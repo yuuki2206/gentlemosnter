@@ -1,0 +1,699 @@
+html.hide-scrollbar {
+  overflow-y:auto!important;
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important}
+html.hide-scrollbar::-webkit-scrollbar {
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  -webkit-appearance:none!important}
+html.hide-scrollbar::-webkit-scrollbar-thumb,html.hide-scrollbar::-webkit-scrollbar-track {
+  display:none!important;
+  background:transparent!important}
+html.hide-scrollbar::-webkit-scrollbar-corner {
+  display:none!important;
+  background:transparent!important}
+@font-face {
+  font-family:Goudy Old Style;
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+  src:url(/fonts/en/Goudy-Old-Style-Regular.woff2) format("woff2")}
+.goudy-old-style-veggie {
+  font-family:Goudy Old Style,sans-serif;
+  font-weight:400;
+  font-style:normal}
+.noto-serif-kr-mixed {
+  font-family:Goudy Old Style,"Noto Serif KR",sans-serif;
+  font-weight:400}
+.noto-serif-jp-mixed {
+  font-family:Goudy Old Style,"Noto Serif JP",sans-serif;
+  font-weight:400}
+.noto-serif-sc-mixed {
+  font-family:Goudy Old Style,"Noto Serif SC",sans-serif;
+  font-weight:400}
+#veggie-collection .veggie-cta {
+  font-size:13px;
+  font-weight:500;
+  padding:0 10px;
+  min-height:27px!important;
+  box-shadow:0 0 8px 0 rgba(0,0,0,.1),0 0 16px 0 rgba(0,0,0,.05)}
+#veggie-collection .veggie-cta>span {
+  display:inline-block!important;
+  line-height:17px}
+#veggie-collection .veggie-cta:lang(en),#veggie-collection .veggie-cta:lang(zh-TW) {
+  font-size:16px;
+  font-weight:400}
+@media(min-width:768px) {
+  #veggie-collection .veggie-cta {
+  font-size:17px;
+  font-weight:500;
+  padding:0 12px;
+  min-height:37px!important}
+#veggie-collection .veggie-cta>span {
+  line-height:21px}
+#veggie-collection .veggie-cta:lang(en),#veggie-collection .veggie-cta:lang(zh-TW) {
+  font-size:20px;
+  font-weight:400}
+}
+@media(min-width:768px)and (max-width:1199px) {
+  #veggie-collection .veggie-cta.veggie-cta--md-1200 {
+  font-size:13px;
+  font-weight:500;
+  padding:0 10px;
+  min-height:27px!important}
+#veggie-collection .veggie-cta.veggie-cta--md-1200>span {
+  line-height:17px}
+#veggie-collection .veggie-cta.veggie-cta--md-1200:lang(en),#veggie-collection .veggie-cta.veggie-cta--md-1200:lang(zh-TW) {
+  font-size:16px;
+  font-weight:400}
+}
+#veggie-collection .veggie-hero-section .veggie-hero-caption {
+  font-size:12px;
+  font-weight:400;
+  line-height:12px}
+#veggie-collection .veggie-hero-section .veggie-hero-caption:lang(en),#veggie-collection .veggie-hero-section .veggie-hero-caption:lang(zh-TW) {
+  font-size:12px;
+  line-height:13px}
+@media(min-width:768px) {
+  #veggie-collection .veggie-hero-section .veggie-hero-caption {
+  font-size:17px;
+  line-height:21px;
+  font-weight:400}
+#veggie-collection .veggie-hero-section .veggie-hero-caption:lang(en),#veggie-collection .veggie-hero-section .veggie-hero-caption:lang(zh-TW) {
+  font-size:20px;
+  line-height:21px}
+}
+#veggie-collection .veggie-hero-section .veggie-hero-desc {
+  font-size:21px;
+  font-weight:400;
+  line-height:30px;
+  word-break:keep-all}
+#veggie-collection .veggie-hero-section .veggie-hero-desc:lang(en),#veggie-collection .veggie-hero-section .veggie-hero-desc:lang(zh-TW) {
+  font-size:24px;
+  line-height:25px}
+#veggie-collection .veggie-hero-section .veggie-hero-desc:lang(ja) {
+  word-break:normal;
+  text-wrap:pretty}
+#veggie-collection .veggie-hero-section .veggie-hero-desc:lang(zh-CN) {
+  word-break:normal}
+@media(min-width:768px) {
+  #veggie-collection .veggie-hero-section .veggie-hero-desc {
+  max-width:720px;
+  font-size:25px;
+  line-height:34px}
+#veggie-collection .veggie-hero-section .veggie-hero-desc:lang(en),#veggie-collection .veggie-hero-section .veggie-hero-desc:lang(zh-TW) {
+  font-size:28px;
+  line-height:29px}
+#veggie-collection .veggie-hero-section .veggie-hero-desc:lang(zh-CN) {
+  max-width:722px}
+}
+#veggie-collection .veggie-editorial-1-section .image-group {
+  display:grid;
+  grid-template-columns:1fr 1fr}
+#veggie-collection .veggie-editorial-1-section .image-1,#veggie-collection .veggie-editorial-1-section .image-2 {
+  aspect-ratio:4/5}
+#veggie-collection .veggie-editorial-1-section .image-3 {
+  aspect-ratio:1/1}
+@media(max-width:767px) {
+  #veggie-collection .veggie-editorial-1-section {
+  padding:0 24px;
+  gap:24px}
+#veggie-collection .veggie-editorial-1-section .image-1 {
+  aspect-ratio:327/409}
+#veggie-collection .veggie-editorial-1-section .image-4 {
+  aspect-ratio:327/226}
+#veggie-collection .veggie-editorial-1-section .image-group {
+  gap:14px}
+}
+@media(min-width:768px) {
+  #veggie-collection .veggie-editorial-1-section {
+  margin:0 60px;
+  gap:1.655vw}
+#veggie-collection .veggie-editorial-1-section .image-1,#veggie-collection .veggie-editorial-1-section .image-4 {
+  width:65.4320987654%;
+  max-width:800px;
+  margin:0 auto}
+#veggie-collection .veggie-editorial-1-section .image-4 {
+  aspect-ratio:8/5}
+#veggie-collection .veggie-editorial-1-section .image-group {
+  gap:1.655vw}
+}
+@media(min-width:1344px) {
+  #veggie-collection .veggie-editorial-1-section {
+  max-width:1224px;
+  margin:0 auto;
+  gap:24px}
+#veggie-collection .veggie-editorial-1-section .image-group {
+  gap:24px}
+}
+#veggie-collection .veggie-folding-video-section {
+  position:relative}
+#veggie-collection .veggie-folding-video-section:after,#veggie-collection .veggie-folding-video-section:before {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:120px;
+  z-index:10;
+  pointer-events:none}
+@media(max-width:767px) {
+  #veggie-collection .veggie-folding-video-section:after,#veggie-collection .veggie-folding-video-section:before {
+  height:13.3333vw}
+}
+@media(min-width:768px) {
+  #veggie-collection .veggie-folding-video-section:after,#veggie-collection .veggie-folding-video-section:before {
+  height:50px}
+}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-folding-video-section:after,#veggie-collection .veggie-folding-video-section:before {
+  height:120px}
+}
+#veggie-collection .veggie-folding-video-section:before {
+  top:0;
+  background:linear-gradient(0deg,rgba(222,230,240,0),#dee6f0)}
+#veggie-collection .veggie-folding-video-section:after {
+  bottom:0;
+  background:linear-gradient(180deg,rgba(222,230,240,0),#dee6f0);
+  z-index:1}
+#veggie-collection .veggie-folding-video-section .veggie-folding-video-wrapper {
+  width:100%}
+@media(max-width:767px) {
+  #veggie-collection .veggie-folding-video-section .veggie-folding-video-wrapper {
+  aspect-ratio:375/667}
+}
+@media(min-width:768px) {
+  #veggie-collection .veggie-folding-video-section .veggie-folding-video-wrapper {
+  width:100vw;
+  height:1080px}
+}
+#veggie-collection .veggie-folding-video-section .veggie-folding-video-wrapper .folding-video {
+  position:absolute;
+  -o-object-fit:cover;
+  object-fit:cover}
+@media(max-width:767px) {
+  #veggie-collection .veggie-folding-video-section .veggie-folding-video-wrapper .folding-video {
+  width:100%;
+  height:100%}
+}
+@media(min-width:768px) {
+  #veggie-collection .veggie-folding-video-section .veggie-folding-video-wrapper .folding-video {
+  width:100%;
+  height:1080px}
+}
+#veggie-collection .veggie-folding-video-section .veggie-folding-desc-wrapper {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  bottom:24px;
+  gap:20px;
+  position:absolute;
+  left:0;
+  right:0}
+#veggie-collection .veggie-folding-video-section .veggie-folding-desc-wrapper .veggie-folding-desc {
+  font-size:16px;
+  font-weight:400;
+  line-height:17px}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-folding-video-section .veggie-folding-desc-wrapper {
+  flex-direction:row;
+  justify-content:space-between;
+  padding:0 120px;
+  gap:0;
+  top:50%;
+  bottom:50%}
+#veggie-collection .veggie-folding-video-section .veggie-folding-desc-wrapper .veggie-folding-desc {
+  font-size:20px;
+  line-height:21px}
+}
+@media(min-width:1450px)and (max-width:1790px) {
+  #veggie-collection .veggie-collection-section {
+  max-width:1330px;
+  margin:0 auto}
+}
+#veggie-collection .veggie-collection-section .veggie-collection-desc {
+  font-size:21px;
+  font-weight:400;
+  line-height:30px;
+  word-break:normal}
+#veggie-collection .veggie-collection-section .veggie-collection-desc:lang(en),#veggie-collection .veggie-collection-section .veggie-collection-desc:lang(zh-TW) {
+  font-size:24px;
+  line-height:25px}
+#veggie-collection .veggie-collection-section .veggie-collection-desc:lang(ko) {
+  word-break:keep-all}
+@media(min-width:768px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-desc {
+  font-size:25px;
+  line-height:34px}
+#veggie-collection .veggie-collection-section .veggie-collection-desc:lang(en),#veggie-collection .veggie-collection-section .veggie-collection-desc:lang(zh-TW) {
+  font-size:28px;
+  line-height:29px}
+}
+@media(max-width:1111px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-video-wrapper {
+  max-width:743px;
+  padding:0 12px;
+  margin:0 auto 20px}
+}
+@media(min-width:1450px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-video-wrapper {
+  max-width:1112px;
+  margin:0 auto}
+}
+@media(max-width:767px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-video {
+  aspect-ratio:355/500}
+}
+@media(min-width:768px)and (max-width:1111px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-video {
+  max-width:743px;
+  aspect-ratio:743/1058}
+}
+@media(min-width:1112px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-video {
+  aspect-ratio:1112/625}
+}
+@media(min-width:1450px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-video {
+  width:1112px;
+  margin:0 auto}
+}
+#veggie-collection .veggie-collection-section .veggie-collection-list {
+  display:grid;
+  margin:0 auto}
+#veggie-collection .veggie-collection-section .veggie-collection-list>a {
+  height:auto}
+@media(max-width:1111px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-list {
+  max-width:375px;
+  margin:0 auto 80px;
+  grid-template-columns:repeat(2,1fr)}
+#veggie-collection .veggie-collection-section .veggie-collection-list>a {
+  max-width:170px;
+  margin:0 auto}
+#veggie-collection .veggie-collection-section .veggie-collection-list .veggie-collection-item-name {
+  font-size:12px;
+  line-height:13px;
+  font-weight:400}
+}
+@media(min-width:1112px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-list {
+  margin:0 auto 160px;
+  grid-column-gap:80px}
+#veggie-collection .veggie-collection-section .veggie-collection-list>a {
+  max-width:390px}
+#veggie-collection .veggie-collection-section .veggie-collection-list .veggie-collection-item-name {
+  font-size:20px;
+  line-height:21px}
+}
+@media(min-width:1112px)and (max-width:1449px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-list {
+  max-width:860px;
+  grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:1450px)and (max-width:1919px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-list {
+  width:1330px;
+  grid-template-columns:repeat(3,1fr)}
+#veggie-collection .veggie-collection-section .veggie-collection-list>a:last-child:nth-child(3n+1) {
+  grid-column:2}
+}
+@media(min-width:1920px)and (max-width:2389px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-list {
+  width:1800px;
+  grid-template-columns:repeat(4,1fr)}
+#veggie-collection .veggie-collection-section .veggie-collection-list>a:nth-last-child(2):nth-child(4n+1) {
+  grid-column:2}
+#veggie-collection .veggie-collection-section .veggie-collection-list>a:last-child:nth-child(4n+2) {
+  grid-column:3}
+}
+@media(min-width:2390px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-list {
+  margin:0 60px 160px;
+  grid-template-columns:repeat(5,390px);
+  justify-content:center}
+}
+#veggie-collection .veggie-collection-section .veggie-collection-item-image {
+  aspect-ratio:390/450}
+@media(max-width:1111px) {
+  #veggie-collection .veggie-collection-section .veggie-collection-item-image {
+  aspect-ratio:1/1}
+}
+@media(max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section {
+  display:flex;
+  flex-direction:column;
+  gap:16vw}
+}
+@media(min-width:768px)and (max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section {
+  width:767px;
+  margin:0 auto}
+}
+@media(min-width:1680px) {
+  #veggie-collection .veggie-editorial-2-section {
+  width:1680px;
+  margin:0 auto}
+}
+#veggie-collection .veggie-editorial-2-section .editorial-desc {
+  font-size:16px;
+  font-weight:400;
+  line-height:17px}
+#veggie-collection .veggie-editorial-2-section .editorial-desc:lang(zh-CN) {
+  font-size:15px}
+@media(min-width:768px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-desc {
+  font-size:28px;
+  line-height:29px}
+#veggie-collection .veggie-editorial-2-section .editorial-desc:lang(zh-CN) {
+  font-size:25px;
+  line-height:34px}
+}
+@media(max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section .image-group-wrapper {
+  max-width:767px;
+  display:flex;
+  flex-direction:column;
+  gap:16vw}
+}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-editorial-2-section .image-group-wrapper {
+  display:flex;
+  flex-direction:row;
+  align-items:stretch;
+  gap:1.428vw;
+  justify-content:flex-start;
+  width:100%}
+#veggie-collection .veggie-editorial-2-section .image-group-wrapper>.editorial-image-picture,#veggie-collection .veggie-editorial-2-section .image-group-wrapper>.editorial-wrapper-1,#veggie-collection .veggie-editorial-2-section .image-group-wrapper>.editorial-wrapper-2 {
+  flex:1 1 0;
+  min-width:0}
+#veggie-collection .veggie-editorial-2-section .image-group-wrapper>.editorial-image-picture {
+  display:block}
+}
+@media(min-width:1680px) {
+  #veggie-collection .veggie-editorial-2-section .image-group-wrapper {
+  gap:24px}
+}
+@media(max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-wrapper-1,#veggie-collection .veggie-editorial-2-section .editorial-wrapper-2 {
+  max-width:767px;
+  display:flex;
+  flex-direction:column;
+  gap:7.4667vw}
+}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-wrapper-1 .desc-box {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  aspect-ratio:591/428;
+  width:100%}
+}
+#veggie-collection .veggie-editorial-2-section .editorial-wrapper-2 .desc-box {
+  text-indent:-7.2px}
+@media(min-width:1200px)and (max-width:1679px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-wrapper-2 .desc-box {
+  text-align:right;
+  padding:6.2625vw 17.7733vw 6.2625vw 0}
+}
+@media(min-width:1680px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-wrapper-2 .desc-box {
+  padding:111px 0;
+  text-align:center}
+}
+@media(max-width:767px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-1 {
+  aspect-ratio:375/532}
+}
+@media(min-width:768px)and (max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-1 {
+  max-width:767px;
+  aspect-ratio:767/1088}
+}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-1 {
+  aspect-ratio:591/839}
+}
+@media(max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-2-wrapper {
+  display:grid;
+  grid-template-columns:1fr 53.3333333333% 10px}
+#veggie-collection .veggie-editorial-2-section .editorial-image-2-wrapper .editorial-image-2 {
+  aspect-ratio:200/250}
+}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-2-wrapper .editorial-image-2 {
+  aspect-ratio:591/739}
+#veggie-collection .veggie-editorial-2-section .editorial-image-2-wrapper .empty-box-hidden {
+  display:none}
+}
+@media(max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper {
+  display:grid;
+  grid-template-columns:10px 60% 1fr}
+}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper {
+  display:grid;
+  grid-template-columns:997.14fr 202.86fr}
+}
+@media(min-width:1680px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper {
+  grid-template-columns:1396fr 284fr}
+}
+@media(max-width:1199px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper .editorial-image-3-picture {
+  display:block;
+  position:relative;
+  aspect-ratio:225/400;
+  overflow:hidden}
+#veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper .editorial-image-3 {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:177.7777777778%;
+  max-width:none;
+  height:auto;
+  aspect-ratio:400/225;
+  -o-object-fit:cover;
+  object-fit:cover;
+  transform:translate(-50%,-50%) rotate(90deg);
+  transform-origin:center}
+}
+@media(min-width:1200px)and (max-width:1679px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper .editorial-image-3 {
+  aspect-ratio:997/560}
+}
+@media(min-width:1680px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper .editorial-image-3 {
+  width:1396px;
+  aspect-ratio:1396/785}
+}
+@media(min-width:1200px) {
+  #veggie-collection .veggie-editorial-2-section .editorial-image-3-wrapper .empty-box-hidden {
+  display:none}
+}
+#veggie-collection .veggie-popup-section {
+  gap:40px}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section {
+  gap:80px}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-desc {
+  max-width:327px;
+  margin:0 auto;
+  font-size:21px;
+  font-weight:400;
+  line-height:30px}
+#veggie-collection .veggie-popup-section .veggie-popup-desc:lang(ko) {
+  word-break:keep-all}
+#veggie-collection .veggie-popup-section .veggie-popup-desc:lang(en),#veggie-collection .veggie-popup-section .veggie-popup-desc:lang(zh-TW) {
+  font-size:24px;
+  line-height:25px}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-desc {
+  max-width:720px;
+  font-size:25px;
+  line-height:34px}
+#veggie-collection .veggie-popup-section .veggie-popup-desc:lang(en),#veggie-collection .veggie-popup-section .veggie-popup-desc:lang(zh-TW) {
+  font-size:28px;
+  line-height:29px}
+}
+@media(max-width:500px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-video-wrapper {
+  padding:0 12px}
+}
+@media(min-width:501px)and (max-width:1231px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-video-wrapper {
+  padding:0 60px}
+}
+@media(max-width:500px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-video {
+  aspect-ratio:351/500}
+}
+@media(min-width:501px)and (max-width:767px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-video {
+  aspect-ratio:381/543}
+}
+@media(min-width:768px)and (max-width:1231px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-video {
+  aspect-ratio:648/364}
+}
+@media(min-width:1232px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-video {
+  max-width:1112px;
+  margin:0 auto;
+  aspect-ratio:1112/625}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper {
+  display:flex;
+  flex-direction:column;
+  gap:48px}
+@media(max-width:767px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper {
+  margin:0 24px}
+}
+@media(min-width:768px)and (max-width:1231px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper {
+  margin:0 120px}
+}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper {
+  gap:100px}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-list-desc {
+  font-size:13px;
+  font-weight:400;
+  line-height:17px;
+  color:#111}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-list-desc:lang(en),#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-list-desc:lang(zh-TW) {
+  font-size:16px}
+@media(max-width:767px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-list-desc:lang(ja) {
+  font-size:12px}
+}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-list-desc {
+  font-size:17px;
+  line-height:21px}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-list-desc:lang(en),#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-list-desc:lang(zh-TW) {
+  font-size:20px}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc {
+  font-size:10px;
+  line-height:14px;
+  color:#111;
+  font-weight:400;
+  max-width:327px;
+  margin:0 auto}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc:lang(en),#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc:lang(zh-TW) {
+  font-size:12px;
+  line-height:13px}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc:lang(ko) {
+  word-break:keep-all}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc {
+  font-size:14px;
+  font-weight:400;
+  line-height:18px}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc:lang(en),#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc:lang(zh-TW) {
+  font-size:16px;
+  line-height:17px}
+}
+@media(min-width:768px)and (max-width:1231px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc {
+  max-width:544px}
+}
+@media(min-width:1232px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc {
+  max-width:1112px}
+#veggie-collection .veggie-popup-section .veggie-popup-list-wrapper .veggie-popup-keyring-desc:lang(ja) {
+  max-width:700px}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list {
+  max-width:327px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  grid-gap:48px 12px;
+  gap:48px 12px}
+#veggie-collection .veggie-popup-section .veggie-popup-list>li {
+  min-width:0}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list {
+  max-width:544px;
+  gap:64px 24px}
+}
+@media(min-width:1232px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list {
+  max-width:1112px;
+  grid-template-columns:repeat(4,1fr)}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-city {
+  font-size:16px;
+  font-weight:400;
+  line-height:17px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-city:lang(ko) {
+  font-size:13px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-city span {
+  font-size:8px;
+  line-height:17px}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-city {
+  font-size:20px;
+  line-height:21px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-city:lang(ko) {
+  font-size:17px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-city span {
+  font-size:12px;
+  line-height:21px}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-location {
+  font-size:16px;
+  font-weight:400;
+  line-height:17px;
+  margin-bottom:6px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-location:lang(ko) {
+  font-size:13px;
+  white-space:nowrap}
+@media(max-width:350px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-location:lang(ko) {
+  white-space:normal;
+  word-break:keep-all}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-location:not(:lang(ko)) {
+  word-break:keep-all}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-location {
+  font-size:18px;
+  line-height:19px;
+  margin-bottom:10px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-location:lang(ko) {
+  font-size:17px;
+  line-height:21px}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-address {
+  font-size:12px;
+  font-weight:400;
+  line-height:13px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-address:lang(ko) {
+  font-size:11px;
+  word-break:keep-all}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-address {
+  font-size:16px;
+  line-height:17px}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-address:lang(ko) {
+  font-size:15px}
+}
+#veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-address .en-text {
+  font-family:Goudy Old Style,sans-serif;
+  font-weight:400;
+  font-size:12px;
+  line-height:13px}
+@media(min-width:768px) {
+  #veggie-collection .veggie-popup-section .veggie-popup-list .veggie-popup-list-address .en-text {
+  font-size:16px;
+  line-height:17px}
+}

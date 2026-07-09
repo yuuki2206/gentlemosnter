@@ -1,0 +1,30 @@
+# Dependency directories (Thư mục thư viện - Render và Vercel tự cài đặt, không cần push)
+node_modules/
+**/node_modules/
+package-lock.json (nếu muốn tăng tốc độ cài đặt nhưng thường có thể push)
+
+# Production build outputs (Thư mục build - Vercel tự build)
+client/dist/
+dist/
+build/
+
+# Environment configurations (File bảo mật chứa mật khẩu API - KHÔNG ĐƯỢC PUSH)
+*.env
+.env
+.env.local
+server/config.env
+config.env
+
+# Logs and databases (File log và dữ liệu tạm)
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.database/
+.mongo/
+
+# Editor directories and system files (File hệ thống)
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
