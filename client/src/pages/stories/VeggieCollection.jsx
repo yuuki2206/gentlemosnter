@@ -34,7 +34,7 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.35, // Kích hoạt khi 35% của khung chứa hiển thị trên màn hình
+      threshold: 0.1, // Giảm xuống 10% để dễ dàng kích hoạt trên màn hình điện thoại di động
     };
 
     const handleIntersection = (entries, observer) => {
@@ -47,9 +47,12 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
             // Lazy-load gán nguồn video nếu chưa được gán
             if (!video.src || video.src === "") {
               video.src = getMediaUrl(`/Veggie%20collection/folding_${index}_pc.mp4`);
+              video.load(); // Khởi chạy tải video khi thay đổi thuộc tính src trên di động
             }
             video.loop = false;
-            video.play().catch(() => {});
+            video.play().catch((err) => {
+              console.warn("[Autoplay Blocked] Lỗi phát video gập kính:", err);
+            });
             
             // Dừng quan sát để video tự động đóng băng ở khung hình cuối cùng khi hoàn tất phát
             observer.unobserve(video);
