@@ -24,6 +24,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);    // Trạng thái đóng/mở Shopping Bag Overlay
   const [cartActiveTab, setCartActiveTab] = useState("BAG"); // Tab mặc định khi mở giỏ hàng
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Trạng thái đóng/mở thanh tìm kiếm (Search Drawer)
+  const [expandedItem, setExpandedItem] = useState(null); // Trạng thái mở rộng menu con trên Mobile
 
   // === REACT ROUTER: useLocation ===
   // Hook này trả về object chứa thông tin URL hiện tại, trong đó pathname là phần đường dẫn (VD: "/", "/sunglasses", "/intelligent-eyewear").
@@ -267,21 +268,73 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
               <X size={28} strokeWidth={1.5} />
             </button>
           </div>
-          <div className="flex flex-col px-6 py-8 space-y-6 text-lg font-medium">
-            {Object.keys(menuData).map((item) => (
-              <Link
-                key={item}
-                to={
-                  item === "Sunglasses" || item === "Glasses" ? `/${item.toLowerCase()}`
-                    : item === "Intelligent Eyewear" ? "/intelligent-eyewear"
-                    : "#"
-                }
-                onClick={() => setIsOpen(false)} // Đóng menu sau khi bấm chọn (UX tốt hơn)
-                className="border-b border-gray-100 pb-2 hover:text-gray-500 transition-colors"
-              >
-                {item}
-              </Link>
-            ))}
+          <div className="flex flex-col px-6 py-6 overflow-y-auto max-h-[calc(100vh-80px)] space-y-4 text-base font-normal">
+            {Object.keys(menuData).map((item) => {
+              const hasSubItems = menuData[item].length > 0;
+              const isExpanded = expandedItem === item;
+
+              return (
+                <div key={item} className="border-b border-gray-100 pb-3">
+                  {hasSubItems ? (
+                    <div>
+                      {/* Tiêu đề menu cha dạng Accordion */}
+                      <button
+                        onClick={() => setExpandedItem(isExpanded ? null : item)}
+                        className="w-full flex justify-between items-center text-left py-1 text-black font-semibold text-[15px] tracking-widest uppercase hover:text-gray-500 transition-colors"
+                      >
+                        <span>{item}</span>
+                        <span className="text-[12px] text-gray-400 font-light">
+                          {isExpanded ? "▲" : "▼"}
+                        </span>
+                      </button>
+                      
+                      {/* Danh sách menu con khi được mở rộng */}
+                      {isExpanded && (
+                        <div className="flex flex-col gap-3 pl-4 pt-3 pb-1 text-[13px] font-normal text-gray-600 tracking-wider">
+                          {menuData[item].map((subItem) => (
+                            <Link
+                              key={subItem}
+                              to={
+                                item === "Explore" && subItem === "Services"
+                                  ? "/int/en/services"
+                                  : item === "Explore" && subItem === "Stories"
+                                  ? "/int/en/stories"
+                                  : item === "Sunglasses" || item === "Glasses"
+                                  ? `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`
+                                  : item === "Collections" && subItem === "Veggie"
+                                  ? "/stories/850266286345551416"
+                                  : item === "Collections" && subItem === "Circuit"
+                                  ? "/stories/817695100293913422"
+                                  : "#"
+                              }
+                              onClick={() => {
+                                setIsOpen(false);
+                                setExpandedItem(null);
+                              }}
+                              className="hover:text-black py-1 block"
+                            >
+                              {subItem}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    /* Menu không có mục con (ví dụ: Intelligent Eyewear) */
+                    <Link
+                      to={item === "Intelligent Eyewear" ? "/intelligent-eyewear" : "#"}
+                      onClick={() => {
+                        setIsOpen(false);
+                        setExpandedItem(null);
+                      }}
+                      className="block py-1 text-black font-semibold text-[15px] tracking-widest uppercase hover:text-gray-500 transition-colors"
+                    >
+                      {item}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </header>
