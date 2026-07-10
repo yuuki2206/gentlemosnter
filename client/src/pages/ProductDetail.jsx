@@ -460,19 +460,18 @@ const ProductDetail = () => {
             <h3 className="text-[10px] font-bold tracking-[0.25em] uppercase text-black">
               SIMILAR FRAMES
             </h3>
-            <div className="flex lg:grid lg:grid-cols-6 overflow-x-auto lg:overflow-x-visible gap-5 lg:gap-6 pb-4 lg:pb-0 scrollbar-none">
+            <div className="flex lg:grid lg:grid-cols-6 overflow-x-auto lg:overflow-x-visible gap-4 lg:gap-6 pb-4 lg:pb-0 scrollbar-none">
               {product.similarFrames.slice(0, 6).map((similarItem) => (
                 <Link
                   to={`/shop/${similarItem.sku}`}
                   key={similarItem.sku}
-                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink"
+                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 min-w-[120px] lg:min-w-0 flex-shrink-0 lg:flex-shrink"
                 >
                   <div className="aspect-[4/3] w-full bg-transparent flex justify-center items-center overflow-hidden mb-3">
                     <img
                       src={similarItem.thumbnail}
                       alt={similarItem.name}
-                      className="w-[90%] h-auto object-contain transition-transform duration-500 group-hover:scale-[1.3]"
-                      style={{ transform: "scale(1.2)" }}
+                      className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[1.05] lg:scale-[1.2] group-hover:scale-[1.15] lg:group-hover:scale-[1.35]"
                       onError={handleImageError}
                     />
                   </div>
