@@ -205,7 +205,7 @@ const ProductDetail = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover transition-transform duration-300 scale-[1.05] lg:scale-[1.75]"
+                    className="w-full h-full object-cover transition-transform duration-300 scale-[0.85] lg:scale-[1.4]"
                   >
                     <source src={mediaUrl} type="video/mp4" />
                   </video>
@@ -213,7 +213,7 @@ const ProductDetail = () => {
                   <img
                     src={mediaUrl}
                     alt={`${product.name} detail view ${index + 1}`}
-                    className="w-full h-full object-contain transition-transform duration-300 scale-[1.05] lg:scale-[1.75]"
+                    className="w-full h-full object-contain transition-transform duration-300 scale-[0.85] lg:scale-[1.4]"
                     onError={handleImageError}
                   />
                 )}
