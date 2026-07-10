@@ -465,13 +465,13 @@ const ProductDetail = () => {
                 <Link
                   to={`/shop/${similarItem.sku}`}
                   key={similarItem.sku}
-                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 min-w-[120px] lg:min-w-0 flex-shrink-0 lg:flex-shrink"
+                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 min-w-[90px] lg:min-w-0 flex-shrink-0 lg:flex-shrink"
                 >
                   <div className="aspect-[4/3] w-full bg-transparent flex justify-center items-center overflow-hidden mb-3">
                     <img
                       src={similarItem.thumbnail}
                       alt={similarItem.name}
-                      className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[1.05] lg:scale-[1.2] group-hover:scale-[1.15] lg:group-hover:scale-[1.35]"
+                      className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[0.9] lg:scale-[1.2] group-hover:scale-[1.0] lg:group-hover:scale-[1.35]"
                       onError={handleImageError}
                     />
                   </div>
