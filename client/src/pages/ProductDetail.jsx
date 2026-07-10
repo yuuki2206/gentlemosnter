@@ -186,18 +186,17 @@ const ProductDetail = () => {
             <ArrowLeft size={11} /> BACK
           </button>
         </div>
-
-        {/* CẤU TRÚC SPLIT: TRÁI SCROLLABLE GALLERY, PHẢI STICKY SIDEBAR (Dùng flex và justify-end để đẩy ảnh về gần giữa màn hình hơn) */}
+        {/* CẤU TRÚC SPLIT: TRÁI SCROLLABLE GALLERY, PHẢI STICKY SIDEBAR */}
         <div className="flex flex-col lg:flex-row justify-end items-start w-full relative gap-0">
           
-          {/* CỘT TRÁI: Gallery hình ảnh/video sản phẩm dạng Vuông (1:1), Zoom kích thước kính lớn giống web gốc */}
-          <div className="w-full lg:flex-1 max-w-[1080px] flex flex-col gap-0 scroll-smooth">
+          {/* CỘT TRÁI: Gallery hình ảnh/video sản phẩm dạng Vuông (1:1), tự động chuyển sang Carousel trượt ngang trên Mobile */}
+          <div className="w-full lg:flex-1 max-w-[1080px] flex lg:flex-col overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory scrollbar-none gap-0 scroll-smooth">
             
             {mediaList.map((mediaUrl, index) => (
               <div 
                 key={index} 
-                className={`w-full flex justify-center items-center overflow-hidden relative bg-transparent ${
-                  index === 0 ? "aspect-square" : "aspect-[16/10]"
+                className={`w-full flex-shrink-0 snap-start flex justify-center items-center overflow-hidden relative bg-transparent aspect-square lg:aspect-auto ${
+                  index === 0 ? "lg:aspect-square" : "lg:aspect-[16/10]"
                 }`}
               >
                 {isVideoMedia(mediaUrl) ? (
@@ -206,8 +205,7 @@ const ProductDetail = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover transition-transform duration-300"
-                    style={{ transform: "scale(1.75)" }}
+                    className="w-full h-full object-cover transition-transform duration-300 scale-[1.05] lg:scale-[1.75]"
                   >
                     <source src={mediaUrl} type="video/mp4" />
                   </video>
@@ -215,21 +213,20 @@ const ProductDetail = () => {
                   <img
                     src={mediaUrl}
                     alt={`${product.name} detail view ${index + 1}`}
-                    className="w-full h-full object-contain transition-transform duration-300"
-                    style={{ transform: "scale(1.75)" }}
+                    className="w-full h-full object-contain transition-transform duration-300 scale-[1.05] lg:scale-[1.75]"
                     onError={handleImageError}
                   />
                 )}
-
-                {/* Biểu tượng mũi tên scroll xuống chỉ ở ảnh đầu tiên */}
+ 
+                {/* Biểu tượng mũi tên scroll xuống chỉ ở ảnh đầu tiên trên Desktop */}
                 {index === 0 && mediaList.length > 1 && (
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-black/40 animate-bounce">
+                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-black/40 animate-bounce max-lg:hidden">
                     <ArrowDown size={20} strokeWidth={1} />
                   </div>
                 )}
               </div>
             ))}
-
+ 
           </div>
 
           {/* CỘT PHẢI (327px): Sticky Sidebar ghim cố định bên phải đúng tỷ lệ pixel và padding */}
