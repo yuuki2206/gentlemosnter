@@ -12,6 +12,7 @@ import CartOverlay from "./CartOverlay";
 import SearchDrawer from "./SearchDrawer";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
+import { useLenis } from "lenis/react";
 
 const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const { cartCount } = useContext(CartContext);
@@ -25,6 +26,37 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const [cartActiveTab, setCartActiveTab] = useState("BAG"); // Tab mặc định khi mở giỏ hàng
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Trạng thái đóng/mở thanh tìm kiếm (Search Drawer)
   const [expandedItem, setExpandedItem] = useState(null); // Trạng thái mở rộng menu con trên Mobile
+  const [showHeader, setShowHeader] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const lenis = useLenis((lenisInstance) => {
+    // Cập nhật tiến độ cuộn (0 đến 1)
+    setScrollProgress(lenisInstance.progress);
+    
+    // Ẩn/hiện Header dựa trên hướng cuộn (direction)
+    const currentScroll = lenisInstance.scroll;
+    const direction = lenisInstance.direction; // 1 = xuống, -1 = lên
+    
+    if (currentScroll > 100) {
+      if (direction === 1) {
+        setShowHeader(false);
+      } else if (direction === -1) {
+        setShowHeader(true);
+      }
+    } else {
+      setShowHeader(true);
+    }
+  });
+
+  // Tự động dừng/khởi động cuộn mượt Lenis khi mở các Drawer/Overlay để tránh lỗi double scroll
+  useEffect(() => {
+    if (!lenis) return;
+    if (isCartOpen || isSearchOpen || isOpen || isAuthOpen) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  }, [isCartOpen, isSearchOpen, isOpen, isAuthOpen, lenis]);
 
   // === REACT ROUTER: useLocation ===
   // Hook này trả về object chứa thông tin URL hiện tại, trong đó pathname là phần đường dẫn (VD: "/", "/sunglasses", "/intelligent-eyewear").
@@ -115,8 +147,18 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   return (
     // === React Fragment (<>): Bọc nhiều element cùng cấp mà không tạo thẻ DOM thừa ===
     <>
+      {/* Scroll Progress Bar - Thanh tiến trình cuộn tối giản 1.5px ở trên cùng */}
+      <div 
+        className={`fixed top-0 left-0 h-[1.5px] z-[1000] transition-all duration-75 ${
+          location.pathname.includes("intelligent-eyewear") ? "bg-white" : "bg-black"
+        }`}
+        style={{ width: `${scrollProgress * 100}%` }}
+      />
+
       <header
-        className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-all duration-500 ease-in-out ${
+          showHeader ? "translate-y-0" : "-translate-y-full"
+        } ${
           isSolid
             ? (location.pathname.includes("intelligent-eyewear") ? "bg-black text-white" : "bg-[#f8f8f8] text-black")
             : "bg-transparent text-white"

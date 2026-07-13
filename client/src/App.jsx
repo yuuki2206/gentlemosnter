@@ -23,6 +23,7 @@ import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 /**
  * AppContent - Component phụ trợ chạy bên trong AuthProvider để lấy được Context thông tin User đăng nhập
@@ -87,6 +88,7 @@ function AppContent() {
           )}
         </div>
       )}
+      <ScrollToTopButton />
     </>
   );
 }
