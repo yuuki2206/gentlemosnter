@@ -4,6 +4,13 @@ import { protect } from "./auth.js";
 
 const router = express.Router();
 
+// Bộ nhớ đệm cache toàn cục cho danh sách sản phẩm (Grid Cards)
+let productsCache = null;
+
+const clearProductsCache = () => {
+  productsCache = null;
+};
+
 // Middleware xác thực chỉ cho phép Admin truy cập
 const adminOnly = (req, res, next) => {
   if (req.user && req.user.role === "admin") {
@@ -20,43 +27,35 @@ const adminOnly = (req, res, next) => {
 router.get("/", async (req, res) => {
   try {
     const { category, type, search } = req.query;
-    let query = {};
 
-    // Tìm kiếm theo từ khóa keyword (Chỉ tìm theo Tên sản phẩm để chính xác tuyệt đối)
+    // Tải toàn bộ sản phẩm lên cache nếu chưa có (chỉ lấy các trường cần cho Grid và Swiper để giảm payload)
+    if (!productsCache) {
+      productsCache = await Product.find({}).select("sku name price thumbnail collection collections gallery");
+    }
+
+    let result = [...productsCache];
+
+    // 1. Lọc theo từ khóa search (Tìm kiếm theo Tên sản phẩm)
     if (search) {
-      query.name = { $regex: search, $options: "i" };
+      const searchLower = search.toLowerCase();
+      result = result.filter(p => p.name?.toLowerCase().includes(searchLower));
     }
 
-    // type: 'Sunglasses' hoặc 'Glasses'
+    // 2. Lọc theo type (Sunglasses hoặc Glasses)
     if (type) {
-      query.collection = type;
+      result = result.filter(p => p.collection === type);
     }
 
-    // category: Bộ sưu tập cụ thể (ví dụ: 'Veggie Collection', 'BOLD Collection'...)
+    // 3. Lọc theo category/bộ sưu tập (ví dụ: 'Veggie Collection', 'BOLD Collection'...)
     if (category && category !== "View all") {
-      if (query.$or) {
-        // Nếu đã có $or từ phần search, kết hợp bằng $and
-        query = {
-          $and: [
-            { $or: query.$or },
-            {
-              $or: [
-                { collection: category },
-                { collections: category }
-              ]
-            }
-          ]
-        };
-      } else {
-        query.$or = [
-          { collection: category },
-          { collections: category }
-        ];
-      }
+      const catLower = category.toLowerCase();
+      result = result.filter(p => 
+        p.collection?.toLowerCase() === catLower || 
+        p.collections?.some(c => c.toLowerCase() === catLower)
+      );
     }
 
-    const products = await Product.find(query);
-    res.json(products);
+    res.json(result);
   } catch (error) {
     res.status(500).json({ message: `Lỗi server: ${error.message}` });
   }
@@ -85,7 +84,7 @@ router.get("/:sku", async (req, res) => {
     const similarFrames = await Product.find({
       collection: product.collection,
       sku: { $ne: product.sku }
-    }).limit(6);
+    }).select("sku name price thumbnail collection collections gallery").limit(6);
 
     const productObj = product.toObject();
     productObj.colorways = colorways || [];
@@ -134,6 +133,7 @@ router.post("/", protect, adminOnly, async (req, res) => {
       colorLabel: colorLabel || ""
     });
 
+    clearProductsCache(); // Reset cache khi thêm sản phẩm mới
     res.status(201).json(product);
   } catch (error) {
     res.status(500).json({ message: `Lỗi thêm sản phẩm: ${error.message}` });
@@ -169,6 +169,7 @@ router.put("/:sku", protect, adminOnly, async (req, res) => {
     product.colorLabel = req.body.colorLabel !== undefined ? req.body.colorLabel : product.colorLabel;
 
     const updatedProduct = await product.save();
+    clearProductsCache(); // Reset cache khi cập nhật thông tin sản phẩm
     res.json(updatedProduct);
   } catch (error) {
     res.status(500).json({ message: `Lỗi cập nhật sản phẩm: ${error.message}` });
@@ -187,6 +188,7 @@ router.delete("/:sku", protect, adminOnly, async (req, res) => {
     }
 
     await Product.findByIdAndDelete(product._id);
+    clearProductsCache(); // Reset cache khi xóa sản phẩm
     res.json({ message: "Đã xóa sản phẩm khỏi Database thành công." });
   } catch (error) {
     res.status(500).json({ message: `Lỗi xóa sản phẩm: ${error.message}` });

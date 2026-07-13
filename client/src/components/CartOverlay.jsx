@@ -289,7 +289,7 @@ const CartOverlay = ({ isOpen, onClose, initialTab = "BAG" }) => {
                 ) : (
                   // Active State: Danh sách sản phẩm trong giỏ hàng
                   <div className="flex flex-col gap-8">
-                    <div className="flex flex-col border-t border-gray-100">
+                    <div className="flex flex-col border-t border-gray-100 max-h-[50vh] overflow-y-auto pr-2 scrollbar-thin">
                       {cart.map((item) => (
                         <div
                           key={item.sku}
@@ -413,7 +413,7 @@ const CartOverlay = ({ isOpen, onClose, initialTab = "BAG" }) => {
                   </div>
                 ) : (
                   // Active State: Danh sách yêu thích
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gray-100 pt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gray-100 pt-6 max-h-[50vh] overflow-y-auto pr-2 scrollbar-thin">
                     {wishlist.map((item) => (
                       <div
                         key={item.sku}
