@@ -456,18 +456,18 @@ const ProductDetail = () => {
             <h3 className="text-[10px] font-bold tracking-[0.25em] uppercase text-black">
               SIMILAR FRAMES
             </h3>
-            <div className="flex lg:grid lg:grid-cols-6 overflow-x-auto lg:overflow-x-visible gap-4 lg:gap-6 pb-4 lg:pb-0 scrollbar-none">
+            <div className="flex sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 overflow-x-auto sm:overflow-x-visible gap-4 lg:gap-6 pb-4 sm:pb-0 scrollbar-none">
               {product.similarFrames.slice(0, 6).map((similarItem) => (
                 <Link
                   to={`/shop/${similarItem.sku}`}
                   key={similarItem.sku}
-                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 min-w-[90px] lg:min-w-0 flex-shrink-0 lg:flex-shrink"
+                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 min-w-[100px] sm:min-w-0 flex-shrink-0 sm:flex-shrink"
                 >
                   <div className="aspect-[4/3] w-full bg-transparent flex justify-center items-center overflow-hidden mb-3">
                     <img
                       src={similarItem.thumbnail}
                       alt={similarItem.name}
-                      className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[0.9] lg:scale-[1.2] group-hover:scale-[1.0] lg:group-hover:scale-[1.35]"
+                      className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[0.95] sm:scale-100 lg:scale-[1.2] group-hover:scale-[1.05] lg:group-hover:scale-[1.35]"
                       onError={handleImageError}
                     />
                   </div>
