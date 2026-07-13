@@ -21,6 +21,8 @@ import ProductDetail from "./pages/ProductDetail";
 import { CartProvider, CartContext } from "./context/CartContext";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { PrivyProvider } from "@privy-io/react-auth";
+import { ReactLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 
 /**
  * AppContent - Component phụ trợ chạy bên trong AuthProvider để lấy được Context thông tin User đăng nhập
@@ -91,28 +93,30 @@ function AppContent() {
 
 function App() {
   return (
-    <PrivyProvider
-      appId="cl7ydg25e00003b5xp9r4g93z" // Sandbox App ID của Privy (Chạy thử nghiệm lập tức)
-      config={{
-        loginMethods: ["email", "google"],
-        appearance: {
-          theme: "light",
-          accentColor: "#000000",
-          showWalletLoginFirst: false,
-        },
-        embeddedWallets: {
-          createOnLogin: "users-without-wallets", // Tự tạo ví Web3 nhúng khi người dùng login
-        },
-      }}
-    >
-      <AuthProvider>
-        <CartProvider>
-          <Router>
-            <AppContent />
-          </Router>
-        </CartProvider>
-      </AuthProvider>
-    </PrivyProvider>
+    <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothWheel: true }}>
+      <PrivyProvider
+        appId="cl7ydg25e00003b5xp9r4g93z" // Sandbox App ID của Privy (Chạy thử nghiệm lập tức)
+        config={{
+          loginMethods: ["email", "google"],
+          appearance: {
+            theme: "light",
+            accentColor: "#000000",
+            showWalletLoginFirst: false,
+          },
+          embeddedWallets: {
+            createOnLogin: "users-without-wallets", // Tự tạo ví Web3 nhúng khi người dùng login
+          },
+        }}
+      >
+        <AuthProvider>
+          <CartProvider>
+            <Router>
+              <AppContent />
+            </Router>
+          </CartProvider>
+        </AuthProvider>
+      </PrivyProvider>
+    </ReactLenis>
   );
 }
 
