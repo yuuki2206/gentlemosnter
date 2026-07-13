@@ -18,7 +18,33 @@
 
 export const getMediaUrl = (path) => {
   const base = import.meta.env.VITE_MEDIA_BASE_URL || "";
-  // Đảm bảo không bị trùng dấu gạch chéo kép nếu path đã bắt đầu bằng '/'
+  
+  if (base) {
+    // Ánh xạ các đường dẫn local sang đường dẫn CDN thực tế trên Production
+    let resolvedPath = path;
+
+    // 1. Ánh xạ Veggie Collection
+    if (resolvedPath.includes("Veggie%20collection") || resolvedPath.includes("Veggie collection")) {
+      resolvedPath = resolvedPath.replace(/Veggie%20collection|Veggie collection/g, "veggie-collection/video");
+      if (resolvedPath.endsWith("Veggie.mp4")) {
+        resolvedPath = resolvedPath.replace("Veggie.mp4", "hero_short_pc.mp4");
+      }
+    } else if (resolvedPath === "/Veggie.mp4" || resolvedPath === "Veggie.mp4") {
+      resolvedPath = "veggie-collection/video/hero_short_pc.mp4";
+    }
+
+    // 2. Ánh xạ Circuit Collection
+    if (resolvedPath.includes("Circuit%20collection") || resolvedPath.includes("Circuit collection")) {
+      resolvedPath = resolvedPath.replace(/Circuit%20collection|Circuit collection/g, "circuit-collection/video");
+    }
+
+    // Đảm bảo không trùng dấu gạch chéo kép
+    const cleanBase = base.endsWith("/") ? base.slice(0, -1) : base;
+    const cleanPath = resolvedPath.startsWith("/") ? resolvedPath : `/${resolvedPath}`;
+    return `${cleanBase}${cleanPath}`;
+  }
+
+  // Chạy dưới Local
   if (base.endsWith("/") && path.startsWith("/")) {
     return `${base}${path.slice(1)}`;
   }
