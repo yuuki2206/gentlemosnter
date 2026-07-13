@@ -187,17 +187,16 @@ const ProductDetail = () => {
           </button>
         </div>
         {/* CẤU TRÚC SPLIT: TRÁI SCROLLABLE GALLERY, PHẢI STICKY SIDEBAR */}
-        <div className="flex flex-col lg:flex-row justify-end items-start w-full relative gap-0">
+        <div className="flex flex-col lg:flex-row justify-between items-start w-full relative gap-12 lg:gap-16 max-w-[1440px] mx-auto">
           
-          {/* CỘT TRÁI: Gallery hình ảnh/video sản phẩm dạng Vuông (1:1), tự động chuyển sang Carousel trượt ngang trên Mobile */}
-          <div className="w-full lg:flex-1 max-w-[1080px] flex lg:flex-col overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory scrollbar-none gap-0 scroll-smooth">
+          {/* CỘT TRÁI: Gallery hình ảnh/video sản phẩm */}
+          <div className="w-full lg:flex-1 flex lg:flex-col overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory scrollbar-none gap-0 scroll-smooth">
             
             {mediaList.map((mediaUrl, index) => (
               <div 
                 key={index} 
-                className={`w-full flex-shrink-0 snap-start flex justify-center items-center overflow-hidden relative bg-transparent aspect-square lg:aspect-auto ${
-                  index === 0 ? "lg:aspect-square" : "lg:aspect-[16/10]"
-                }`}
+                className="w-full flex-shrink-0 snap-start flex justify-center items-center overflow-hidden relative bg-transparent h-[320px] lg:h-auto"
+                style={{ aspectRatio: index === 0 ? "1/1" : "1.6", maxHeight: "350px" }}
               >
                 {isVideoMedia(mediaUrl) ? (
                   <video
@@ -205,7 +204,7 @@ const ProductDetail = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover transition-transform duration-300 scale-[0.85] lg:scale-[1.4]"
+                    className="w-full h-full object-cover transition-transform duration-300 scale-[0.95] lg:scale-[1.1]"
                   >
                     <source src={mediaUrl} type="video/mp4" />
                   </video>
@@ -213,7 +212,7 @@ const ProductDetail = () => {
                   <img
                     src={mediaUrl}
                     alt={`${product.name} detail view ${index + 1}`}
-                    className="w-full h-full object-contain transition-transform duration-300 scale-[0.85] lg:scale-[1.4]"
+                    className="w-full h-full object-contain transition-transform duration-300 scale-[0.95] lg:scale-[1.1]"
                     onError={handleImageError}
                   />
                 )}
@@ -229,8 +228,8 @@ const ProductDetail = () => {
  
           </div>
 
-          {/* CỘT PHẢI (327px): Sticky Sidebar ghim cố định bên phải đúng tỷ lệ pixel và padding */}
-          <div className="w-full lg:w-[327px] lg:sticky lg:top-0 lg:pt-[290px] box-content lg:pl-[36px] lg:pr-0 bg-transparent space-y-6 text-left flex flex-col justify-start">
+          {/* CỘT PHẢI (350px): Sticky Sidebar ghim cố định bên phải */}
+          <div className="w-full lg:w-[350px] lg:sticky lg:top-0 lg:pt-[100px] flex-shrink-0 bg-transparent space-y-6 text-left flex flex-col justify-start">
             
             {/* Header thông tin: Tên sản phẩm, giá, nút Bookmark */}
             <div className="relative pr-8 space-y-1">
