@@ -56,7 +56,8 @@ const Hero = () => {
             + Tìm tất cả các thẻ video trong các slide và thực hiện cơ chế: slide nào hiển thị thì play(), các slide khác thì pause() để tiết kiệm CPU/Ram cho trình duyệt.
       */}
       <Swiper
-        className="w-full h-full cursor-ew-resize"
+        className="w-full h-full"
+        data-cursor="drag"
         loop={true}
         grabCursor={false} 
         onSwiper={setSwiperInstance}

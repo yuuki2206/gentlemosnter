@@ -57,6 +57,7 @@ const SwiperProductCard = ({ item }) => {
   return (
     <Link
       to={`/shop/${item.sku}`}
+      data-cursor="view"
       className="group flex flex-col cursor-pointer pb-8"
     >
       {/* 

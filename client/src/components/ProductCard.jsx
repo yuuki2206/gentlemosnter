@@ -89,7 +89,7 @@ const ProductCard = ({ item, hideModelView = false }) => {
           - md:aspect-[4/3]: Tỉ lệ 4:3 trên Desktop (rộng hơn, hiển thị đẹp hơn).
           - group-hover:scale-105: Zoom nhẹ 5% khi hover chuột vào thẻ cha (tạo cảm giác động).
       */}
-      <Link to={`/shop/${item.sku}`} className="block w-full aspect-square md:aspect-[4/3] flex justify-center items-center overflow-hidden mb-4 md:mb-8 bg-[#f4f4f4] relative">
+      <Link to={`/shop/${item.sku}`} data-cursor="view" className="block w-full aspect-square md:aspect-[4/3] flex justify-center items-center overflow-hidden mb-4 md:mb-8 bg-[#f4f4f4] relative">
         {/* Conditional Rendering: Hiển thị <video> hoặc <img> tùy theo loại media */}
         {isVideo ? (
           <video
