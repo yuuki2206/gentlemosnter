@@ -29,7 +29,7 @@ export const getMediaUrl = (path) => {
  * Ảnh dự phòng mặc định (Unsplash Premium Sunglasses)
  * Được hiển thị khi link ảnh gốc từ database hoặc Cloudinary bị lỗi 404 hoặc không load được.
  */
-export const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=600&auto=format&fit=crop";
+export const FALLBACK_IMAGE_URL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%"><rect width="100%" height="100%" fill="%23f3f3f3"/><g fill="none" stroke="%23cccccc" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(2, 8)"><path d="M0 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3H3c-1.66 0-3-1.34-3-3z"/><path d="M12 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3h-2c-1.66 0-3-1.34-3-3z"/><path d="M8 3h4"/><path d="M0 3c0-1 .5-2 1.5-2.5M20 3c0-1-.5-2-1.5-2.5"/></g></svg>`;
 
 /**
  * Bộ bắt lỗi hình ảnh (Image Error Handler)
