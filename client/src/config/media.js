@@ -19,28 +19,23 @@
 export const getMediaUrl = (path) => {
   const base = import.meta.env.VITE_MEDIA_BASE_URL || "";
   
+  // Phục vụ các video chiến dịch (Veggie/Circuit) trực tiếp từ local Vercel domain
+  // để tránh việc nhà mạng di động Việt Nam chặn/lọc CDN hãng Gentle Monster.
+  const isLocalCampaignMedia = 
+    path.includes("Veggie%20collection") || 
+    path.includes("Veggie collection") ||
+    path.includes("Circuit%20collection") || 
+    path.includes("Circuit collection") ||
+    path.endsWith("Veggie.mp4");
+
+  if (isLocalCampaignMedia) {
+    return path;
+  }
+
   if (base) {
-    // Ánh xạ các đường dẫn local sang đường dẫn CDN thực tế trên Production
-    let resolvedPath = path;
-
-    // 1. Ánh xạ Veggie Collection
-    if (resolvedPath.includes("Veggie%20collection") || resolvedPath.includes("Veggie collection")) {
-      resolvedPath = resolvedPath.replace(/Veggie%20collection|Veggie collection/g, "veggie-collection/video");
-      if (resolvedPath.endsWith("Veggie.mp4")) {
-        resolvedPath = resolvedPath.replace("Veggie.mp4", "hero_short_pc.mp4");
-      }
-    } else if (resolvedPath === "/Veggie.mp4" || resolvedPath === "Veggie.mp4") {
-      resolvedPath = "veggie-collection/video/hero_short_pc.mp4";
-    }
-
-    // 2. Ánh xạ Circuit Collection
-    if (resolvedPath.includes("Circuit%20collection") || resolvedPath.includes("Circuit collection")) {
-      resolvedPath = resolvedPath.replace(/Circuit%20collection|Circuit collection/g, "circuit-collection/video");
-    }
-
-    // Đảm bảo không trùng dấu gạch chéo kép
+    // Đảm bảo không trùng dấu gạch chéo kép cho các tài nguyên CDN khác
     const cleanBase = base.endsWith("/") ? base.slice(0, -1) : base;
-    const cleanPath = resolvedPath.startsWith("/") ? resolvedPath : `/${resolvedPath}`;
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
     return `${cleanBase}${cleanPath}`;
   }
 
