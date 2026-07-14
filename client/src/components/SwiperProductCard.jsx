@@ -7,7 +7,6 @@ import { handleImageError } from "../config/media";
 const SwiperProductCard = ({ item, loading = false }) => {
   const { addToCart, addToWishlist, removeFromWishlist, wishlist } = useContext(CartContext);
   const [isHovered, setIsHovered] = useState(false);
-  const isWishlisted = wishlist.some((w) => w.sku === item.sku);
 
   // Skeleton Loader State
   if (loading) {
@@ -21,6 +20,8 @@ const SwiperProductCard = ({ item, loading = false }) => {
       </div>
     );
   }
+
+  const isWishlisted = wishlist.some((w) => w.sku === item?.sku);
 
   // Lọc và sắp xếp ảnh
   const rawMediaList = Array.from(new Set([item.thumbnail, ...(item.gallery || [])].filter(Boolean)));
