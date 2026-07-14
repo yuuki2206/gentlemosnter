@@ -21,7 +21,7 @@ import ProductDetail from "./pages/ProductDetail";
 import { CartProvider, CartContext } from "./context/CartContext";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { PrivyProvider } from "@privy-io/react-auth";
-import { ReactLenis } from "lenis/react";
+import { ReactLenis, useLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Preloader from "./components/Preloader";
@@ -33,6 +33,25 @@ import ToastNotification from "./components/ToastNotification";
 function AppContent() {
   const { user, loading: authLoading } = useContext(AuthContext);
   const location = useLocation();
+  const lenis = useLenis();
+
+  // Đồng bộ lại đồng hồ hoạt họa (clock ticks) của Lenis khi người dùng quay lại tab (Tránh lỗi lag/giật do tụt FPS ở background)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible" && lenis) {
+        lenis.start();
+        lenis.resize();
+        requestAnimationFrame(() => {
+          lenis.raf(performance.now());
+        });
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [lenis]);
 
   const [showPreloader, setShowPreloader] = useState(() => {
     // Chỉ hiển thị preloader 1 lần duy nhất trong mỗi phiên duyệt web (Session)
