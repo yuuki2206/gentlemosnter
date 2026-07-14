@@ -38,7 +38,9 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
     setIsAuthOpen(false);
   };
 
-  const lenis = useLenis((lenisInstance) => {
+  const lenis = useLenis();
+
+  useLenis((lenisInstance) => {
     // Cập nhật tiến độ cuộn qua DOM trực tiếp để tránh React Re-render liên tục gây giật lag
     if (progressBarRef.current) {
       progressBarRef.current.style.transform = `scaleX(${lenisInstance.progress})`;

@@ -4,7 +4,7 @@
  * - Route: Ánh xạ từng đường dẫn URL đến trang giao diện tương ứng.
  * - Navigate: Tự động chuyển hướng các link lỗi (*) về trang chủ.
  */
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, Link } from "react-router-dom";
 import { SlidersHorizontal, Eye } from "lucide-react";
 import Home from "./pages/Home";
