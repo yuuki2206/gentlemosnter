@@ -24,7 +24,6 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import ScrollToTopButton from "./components/ScrollToTopButton";
-import CustomCursor from "./components/CustomCursor";
 
 /**
  * AppContent - Component phụ trợ chạy bên trong AuthProvider để lấy được Context thông tin User đăng nhập
@@ -90,7 +89,6 @@ function AppContent() {
         </div>
       )}
       <ScrollToTopButton />
-      <CustomCursor />
     </>
   );
 }

@@ -20,16 +20,3 @@ body {
     scrollbar-width: none;
   }
 }
-
-@media (min-width: 1024px) {
-  body.lg-custom-cursor-active {
-    cursor: none;
-  }
-  body.lg-custom-cursor-active a,
-  body.lg-custom-cursor-active button,
-  body.lg-custom-cursor-active [role="button"],
-  body.lg-custom-cursor-active input,
-  body.lg-custom-cursor-active textarea {
-    cursor: none;
-  }
-}
