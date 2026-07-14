@@ -30,6 +30,14 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const progressBarRef = useRef(null);
   const showHeaderRef = useRef(true);
 
+  // Helper tắt toàn bộ overlay cùng một lúc tránh chồng chéo giao diện
+  const closeAllDrawers = () => {
+    setIsOpen(false);
+    setIsCartOpen(false);
+    setIsSearchOpen(false);
+    setIsAuthOpen(false);
+  };
+
   const lenis = useLenis((lenisInstance) => {
     // Cập nhật tiến độ cuộn qua DOM trực tiếp để tránh React Re-render liên tục gây giật lag
     if (progressBarRef.current) {
@@ -183,7 +191,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
             {/* NÚT HAMBURGER: Chỉ hiện trên Mobile (lg:hidden), bấm mở menu toàn màn hình */}
             <button
               className="lg:hidden p-1 hover:opacity-70 transition-opacity"
-              onClick={() => setIsOpen(true)}
+              onClick={() => { closeAllDrawers(); setIsOpen(true); }}
             >
               <Menu size={24} strokeWidth={1.5} />
             </button>
@@ -269,7 +277,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
               </Link>
             )}
             <button 
-              onClick={() => setIsSearchOpen(true)}
+              onClick={() => { closeAllDrawers(); setIsSearchOpen(true); }}
               className="hover:opacity-70 transition-opacity"
             >
               <Search size={20} strokeWidth={1.5} />
@@ -277,10 +285,10 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
             {/* Nút User: Bấm chuyển sang /account nếu đã đăng nhập, hoặc mở sidebar đăng nhập nếu chưa */}
             <button
               onClick={() => {
-                setIsCartOpen(false); // Đóng giỏ hàng khi tương tác tài khoản
                 if (user) {
                   navigate("/account");
                 } else {
+                  closeAllDrawers();
                   setIsAuthOpen(true);
                 }
               }}
@@ -295,7 +303,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
             </button>
             <button
               onClick={() => {
-                setIsAuthOpen(false); // Đóng đăng nhập khi tương tác giỏ hàng
+                closeAllDrawers();
                 setCartActiveTab("BAG");
                 setIsCartOpen(true);
               }}
@@ -313,7 +321,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
             - -translate-x-full: Ẩn (đẩy ra ngoài bên trái 100% chiều rộng).
             - transition-transform duration-300: Tạo hiệu ứng trượt mượt mà 300ms.
         */}
-        <div className={`fixed inset-0 bg-white text-black z-[60] transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`fixed inset-0 bg-white text-black z-[99999] transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
           <div className="flex justify-between items-center p-4 border-b border-gray-100">
             <span className="font-serif font-bold tracking-widest">MENU</span>
             <button onClick={() => setIsOpen(false)} className="p-1 hover:opacity-70">

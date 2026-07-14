@@ -120,14 +120,14 @@ const AuthSidebar = ({ isOpen, onClose }) => {
       {/* Backdrop che mờ */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 bg-black/40 z-[90] transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/40 z-[99998] transition-opacity duration-300 ${
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       />
 
       {/* Sidebar Panel */}
       <div
-        className={`fixed top-0 right-0 h-full w-full sm:w-[400px] md:w-[480px] bg-[#fdfdfd] z-[100] transform transition-transform duration-500 ease-in-out flex flex-col ${
+        className={`fixed top-0 right-0 h-full w-full sm:w-[400px] md:w-[480px] bg-[#fdfdfd] z-[99999] transform transition-transform duration-500 ease-in-out flex flex-col ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

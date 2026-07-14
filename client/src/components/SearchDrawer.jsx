@@ -91,7 +91,7 @@ const SearchDrawer = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-[#f8f8f8] z-[9999] overflow-y-auto px-4 md:px-[60px] py-[60px] text-left">
+    <div className="fixed inset-0 bg-[#f8f8f8] z-[99999] overflow-y-auto px-4 md:px-[60px] py-[60px] text-left">
       
       {/* Header nút Close đóng */}
       <button 

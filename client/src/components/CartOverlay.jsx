@@ -129,8 +129,8 @@ const CartOverlay = ({ isOpen, onClose, initialTab = "BAG" }) => {
   };
 
   return (
-    // Backdrop che toàn màn hình, nằm dưới Header (z-40) và khởi đầu từ top-[0]
-    <div className="fixed inset-0 w-full h-full bg-white z-[80] overflow-y-auto pt-[80px] md:pt-[100px] text-black font-sans antialiased">
+    // Backdrop che toàn màn hình, nằm trên Header (z-[99999])
+    <div className="fixed inset-0 w-full h-full bg-white z-[99999] overflow-y-auto pt-[80px] md:pt-[100px] text-black font-sans antialiased">
       
       {/* ================= NÚT ĐÓNG (X) GÓC PHẢI TRÊN (Khớp Mockup) ================= */}
       <button
