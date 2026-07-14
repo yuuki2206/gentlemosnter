@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
-import { useLenis } from "lenis/react";
 
 const ScrollToTopButton = () => {
-  const lenis = useLenis();
   const [isVisible, setIsVisible] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -23,11 +21,7 @@ const ScrollToTopButton = () => {
   }, []);
 
   const handleScrollToTop = () => {
-    if (lenis) {
-      lenis.scrollTo(0, { duration: 1.2 });
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Hiệu ứng hút nam châm (Magnetic Pull) khi di chuột vào nút

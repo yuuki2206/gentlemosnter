@@ -12,7 +12,7 @@ import CartOverlay from "./CartOverlay";
 import SearchDrawer from "./SearchDrawer";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
-import { useLenis } from "lenis/react";
+
 
 const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const { cartCount } = useContext(CartContext);
@@ -38,47 +38,17 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
     setIsAuthOpen(false);
   };
 
-  const lenis = useLenis();
-
-  useLenis((lenisInstance) => {
-    // Cập nhật tiến độ cuộn qua DOM trực tiếp để tránh React Re-render liên tục gây giật lag
-    if (progressBarRef.current) {
-      progressBarRef.current.style.transform = `scaleX(${lenisInstance.progress})`;
-    }
-    
-    // Ẩn/hiện Header dựa trên hướng cuộn qua DOM trực tiếp để tăng tối đa hiệu năng (Không re-render React)
-    const currentScroll = lenisInstance.scroll;
-    const direction = lenisInstance.direction; // 1 = xuống, -1 = lên
-    
-    if (currentScroll > 100) {
-      if (direction === 1 && showHeaderRef.current) {
-        showHeaderRef.current = false;
-        if (headerRef.current) {
-          headerRef.current.style.transform = "translateY(-100%)";
-        }
-      } else if (direction === -1 && !showHeaderRef.current) {
-        showHeaderRef.current = true;
-        if (headerRef.current) {
-          headerRef.current.style.transform = "translateY(0)";
-        }
-      }
-    } else if (!showHeaderRef.current) {
-      showHeaderRef.current = true;
-      if (headerRef.current) {
-        headerRef.current.style.transform = "translateY(0)";
-      }
-    }
-  });
-
-  // Tự động dừng/khởi động cuộn mượt Lenis khi mở các Drawer/Overlay để tránh lỗi double scroll
+  // 1. Khóa cuộn trang (Overflow Hidden) khi mở các Sidebar/Cart/Search overlays
   useEffect(() => {
-    if (!lenis) return;
     if (isCartOpen || isSearchOpen || isOpen || isAuthOpen) {
-      lenis.stop();
+      document.body.style.overflow = "hidden";
     } else {
-      lenis.start();
+      document.body.style.overflow = "";
     }
-  }, [isCartOpen, isSearchOpen, isOpen, isAuthOpen, lenis]);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isCartOpen, isSearchOpen, isOpen, isAuthOpen]);
 
   // === REACT ROUTER: useLocation ===
   // Hook này trả về object chứa thông tin URL hiện tại, trong đó pathname là phần đường dẫn (VD: "/", "/sunglasses", "/intelligent-eyewear").
@@ -135,26 +105,57 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
     "Explore": "pl-[505px]",
   };
 
-  // === useEffect: LẮNG NGHE SỰ KIỆN SCROLL ===
-  // Kỹ thuật: Đăng ký event listener "scroll" trên window khi component mount,
-  // và gỡ bỏ (cleanup) khi component unmount để tránh memory leak.
-  // Dependency array [] rỗng = chỉ chạy 1 lần duy nhất sau lần render đầu tiên.
+  // === useEffect: LẮNG NGHE SỰ KIỆN SCROLL NATIVE ===
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // Ngưỡng 50px trước khi Header đổi màu nền
+      const currentScrollY = window.scrollY;
+
+      // 1. Cập nhật thanh tiến trình cuộn trên cùng
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0 && progressBarRef.current) {
+        const progress = currentScrollY / docHeight;
+        progressBarRef.current.style.transform = `scaleX(${progress})`;
+      }
+
+      // 2. Ẩn/hiện Header bằng transform trực tiếp trên DOM (Tối đa hóa FPS)
+      if (currentScrollY > 100) {
+        if (currentScrollY > lastScrollY && showHeaderRef.current) {
+          showHeaderRef.current = false;
+          if (headerRef.current) {
+            headerRef.current.style.transform = "translateY(-100%)";
+          }
+        } else if (currentScrollY < lastScrollY && !showHeaderRef.current) {
+          showHeaderRef.current = true;
+          if (headerRef.current) {
+            headerRef.current.style.transform = "translateY(0)";
+          }
+        }
+      } else if (!showHeaderRef.current) {
+        showHeaderRef.current = true;
+        if (headerRef.current) {
+          headerRef.current.style.transform = "translateY(0)";
+        }
+      }
+
+      // 3. Đổi màu nền Header khi cuộn quá 50px
+      setIsScrolled(currentScrollY > 50);
+
+      lastScrollY = currentScrollY;
     };
-    
+
     const handleOpenCart = () => {
       setCartActiveTab("BAG");
       setIsCartOpen(true);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("openCart", handleOpenCart);
     window.addEventListener("triggerOpenCart", handleOpenCart);
     
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Cleanup function
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("openCart", handleOpenCart);
       window.removeEventListener("triggerOpenCart", handleOpenCart);
     };

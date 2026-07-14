@@ -21,8 +21,7 @@ import ProductDetail from "./pages/ProductDetail";
 import { CartProvider, CartContext } from "./context/CartContext";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { PrivyProvider } from "@privy-io/react-auth";
-import { ReactLenis, useLenis } from "lenis/react";
-import "lenis/dist/lenis.css";
+
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Preloader from "./components/Preloader";
 import ToastNotification from "./components/ToastNotification";
@@ -33,25 +32,7 @@ import ToastNotification from "./components/ToastNotification";
 function AppContent() {
   const { user, loading: authLoading } = useContext(AuthContext);
   const location = useLocation();
-  const lenis = useLenis();
 
-  // Đồng bộ lại đồng hồ hoạt họa (clock ticks) của Lenis khi người dùng quay lại tab (Tránh lỗi lag/giật do tụt FPS ở background)
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible" && lenis) {
-        lenis.start();
-        lenis.resize();
-        requestAnimationFrame(() => {
-          lenis.raf(performance.now());
-        });
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, [lenis]);
 
   const [showPreloader, setShowPreloader] = useState(() => {
     // Chỉ hiển thị preloader 1 lần duy nhất trong mỗi phiên duyệt web (Session)
@@ -128,30 +109,28 @@ function AppContent() {
 
 function App() {
   return (
-    <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothWheel: true }}>
-      <PrivyProvider
-        appId="cl7ydg25e00003b5xp9r4g93z" // Sandbox App ID của Privy (Chạy thử nghiệm lập tức)
-        config={{
-          loginMethods: ["email", "google"],
-          appearance: {
-            theme: "light",
-            accentColor: "#000000",
-            showWalletLoginFirst: false,
-          },
-          embeddedWallets: {
-            createOnLogin: "users-without-wallets", // Tự tạo ví Web3 nhúng khi người dùng login
-          },
-        }}
-      >
-        <AuthProvider>
-          <CartProvider>
-            <Router>
-              <AppContent />
-            </Router>
-          </CartProvider>
-        </AuthProvider>
-      </PrivyProvider>
-    </ReactLenis>
+    <PrivyProvider
+      appId="cl7ydg25e00003b5xp9r4g93z" // Sandbox App ID của Privy (Chạy thử nghiệm lập tức)
+      config={{
+        loginMethods: ["email", "google"],
+        appearance: {
+          theme: "light",
+          accentColor: "#000000",
+          showWalletLoginFirst: false,
+        },
+        embeddedWallets: {
+          createOnLogin: "users-without-wallets", // Tự tạo ví Web3 nhúng khi người dùng login
+        },
+      }}
+    >
+      <AuthProvider>
+        <CartProvider>
+          <Router>
+            <AppContent />
+          </Router>
+        </CartProvider>
+      </AuthProvider>
+    </PrivyProvider>
   );
 }
 
