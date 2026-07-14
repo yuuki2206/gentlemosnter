@@ -201,9 +201,14 @@ const SearchDrawer = ({ isOpen, onClose }) => {
             {loading ? (
               <p className="text-[11px] text-gray-400 italic">Searching...</p>
             ) : results.length === 0 ? (
-              <p className="text-[11px] text-gray-500 font-light">
-                No results found for <span className="font-semibold">"{query}"</span>. Please try another keyword.
-              </p>
+              <div className="flex flex-col items-center justify-center py-20 text-center space-y-2">
+                <p className="text-[12px] text-black font-normal tracking-wide">
+                  We were unable to find exact matches for "{query}."
+                </p>
+                <p className="text-[11px] text-gray-400 font-light tracking-wide">
+                  Please check your spelling or spacing.
+                </p>
+              </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {results.map((item) => {

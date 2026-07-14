@@ -45,6 +45,26 @@ const CircuitCollection = ({ story }) => {
     window.scrollTo(0, 0);
   }, [story]);
 
+  // Kích hoạt hiệu ứng lộ diện khi cuộn trang (IntersectionObserver)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   // Điều khiển Play/Pause cho Hero Video
   const toggleHeroPlay = () => {
     if (heroVideoRef.current) {
@@ -158,7 +178,7 @@ const CircuitCollection = ({ story }) => {
           </div>
 
           {/* Logo vector và đoạn giới thiệu */}
-          <div className="desktop:mt-[80px] mt-[20px] desktop:mb-[60px] mb-[48px] flex items-center justify-center mobile:px-[24px]">
+          <div className="desktop:mt-[80px] mt-[20px] desktop:mb-[60px] mb-[48px] flex items-center justify-center mobile:px-[24px] reveal-on-scroll">
             <svg className="w-[327px] h-[32px] desktop:w-[538px] desktop:h-[52px]" fill="none" height="32" viewBox="0 0 327 32" width="327" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_519_6634)">
                 <path d="M82.7643 20.9723L75.5926 27.8874H66.4429L77.8262 16.6588C82.0579 12.4924 84.0964 11.8103 91.3152 11.8103H119.814L113.631 17.8292H92.1293C86.7404 17.8292 85.5899 18.2438 82.7643 20.9657M112.703 18.7922H92.2571C86.8278 18.7922 85.9801 19.2068 83.5178 21.6545L77.2476 27.8874H85.7312L87.7495 25.8811C89.0816 24.5569 89.6804 24.4298 92.3647 24.4298H107.031L112.703 18.7922ZM114.916 27.8874L131.13 11.8103H121.058L104.885 27.8874H114.916Z" fill="white"></path>
@@ -198,7 +218,7 @@ const CircuitCollection = ({ story }) => {
         </section>
 
         {/* SECTION 1: Campaign Editorial Grid */}
-        <section className="circuit-campaign-section flex flex-col gap-[80px] desktop:gap-[120px]" data-sentry-component="CircuitCampaignSection">
+        <section className="circuit-campaign-section flex flex-col gap-[80px] desktop:gap-[120px] reveal-on-scroll" data-sentry-component="CircuitCampaignSection">
           <div className="flex flex-row">
             <div className="mobile:hidden desktop:flex-[470]"></div>
             <div className="circuit-campaign-item flex flex-col gap-[12px] desktop:gap-[32px] desktop:flex-[750] flex-[351]">

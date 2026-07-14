@@ -121,6 +121,32 @@ const ProductDetail = () => {
     }));
   };
 
+  const getSwatchColorStyle = (name) => {
+    const lower = name.toLowerCase();
+    if (lower.includes("black") || lower.includes("dark")) return { backgroundColor: "#000000" };
+    if (lower.includes("grey") || lower.includes("gray")) return { backgroundColor: "#808080" };
+    if (lower.includes("white")) return { backgroundColor: "#ffffff", border: "1px solid #ddd" };
+    if (lower.includes("khaki")) return { backgroundColor: "#8f9779" };
+    if (lower.includes("clear") || lower.includes("transparent") || lower.includes("crystal")) {
+      return { 
+        background: "linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)",
+        border: "1px solid #cbd5e1"
+      };
+    }
+    if (lower.includes("tortoise") || lower.includes("brown") || lower.includes("amber")) {
+      return { 
+        backgroundImage: "radial-gradient(circle, #5c4033 20%, #3d2314 80%)",
+        border: "1px solid #3d2314"
+      };
+    }
+    if (lower.includes("green")) return { backgroundColor: "#1e3a1e" };
+    if (lower.includes("blue")) return { backgroundColor: "#1e2a3a" };
+    if (lower.includes("pink")) return { backgroundColor: "#fbcfe8" };
+    if (lower.includes("orange")) return { backgroundColor: "#fed7aa" };
+    if (lower.includes("yellow")) return { backgroundColor: "#fef08a" };
+    return { backgroundColor: "#4b5563" };
+  };
+
   const handleWishlistToggle = (e) => {
     e.preventDefault();
     if (isWishlisted) {
@@ -133,19 +159,19 @@ const ProductDetail = () => {
         thumbnail: product.thumbnail,
         slug: product.slug,
       });
-      alert(`Đã thêm ${product.name} vào danh sách yêu thích!`);
     }
   };
 
   const handleAddToCart = () => {
-    addToCart({
+    const item = {
       sku: product.sku,
       name: product.name,
       price: product.price,
       thumbnail: product.thumbnail,
       slug: product.slug,
-    });
-    alert(`Đã thêm ${product.name} vào giỏ hàng thành công!`);
+    };
+    addToCart(item);
+    window.dispatchEvent(new CustomEvent("openCartToast", { detail: item }));
   };
 
   // Convert mm to inches
@@ -259,21 +285,23 @@ const ProductDetail = () => {
                   <span>Colorway Options</span>
                   <span className="text-black font-semibold">{product.colorLabel || getSwatchColorLabel(product.name)}</span>
                 </div>
-                <div className="flex flex-wrap gap-x-2 gap-y-3">
+                <div className="flex flex-wrap gap-x-3 gap-y-3">
                   {product.colorways.map((variant) => (
-                    <div key={variant.sku} className="flex flex-col items-center gap-1">
+                    <div key={variant.sku} className="relative group/chip flex flex-col items-center">
                       <Link
                         to={`/shop/${variant.sku}`}
-                        className={`w-[24px] h-[24px] border bg-white flex justify-center items-center overflow-hidden transition-all ${
-                          variant.sku === product.sku ? "border-black ring-1 ring-black" : "border-gray-200 hover:border-gray-400"
+                        className={`w-5 h-5 rounded-full transition-all duration-300 transform hover:scale-110 flex items-center justify-center ${
+                          variant.sku === product.sku 
+                            ? "ring-1 ring-offset-2 ring-black" 
+                            : "border border-black/10 hover:border-black"
                         }`}
-                        title={variant.name}
+                        style={getSwatchColorStyle(variant.name)}
                       >
-                        <img src={variant.thumbnail} alt={variant.name} className="w-[90%] h-auto object-contain" onError={handleImageError} />
+                        {/* Tooltip nhỏ khi hover */}
+                        <div className="absolute bottom-full mb-2 hidden group-hover/chip:block bg-black text-white text-[8px] tracking-wider uppercase py-1 px-2 whitespace-nowrap z-50 rounded-xs">
+                          {variant.name}
+                        </div>
                       </Link>
-                      {variant.sku === product.sku && (
-                        <div className="w-[12px] h-[1.5px] bg-[#111111] mt-0.5"></div>
-                      )}
                     </div>
                   ))}
                 </div>

@@ -4,7 +4,7 @@
  * - Route: Ánh xạ từng đường dẫn URL đến trang giao diện tương ứng.
  * - Navigate: Tự động chuyển hướng các link lỗi (*) về trang chủ.
  */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, Link } from "react-router-dom";
 import { SlidersHorizontal, Eye } from "lucide-react";
 import Home from "./pages/Home";
@@ -24,6 +24,8 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import Preloader from "./components/Preloader";
+import ToastNotification from "./components/ToastNotification";
 
 /**
  * AppContent - Component phụ trợ chạy bên trong AuthProvider để lấy được Context thông tin User đăng nhập
@@ -32,11 +34,23 @@ function AppContent() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
 
+  const [showPreloader, setShowPreloader] = useState(() => {
+    // Chỉ hiển thị preloader 1 lần duy nhất trong mỗi phiên duyệt web (Session)
+    return !sessionStorage.getItem("preloader_shown");
+  });
+
+  const handlePreloaderComplete = () => {
+    sessionStorage.setItem("preloader_shown", "true");
+    setShowPreloader(false);
+  };
+
   const isAdmin = user && user.role === "admin";
   const isAdminPage = location.pathname.startsWith("/admin");
 
   return (
     <>
+      {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
+      <ToastNotification />
       <Routes>
         {/* Trang chủ */}
         <Route path="/" element={<Home />} />

@@ -137,9 +137,15 @@ const CategoryLayout = ({ data = [], categories = [], categoryInfo = {}, default
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-10 md:gap-x-4 md:gap-y-16">
               
               {/* Cắt mảng (slice) từ 0 đến visibleCount để render thẻ sản phẩm */}
-              {sortedData.slice(0, visibleCount).map((item) => (
-                <SwiperProductCard key={item.sku} item={item} />
-              ))}
+              {loading ? (
+                Array.from({ length: 8 }).map((_, idx) => (
+                  <SwiperProductCard key={`skeleton-${idx}`} loading={true} />
+                ))
+              ) : (
+                sortedData.slice(0, visibleCount).map((item) => (
+                  <SwiperProductCard key={item.sku} item={item} />
+                ))
+              )}
 
             </div>
 

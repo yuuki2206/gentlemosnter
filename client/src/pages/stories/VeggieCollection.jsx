@@ -27,6 +27,26 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
   const [isPlayingHeroVideo, setIsPlayingHeroVideo] = useState(false);
   const [isCampaignPlaying, setIsCampaignPlaying] = useState(false);
 
+  // Kích hoạt hiệu ứng lộ diện khi cuộn trang (IntersectionObserver)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   // Cuộn lên đầu trang và kích hoạt IntersectionObserver phát video xếp gọn 1 lần khi cuộn tới
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -134,7 +154,7 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
           </div>
 
           {/* Mô tả chữ dài ở dưới Hero */}
-          <div className="flex flex-col items-center justify-center gap-[30px] px-6 text-center max-w-[800px] mx-auto mt-8">
+          <div className="flex flex-col items-center justify-center gap-[30px] px-6 text-center max-w-[800px] mx-auto mt-8 reveal-on-scroll">
             <h2 className="hidden lg:block text-[52px] leading-[60px] font-[400] uppercase text-[#111] tracking-wide">
               VEGGIE COLLECTION
             </h2>
@@ -145,7 +165,7 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
         </div>
 
         {/* Mảnh ghép tranh ảnh tĩnh (Steel cuts) */}
-        <section className="veggie-editorial-1-section flex flex-col lg:mb-[80px]">
+        <section className="veggie-editorial-1-section flex flex-col lg:mb-[80px] reveal-on-scroll">
           <img
             alt="steel cut image 1"
             className="w-full h-auto object-cover image-1"

@@ -143,10 +143,12 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("openCart", handleOpenCart);
+    window.addEventListener("triggerOpenCart", handleOpenCart);
     
     return () => {
       window.removeEventListener("scroll", handleScroll); // Cleanup function
       window.removeEventListener("openCart", handleOpenCart);
+      window.removeEventListener("triggerOpenCart", handleOpenCart);
     };
   }, []);
 
