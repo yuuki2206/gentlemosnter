@@ -177,8 +177,8 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
         className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-all duration-500 ease-in-out ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         } ${
-          isSolid
-            ? (location.pathname.includes("intelligent-eyewear") ? "bg-black text-white" : "bg-[#f8f8f8] text-black")
+          isSolid || isOpen
+            ? (location.pathname.includes("intelligent-eyewear") ? "bg-black text-white" : "bg-[#f8f8f8] text-black border-b border-gray-100")
             : "bg-transparent text-white"
         }`}
       >
@@ -188,12 +188,19 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
           {/* CỘT TRÁI: Nút hamburger (Mobile) + Menu ngang (Desktop) */}
           <div className="flex-1 flex justify-start items-center">
             
-            {/* NÚT HAMBURGER: Chỉ hiện trên Mobile (lg:hidden), bấm mở menu toàn màn hình */}
+            {/* NÚT HAMBURGER / CLOSE: Chỉ hiện trên Mobile (lg:hidden) */}
             <button
               className="lg:hidden p-1 hover:opacity-70 transition-opacity"
-              onClick={() => { closeAllDrawers(); setIsOpen(true); }}
+              onClick={() => {
+                if (isOpen) {
+                  setIsOpen(false);
+                } else {
+                  closeAllDrawers();
+                  setIsOpen(true);
+                }
+              }}
             >
-              <Menu size={24} strokeWidth={1.5} />
+              {isOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
             </button>
 
             {/* MENU NGANG DESKTOP: Ẩn trên Mobile (hidden lg:flex)
@@ -315,89 +322,118 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
           </div>
         </div>
 
-        {/* === MENU TOÀN MÀN HÌNH (Mobile Fullscreen Menu) ===
-            Kỹ thuật: Dùng CSS transform translate-x để trượt menu vào/ra từ bên trái.
-            - translate-x-0: Hiện (trượt vào vị trí).
-            - -translate-x-full: Ẩn (đẩy ra ngoài bên trái 100% chiều rộng).
-            - transition-transform duration-300: Tạo hiệu ứng trượt mượt mà 300ms.
-        */}
-        <div className={`fixed inset-0 bg-white text-black z-[99999] transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
-          <div className="flex justify-between items-center p-4 border-b border-gray-100">
-            <span className="font-serif font-bold tracking-widest">MENU</span>
-            <button onClick={() => setIsOpen(false)} className="p-1 hover:opacity-70">
-              <X size={28} strokeWidth={1.5} />
-            </button>
-          </div>
-          <div className="flex flex-col px-6 py-6 overflow-y-auto max-h-[calc(100vh-80px)] space-y-4 text-base font-normal">
-            {Object.keys(menuData).map((item) => {
-              const hasSubItems = menuData[item].length > 0;
-              const isExpanded = expandedItem === item;
+      </header>
 
-              return (
-                <div key={item} className="border-b border-gray-100 pb-3">
-                  {hasSubItems ? (
-                    <div>
-                      {/* Tiêu đề menu cha dạng Accordion */}
-                      <button
-                        onClick={() => setExpandedItem(isExpanded ? null : item)}
-                        className="w-full flex justify-between items-center text-left py-1 text-black font-semibold text-[15px] tracking-widest uppercase hover:text-gray-500 transition-colors"
-                      >
-                        <span>{item}</span>
-                        <span className="text-[12px] text-gray-400 font-light">
-                          {isExpanded ? "▲" : "▼"}
-                        </span>
-                      </button>
-                      
-                      {/* Danh sách menu con khi được mở rộng */}
-                      {isExpanded && (
-                        <div className="flex flex-col gap-3 pl-4 pt-3 pb-1 text-[13px] font-normal text-gray-600 tracking-wider">
-                          {menuData[item].map((subItem) => (
-                            <Link
-                              key={subItem}
-                              to={
-                                item === "Explore" && subItem === "Services"
-                                  ? "/int/en/services"
-                                  : item === "Explore" && subItem === "Stories"
-                                  ? "/int/en/stories"
-                                  : item === "Sunglasses" || item === "Glasses"
-                                  ? `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`
-                                  : item === "Collections" && subItem === "Veggie"
-                                  ? "/stories/850266286345551416"
-                                  : item === "Collections" && subItem === "Circuit"
-                                  ? "/stories/817695100293913422"
-                                  : "#"
-                              }
-                              onClick={() => {
-                                setIsOpen(false);
-                                setExpandedItem(null);
-                              }}
-                              className="hover:text-black py-1 block"
-                            >
-                              {subItem}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    /* Menu không có mục con (ví dụ: Intelligent Eyewear) */
-                    <Link
-                      to={item === "Intelligent Eyewear" ? "/intelligent-eyewear" : "#"}
-                      onClick={() => {
-                        setIsOpen(false);
-                        setExpandedItem(null);
-                      }}
-                      className="block py-1 text-black font-semibold text-[15px] tracking-widest uppercase hover:text-gray-500 transition-colors"
+      {/* === MENU TOÀN MÀN HÌNH MOBILE (Slide Down List Animation) === */}
+      <div 
+        className={`fixed left-0 w-full bg-[#f8f8f8] text-black z-[998] overflow-y-auto transition-all duration-500 ease-out origin-top border-t border-gray-100 ${
+          isOpen 
+            ? "top-[64px] md:top-[80px] h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] opacity-100 scale-y-100" 
+            : "top-[64px] md:top-[80px] h-0 opacity-0 scale-y-0 pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col px-6 py-6 space-y-4 text-base font-normal pb-24 text-left">
+          {Object.keys(menuData).map((item) => {
+            const hasSubItems = menuData[item].length > 0;
+            const isExpanded = expandedItem === item;
+
+            return (
+              <div key={item} className="border-b border-gray-100 pb-3">
+                {hasSubItems ? (
+                  <div>
+                    {/* Tiêu đề menu cha dạng Accordion */}
+                    <button
+                      onClick={() => setExpandedItem(isExpanded ? null : item)}
+                      className="w-full flex justify-between items-center text-left py-1 text-black font-semibold text-[15px] tracking-widest uppercase hover:text-gray-500 transition-colors"
                     >
-                      {item}
-                    </Link>
-                  )}
-                </div>
-              );
-            })}
+                      <span>{item}</span>
+                      <span className="text-[12px] text-gray-400 font-light">
+                        {isExpanded ? "▲" : "▼"}
+                      </span>
+                    </button>
+                    
+                    {/* Danh sách menu con khi được mở rộng */}
+                    {isExpanded && (
+                      <div className="flex flex-col gap-3 pl-4 pt-3 pb-1 text-[13px] font-normal text-gray-600 tracking-wider">
+                        {menuData[item].map((subItem) => (
+                          <Link
+                            key={subItem}
+                            to={
+                              item === "Explore" && subItem === "Services"
+                                ? "/int/en/services"
+                                : item === "Explore" && subItem === "Stories"
+                                ? "/int/en/stories"
+                                : item === "Sunglasses" || item === "Glasses"
+                                ? `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`
+                                : item === "Collections" && subItem === "Veggie"
+                                ? "/stories/850266286345551416"
+                                : item === "Collections" && subItem === "Circuit"
+                                ? "/stories/817695100293913422"
+                                : "#"
+                            }
+                            onClick={() => {
+                              setIsOpen(false);
+                              setExpandedItem(null);
+                            }}
+                            className="hover:text-black py-1 block"
+                          >
+                            {subItem}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  /* Menu không có mục con (ví dụ: Intelligent Eyewear) */
+                  <Link
+                    to={item === "Intelligent Eyewear" ? "/intelligent-eyewear" : "#"}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setExpandedItem(null);
+                    }}
+                    className="block py-1 text-black font-semibold text-[15px] tracking-widest uppercase hover:text-gray-500 transition-colors"
+                  >
+                    {item}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
+
+          {/* Menu phụ ở dưới cùng của Mobile Menu (khớp 100% Mockup hình 2) */}
+          <div className="pt-8 space-y-6 text-left border-t border-gray-200 mt-10">
+            <div className="flex flex-col gap-4 text-[11px] font-bold tracking-[0.2em] uppercase text-black">
+              {user ? (
+                <Link to="/account" onClick={() => setIsOpen(false)} className="hover:opacity-60 transition-opacity">
+                  My Account
+                </Link>
+              ) : (
+                <button onClick={() => { closeAllDrawers(); setIsAuthOpen(true); }} className="text-left uppercase hover:opacity-60 transition-opacity font-bold">
+                  Login / Create Account
+                </button>
+              )}
+              <Link to="/account" onClick={() => setIsOpen(false)} className="hover:opacity-60 transition-opacity">
+                Track My Order
+              </Link>
+            </div>
+            
+            <div className="pt-6 border-t border-gray-100">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-black">
+                Wishlist
+              </span>
+              <p className="text-[10px] text-gray-400 mt-2 tracking-wider">
+                You have nothing in your wishlist, yet.
+              </p>
+            </div>
+
+            <div className="pt-6 border-t border-gray-100">
+              <Link to="/services" onClick={() => setIsOpen(false)} className="text-[11px] font-bold tracking-[0.2em] uppercase text-black hover:opacity-60 transition-opacity">
+                Customer Service
+              </Link>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* === COMPONENT CON: AuthSidebar ===
           Kỹ thuật Component Composition: Header quản lý trạng thái isAuthOpen,
