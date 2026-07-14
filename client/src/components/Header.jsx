@@ -26,9 +26,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const [cartActiveTab, setCartActiveTab] = useState("BAG"); // Tab mặc định khi mở giỏ hàng
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Trạng thái đóng/mở thanh tìm kiếm (Search Drawer)
   const [expandedItem, setExpandedItem] = useState(null); // Trạng thái mở rộng menu con trên Mobile
-  const headerRef = useRef(null);
   const progressBarRef = useRef(null);
-  const showHeaderRef = useRef(true);
 
   // Helper tắt toàn bộ overlay cùng một lúc tránh chồng chéo giao diện
   const closeAllDrawers = () => {
@@ -107,8 +105,6 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
 
   // === useEffect: LẮNG NGHE SỰ KIỆN SCROLL NATIVE ===
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -119,30 +115,8 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
         progressBarRef.current.style.transform = `scaleX(${progress})`;
       }
 
-      // 2. Ẩn/hiện Header bằng transform trực tiếp trên DOM (Tối đa hóa FPS)
-      if (currentScrollY > 100) {
-        if (currentScrollY > lastScrollY && showHeaderRef.current) {
-          showHeaderRef.current = false;
-          if (headerRef.current) {
-            headerRef.current.style.transform = "translateY(-100%)";
-          }
-        } else if (currentScrollY < lastScrollY && !showHeaderRef.current) {
-          showHeaderRef.current = true;
-          if (headerRef.current) {
-            headerRef.current.style.transform = "translateY(0)";
-          }
-        }
-      } else if (!showHeaderRef.current) {
-        showHeaderRef.current = true;
-        if (headerRef.current) {
-          headerRef.current.style.transform = "translateY(0)";
-        }
-      }
-
-      // 3. Đổi màu nền Header khi cuộn quá 50px
+      // 2. Đổi màu nền Header khi cuộn quá 50px
       setIsScrolled(currentScrollY > 50);
-
-      lastScrollY = currentScrollY;
     };
 
     const handleOpenCart = () => {
@@ -185,8 +159,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
       />
 
       <header
-        ref={headerRef}
-        className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-[transform,background-color] duration-500 ease-in-out ${
+        className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-[background-color,border-color] duration-500 ease-in-out ${
           isSolid || isOpen
             ? (location.pathname.includes("intelligent-eyewear") ? "bg-black text-white" : "bg-[#f8f8f8] text-black border-b border-gray-100")
             : "bg-transparent text-white"

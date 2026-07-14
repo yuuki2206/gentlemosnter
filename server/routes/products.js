@@ -35,10 +35,14 @@ router.get("/", async (req, res) => {
 
     let result = [...productsCache];
 
-    // 1. Lọc theo từ khóa search (Tìm kiếm theo Tên sản phẩm)
+    // 1. Lọc theo từ khóa search (Tìm kiếm theo Tên sản phẩm, Bộ sưu tập, Loại sản phẩm)
     if (search) {
       const searchLower = search.toLowerCase();
-      result = result.filter(p => p.name?.toLowerCase().includes(searchLower));
+      result = result.filter(p => 
+        p.name?.toLowerCase().includes(searchLower) ||
+        p.collection?.toLowerCase().includes(searchLower) ||
+        p.collections?.some(c => c.toLowerCase().includes(searchLower))
+      );
     }
 
     // 2. Lọc theo type (Sunglasses hoặc Glasses)
