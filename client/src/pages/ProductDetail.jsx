@@ -489,7 +489,7 @@ const ProductDetail = () => {
                 <Link
                   to={`/shop/${similarItem.sku}`}
                   key={similarItem.sku}
-                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 min-w-[100px] sm:min-w-0 flex-shrink-0 sm:flex-shrink"
+                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 w-[140px] sm:w-auto flex-shrink-0 sm:flex-shrink"
                 >
                   <div className="aspect-[4/3] w-full bg-transparent flex justify-center items-center overflow-hidden mb-3">
                     <img
