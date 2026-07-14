@@ -31,7 +31,7 @@ import ToastNotification from "./components/ToastNotification";
  * AppContent - Component phụ trợ chạy bên trong AuthProvider để lấy được Context thông tin User đăng nhập
  */
 function AppContent() {
-  const { user } = useContext(AuthContext);
+  const { user, loading: authLoading } = useContext(AuthContext);
   const location = useLocation();
 
   const [showPreloader, setShowPreloader] = useState(() => {
@@ -49,7 +49,7 @@ function AppContent() {
 
   return (
     <>
-      {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
+      {showPreloader && <Preloader ready={!authLoading} onComplete={handlePreloaderComplete} />}
       <ToastNotification />
       <Routes>
         {/* Trang chủ */}

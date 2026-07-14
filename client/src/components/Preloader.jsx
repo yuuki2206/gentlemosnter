@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-const Preloader = ({ onComplete }) => {
+const Preloader = ({ ready, onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+
+  // Sử dụng useRef để lưu trữ trạng thái ready hiện tại, 
+  // giúp useEffect đọc được giá trị mới nhất của API mà không cần khởi động lại toàn bộ chu kỳ lặp % (reset về 0)
+  const readyRef = useRef(ready);
+  useEffect(() => {
+    readyRef.current = ready;
+  }, [ready]);
 
   useEffect(() => {
     // Vô hiệu hóa cuộn trang trong lúc loading
@@ -11,12 +18,20 @@ const Preloader = ({ onComplete }) => {
 
     let currentProgress = 0;
     const interval = setInterval(() => {
-      // Tăng ngẫu nhiên từ 3 đến 10 để tạo nhịp tải chân thực
-      const increment = Math.floor(Math.random() * 8) + 3; 
-      currentProgress = Math.min(currentProgress + increment, 100);
-      setProgress(currentProgress);
+      const isReady = readyRef.current;
+      
+      // Nếu API backend chưa phản hồi, tiến trình đếm tối đa dừng ở 95% để chờ đợi (Tránh đứt gãy trải nghiệm)
+      const limit = isReady ? 100 : 95;
 
-      if (currentProgress === 100) {
+      if (currentProgress < limit) {
+        // Tăng ngẫu nhiên từ 2 đến 7 để nhịp đếm chạy thật tự nhiên
+        const increment = Math.floor(Math.random() * 6) + 2; 
+        currentProgress = Math.min(currentProgress + increment, limit);
+        setProgress(currentProgress);
+      }
+
+      // Chỉ hoàn tất khi tiến trình đạt 100% và API xác thực/tải trang đã phản hồi xong
+      if (currentProgress === 100 && isReady) {
         clearInterval(interval);
         setTimeout(() => {
           setIsFadingOut(true); // Kích hoạt hiệu ứng trượt lên & mờ dần
@@ -27,7 +42,7 @@ const Preloader = ({ onComplete }) => {
           }, 800); // Khớp với duration-800
         }, 600); // Giữ ở mức 100% một khoảng nhỏ để tạo điểm dừng sang trọng
       }
-    }, 70);
+    }, 60);
 
     return () => {
       clearInterval(interval);
