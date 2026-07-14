@@ -9,8 +9,13 @@ const ScrollToTopButton = () => {
 
   // Theo dõi scroll để ẩn/hiện nút (hiển thị khi cuộn xuống quá 400px)
   useEffect(() => {
+    let visible = false;
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 400);
+      const isOverThreshold = window.scrollY > 400;
+      if (isOverThreshold !== visible) {
+        visible = isOverThreshold;
+        setIsVisible(isOverThreshold);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);

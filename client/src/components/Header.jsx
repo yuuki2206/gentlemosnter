@@ -4,7 +4,7 @@
  * - useEffect: Lắng nghe scroll để tự động chuyển từ trong suốt sang nền đặc.
  * - useLocation: Nhận diện trang hiện tại để bật/tắt trong suốt cho Header.
  */
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, User, ShoppingBag, Menu, X } from "lucide-react";
 import AuthSidebar from "./AuthSidebar";
@@ -27,23 +27,29 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Trạng thái đóng/mở thanh tìm kiếm (Search Drawer)
   const [expandedItem, setExpandedItem] = useState(null); // Trạng thái mở rộng menu con trên Mobile
   const [showHeader, setShowHeader] = useState(true);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressBarRef = useRef(null);
+  const showHeaderRef = useRef(true);
 
   const lenis = useLenis((lenisInstance) => {
-    // Cập nhật tiến độ cuộn (0 đến 1)
-    setScrollProgress(lenisInstance.progress);
+    // Cập nhật tiến độ cuộn qua DOM trực tiếp để tránh React Re-render liên tục gây giật lag
+    if (progressBarRef.current) {
+      progressBarRef.current.style.transform = `scaleX(${lenisInstance.progress})`;
+    }
     
-    // Ẩn/hiện Header dựa trên hướng cuộn (direction)
+    // Ẩn/hiện Header dựa trên hướng cuộn (chỉ gọi set state khi có sự thay đổi thật sự)
     const currentScroll = lenisInstance.scroll;
     const direction = lenisInstance.direction; // 1 = xuống, -1 = lên
     
     if (currentScroll > 100) {
-      if (direction === 1) {
+      if (direction === 1 && showHeaderRef.current) {
+        showHeaderRef.current = false;
         setShowHeader(false);
-      } else if (direction === -1) {
+      } else if (direction === -1 && !showHeaderRef.current) {
+        showHeaderRef.current = true;
         setShowHeader(true);
       }
-    } else {
+    } else if (!showHeaderRef.current) {
+      showHeaderRef.current = true;
       setShowHeader(true);
     }
   });
@@ -142,6 +148,9 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
     setIsAuthOpen(false);
     setIsOpen(false);
     setIsSearchOpen(false);
+    if (progressBarRef.current) {
+      progressBarRef.current.style.transform = "scaleX(0)";
+    }
   }, [location.pathname, location.search]);
 
   return (
@@ -149,10 +158,11 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
     <>
       {/* Scroll Progress Bar - Thanh tiến trình cuộn tối giản 1.5px ở trên cùng */}
       <div 
-        className={`fixed top-0 left-0 h-[1.5px] z-[1000] transition-all duration-75 ${
+        ref={progressBarRef}
+        className={`fixed top-0 left-0 h-[1.5px] z-[1000] w-full origin-left transition-transform duration-75 ease-out ${
           location.pathname.includes("intelligent-eyewear") ? "bg-white" : "bg-black"
         }`}
-        style={{ width: `${scrollProgress * 100}%` }}
+        style={{ transform: "scaleX(0)" }}
       />
 
       <header
