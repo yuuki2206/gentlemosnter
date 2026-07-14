@@ -124,7 +124,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
     "Glasses": "pl-[140px]",
     "Collections": "pl-[220px]",
     "Intelligent Eyewear": "pl-[520px]",
-    "Explore": "pl-[485px]",
+    "Explore": "pl-[505px]",
   };
 
   // === useEffect: LẮNG NGHE SỰ KIỆN SCROLL ===
