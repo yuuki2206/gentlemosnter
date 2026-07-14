@@ -26,7 +26,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const [cartActiveTab, setCartActiveTab] = useState("BAG"); // Tab mặc định khi mở giỏ hàng
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Trạng thái đóng/mở thanh tìm kiếm (Search Drawer)
   const [expandedItem, setExpandedItem] = useState(null); // Trạng thái mở rộng menu con trên Mobile
-  const [showHeader, setShowHeader] = useState(true);
+  const headerRef = useRef(null);
   const progressBarRef = useRef(null);
   const showHeaderRef = useRef(true);
 
@@ -44,21 +44,27 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
       progressBarRef.current.style.transform = `scaleX(${lenisInstance.progress})`;
     }
     
-    // Ẩn/hiện Header dựa trên hướng cuộn (chỉ gọi set state khi có sự thay đổi thật sự)
+    // Ẩn/hiện Header dựa trên hướng cuộn qua DOM trực tiếp để tăng tối đa hiệu năng (Không re-render React)
     const currentScroll = lenisInstance.scroll;
     const direction = lenisInstance.direction; // 1 = xuống, -1 = lên
     
     if (currentScroll > 100) {
       if (direction === 1 && showHeaderRef.current) {
         showHeaderRef.current = false;
-        setShowHeader(false);
+        if (headerRef.current) {
+          headerRef.current.style.transform = "translateY(-100%)";
+        }
       } else if (direction === -1 && !showHeaderRef.current) {
         showHeaderRef.current = true;
-        setShowHeader(true);
+        if (headerRef.current) {
+          headerRef.current.style.transform = "translateY(0)";
+        }
       }
     } else if (!showHeaderRef.current) {
       showHeaderRef.current = true;
-      setShowHeader(true);
+      if (headerRef.current) {
+        headerRef.current.style.transform = "translateY(0)";
+      }
     }
   });
 
@@ -176,9 +182,8 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
       />
 
       <header
-        className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-all duration-500 ease-in-out ${
-          showHeader ? "translate-y-0" : "-translate-y-full"
-        } ${
+        ref={headerRef}
+        className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-[transform,background-color] duration-500 ease-in-out ${
           isSolid || isOpen
             ? (location.pathname.includes("intelligent-eyewear") ? "bg-black text-white" : "bg-[#f8f8f8] text-black border-b border-gray-100")
             : "bg-transparent text-white"

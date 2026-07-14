@@ -67,7 +67,7 @@ const SwiperProductCard = ({ item, loading = false }) => {
       {/* Khung ảnh chính với hiệu ứng Hover Image Swap */}
       <div className="w-full aspect-[4/3] flex justify-center items-center relative mb-3 bg-[#f4f4f4] overflow-hidden rounded-xs">
         {/* Ảnh trực diện (Ảnh 1) */}
-        <div className={`w-full h-full flex justify-center items-center p-6 transition-all duration-700 ${isHovered ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+        <div className={`w-full h-full flex justify-center items-center p-6 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
           {image1 && image1.toLowerCase().includes(".mp4") ? (
             <video src={image1} autoPlay loop muted playsInline className="w-full h-full object-contain" />
           ) : (
@@ -76,7 +76,7 @@ const SwiperProductCard = ({ item, loading = false }) => {
         </div>
 
         {/* Ảnh góc nghiêng / mẫu (Ảnh 2) */}
-        <div className={`w-full h-full flex justify-center items-center p-6 absolute inset-0 transition-all duration-700 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"}`}>
+        <div className={`w-full h-full flex justify-center items-center p-6 absolute inset-0 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"}`}>
           {image2 && image2.toLowerCase().includes(".mp4") ? (
             <video src={image2} autoPlay loop muted playsInline className="w-full h-full object-contain" />
           ) : (
