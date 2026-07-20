@@ -4,7 +4,8 @@ import { SlidersHorizontal } from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
 import SwiperProductCard from "./SwiperProductCard";
-import { API_BASE_URL } from "../config/api";
+import useSWR from "swr";
+import { productsData } from "../data/products";
 
 /**
  * CategoryLayout Component - Layout dùng chung cho trang danh mục Sunglasses & Glasses (nguyên lý DRY).
@@ -17,30 +18,37 @@ const CategoryLayout = ({ data = [], categories = [], categoryInfo = {}, default
   const activeCategory = searchParams.get("category") || "View all";
   const [visibleCount, setVisibleCount] = useState(32);
 
-  // Mảng chứa sản phẩm tải từ server (hoặc fallback tĩnh)
-  const [products, setProducts] = useState(data);
-  const [loading, setLoading] = useState(true);
+  const typeParam = defaultTitle === "SUNGLASSES" ? "Sunglasses" : "Glasses";
 
-  // Tải danh sách kính bất đồng bộ từ Database qua NodeJS API
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const typeParam = defaultTitle === "SUNGLASSES" ? "Sunglasses" : "Glasses";
-        const res = await fetch(`${API_BASE_URL}/products?type=${typeParam}`);
-        if (res.ok) {
-          const dbProducts = await res.json();
-          if (dbProducts && dbProducts.length > 0) {
-            setProducts(dbProducts);
-          }
+  // Hàm fetcher giả lập truy vấn bất đồng bộ từ localStorage (Offline DB)
+  const fetcher = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        let storedProducts = localStorage.getItem("gm_products_db_v3");
+        if (storedProducts) {
+          try {
+            const parsed = JSON.parse(storedProducts);
+            if (parsed.length > 0 && parsed[0].url && !parsed[0].url.startsWith("http")) {
+              localStorage.removeItem("gm_products_db_v3");
+              storedProducts = null;
+            }
+          } catch (e) {}
         }
-      } catch (err) {
-        console.warn("[API] Không kết nối được Server, tự động dùng dữ liệu tĩnh:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
-  }, [defaultTitle, data]);
+        if (!storedProducts) {
+          localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
+          storedProducts = JSON.stringify(productsData);
+        }
+        const allProducts = JSON.parse(storedProducts);
+        const filtered = allProducts.filter(p => p.collection === typeParam);
+        resolve(filtered);
+      }, 450); // Tạo độ trễ 450ms để hiển thị Shimmer Skeleton sang trọng
+    });
+  };
+
+  const { data: products = [], isLoading: loading } = useSWR(
+    `products-${typeParam}`,
+    fetcher
+  );
 
   useEffect(() => {
     setVisibleCount(32);

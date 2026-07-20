@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Thumbs } from "swiper/modules";
+import { Thumbs, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/thumbs";
+import "swiper/css/free-mode";
 
 /**
  * Component hiển thị một thanh trượt Swiper lớn cho các chiến dịch bộ sưu tập mới (New Arrivals).
@@ -65,8 +66,9 @@ const CampaignSlider = ({ products = [] }) => {
 
       {/* SWIPER CHÍNH (ẢNH LỚN) */}
       <Swiper
-        modules={[Thumbs]}
+        modules={[Thumbs, FreeMode]}
         thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+        freeMode={true}
         breakpoints={{
           320: { slidesPerView: 1.2, spaceBetween: 20 },
           768: { slidesPerView: 2.2, spaceBetween: 30 },

@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { API_BASE_URL, getAuthHeaders } from "../config/api";
+import { productsData } from "../data/products";
 import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History } from "lucide-react";
 import Header from "../components/Header";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const { user, users, ability, adminDeleteUser } = useContext(AuthContext);
+  const { user, users, adminDeleteUser } = useContext(AuthContext);
 
   // States quản lý tabs trong Dashboard
   const [activeTab, setActiveTab] = useState("products"); // 'products' hoặc 'users'
@@ -54,15 +54,26 @@ const AdminDashboard = () => {
     }
   }, [user, navigate]);
 
-  // Tải danh sách sản phẩm từ Backend để hiển thị
-  const fetchAllProducts = async () => {
+  // Tải danh sách sản phẩm từ localStorage (Offline DB)
+  const fetchAllProducts = () => {
     setLoadingProducts(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/products`);
-      if (res.ok) {
-        const data = await res.json();
-        setProducts(data);
+      let storedProducts = localStorage.getItem("gm_products_db_v3");
+      if (storedProducts) {
+        try {
+          const parsed = JSON.parse(storedProducts);
+          if (parsed.length > 0 && parsed[0].url && !parsed[0].url.startsWith("http")) {
+            localStorage.removeItem("gm_products_db_v3");
+            storedProducts = null;
+          }
+        } catch (e) {}
       }
+      if (!storedProducts) {
+        localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
+        storedProducts = JSON.stringify(productsData);
+      }
+      const data = JSON.parse(storedProducts);
+      setProducts(data);
     } catch (err) {
       console.error("Failed to load products:", err);
     } finally {
@@ -70,17 +81,13 @@ const AdminDashboard = () => {
     }
   };
 
-  // Tải danh sách tất cả đơn hàng từ Backend để hiển thị
-  const fetchAllOrders = async () => {
+  // Tải danh sách tất cả đơn hàng từ localStorage (Offline DB)
+  const fetchAllOrders = () => {
     setLoadingOrders(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/orders`, {
-        headers: getAuthHeaders(),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setOrders(data);
-      }
+      const storedOrders = localStorage.getItem("gm_mock_orders");
+      const data = storedOrders ? JSON.parse(storedOrders) : [];
+      setOrders(data);
     } catch (err) {
       console.error("Failed to load orders:", err);
     } finally {
@@ -146,7 +153,7 @@ const AdminDashboard = () => {
   };
 
   // Xử lý gửi Form (Thêm hoặc Sửa)
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -185,56 +192,59 @@ const AdminDashboard = () => {
     };
 
     try {
-      let res;
-      if (isEditing) {
-        // Gọi API cập nhật
-        res = await fetch(`${API_BASE_URL}/products/${sku}`, {
-          method: "PUT",
-          headers: getAuthHeaders(),
-          body: JSON.stringify(productPayload),
-        });
-      } else {
-        // Gọi API thêm mới
-        res = await fetch(`${API_BASE_URL}/products`, {
-          method: "POST",
-          headers: getAuthHeaders(),
-          body: JSON.stringify(productPayload),
-        });
+      let storedProducts = localStorage.getItem("gm_products_db_v3");
+      if (!storedProducts) {
+        localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
+        storedProducts = JSON.stringify(productsData);
       }
+      let allProducts = JSON.parse(storedProducts);
 
-      const responseData = await res.json();
-
-      if (res.ok) {
-        setSuccess(isEditing ? "Đã cập nhật thông tin kính thành công!" : "Đã thêm kính mới thành công!");
-        setShowFormModal(false);
-        fetchAllProducts(); // Tải lại danh sách
+      if (isEditing) {
+        // Cập nhật sản phẩm có sẵn
+        const index = allProducts.findIndex((p) => p.sku === sku);
+        if (index !== -1) {
+          allProducts[index] = { ...allProducts[index], ...productPayload };
+          localStorage.setItem("gm_products_db_v3", JSON.stringify(allProducts));
+          setSuccess("Đã cập nhật thông tin kính thành công!");
+          setShowFormModal(false);
+          fetchAllProducts();
+        } else {
+          setError("Không tìm thấy sản phẩm cần cập nhật.");
+        }
       } else {
-        setError(responseData.message || "Lỗi xử lý yêu cầu.");
+        // Thêm mới sản phẩm
+        const exists = allProducts.some((p) => p.sku === sku);
+        if (exists) {
+          setError("Mã SKU này đã tồn tại.");
+          return;
+        }
+        allProducts.push(productPayload);
+        localStorage.setItem("gm_products_db_v3", JSON.stringify(allProducts));
+        setSuccess("Đã thêm kính mới thành công!");
+        setShowFormModal(false);
+        fetchAllProducts();
       }
     } catch (err) {
-      setError("Không thể kết nối đến máy chủ API.");
+      setError("Lỗi lưu trữ dữ liệu cục bộ.");
     }
   };
 
-  // Xóa sản phẩm khỏi database
-  const handleDeleteProduct = async (productSku) => {
+  // Xóa sản phẩm khỏi database giả lập
+  const handleDeleteProduct = (productSku) => {
     const confirm = window.confirm(`Bạn có chắc chắn muốn xóa kính có mã SKU: ${productSku} khỏi Database?`);
     if (!confirm) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/products/${productSku}`, {
-        method: "DELETE",
-        headers: getAuthHeaders(),
-      });
-      if (res.ok) {
+      let storedProducts = localStorage.getItem("gm_products_db_v3");
+      if (storedProducts) {
+        let allProducts = JSON.parse(storedProducts);
+        const filtered = allProducts.filter((p) => p.sku !== productSku);
+        localStorage.setItem("gm_products_db_v3", JSON.stringify(filtered));
         alert("Đã xóa sản phẩm thành công!");
         fetchAllProducts();
-      } else {
-        const errData = await res.json();
-        alert(errData.message || "Xóa sản phẩm thất bại.");
       }
     } catch (err) {
-      alert("Kết nối server thất bại.");
+      alert("Xóa sản phẩm thất bại.");
     }
   };
 

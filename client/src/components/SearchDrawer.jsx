@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Search, X } from "lucide-react";
-import { API_BASE_URL } from "../config/api";
+import useSWR from "swr";
+import { productsData } from "../data/products";
 import { CartContext } from "../context/CartContext";
 
 const SearchDrawer = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   const inputRef = useRef(null);
 
@@ -36,34 +35,43 @@ const SearchDrawer = ({ isOpen, onClose }) => {
       }, 100);
     } else {
       setQuery("");
-      setResults([]);
     }
   }, [isOpen]);
 
-  // Handle typing search
-  useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
-      return;
-    }
-
-    const delayDebounceFn = setTimeout(async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`${API_BASE_URL}/products?search=${encodeURIComponent(query)}`);
-        if (res.ok) {
-          const data = await res.json();
-          setResults(data);
+  // Hàm fetcher giả lập tìm kiếm dữ liệu bất đồng bộ
+  const searchFetcher = (searchQuery) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        let storedProducts = localStorage.getItem("gm_products_db_v3");
+        if (storedProducts) {
+          try {
+            const parsed = JSON.parse(storedProducts);
+            if (parsed.length > 0 && parsed[0].url && !parsed[0].url.startsWith("http")) {
+              localStorage.removeItem("gm_products_db_v3");
+              storedProducts = null;
+            }
+          } catch (e) {}
         }
-      } catch (err) {
-        console.error("Search failed:", err);
-      } finally {
-        setLoading(false);
-      }
-    }, 300); // 300ms debounce
+        if (!storedProducts) {
+          localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
+          storedProducts = JSON.stringify(productsData);
+        }
+        const allProducts = JSON.parse(storedProducts);
+        const queryLower = searchQuery.toLowerCase();
+        const matched = allProducts.filter(p => 
+          p.name?.toLowerCase().includes(queryLower) ||
+          p.collection?.toLowerCase().includes(queryLower) ||
+          p.collections?.some(c => c.toLowerCase().includes(queryLower))
+        );
+        resolve(matched);
+      }, 200); // Độ trễ 200ms
+    });
+  };
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [query]);
+  const { data: results = [], isLoading: loading } = useSWR(
+    query.trim() ? `search-${query.trim()}` : null,
+    () => searchFetcher(query.trim())
+  );
 
   // Toggle wishlist handler
   const handleWishlistClick = (e, item) => {

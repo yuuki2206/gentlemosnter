@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { API_BASE_URL } from "../config/api";
+import useSWR from "swr";
+import { productsData } from "../data/products";
 import { CartContext } from "../context/CartContext";
 import { handleImageError } from "../config/media";
 import Header from "../components/Header";
@@ -12,10 +13,6 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const { addToCart, addToWishlist, removeFromWishlist, wishlist } = useContext(CartContext);
 
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  
   // Accordion toggle states
   const [openAccordion, setOpenAccordion] = useState({
     shipping: false,
@@ -26,50 +23,90 @@ const ProductDetail = () => {
   // Size Unit toggle
   const [sizeUnit, setSizeUnit] = useState("MM"); // "MM" or "IN"
 
-  // Lấy chi tiết sản phẩm + Colorways + Similar Frames từ API
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`${API_BASE_URL}/products/${sku}`);
-        if (res.ok) {
-          const data = await res.json();
-          setProduct(data);
-          // Tự động cuộn lên đầu trang khi chuyển SKU
-          window.scrollTo(0, 0);
-
-          // Lưu vào danh sách vừa xem gần đây (Recently Viewed)
-          const savedStr = localStorage.getItem("recentlyViewed");
-          let recentlyViewedList = [];
-          if (savedStr) {
-            try {
-              recentlyViewedList = JSON.parse(savedStr);
-            } catch (err) {
-              console.error(err);
+  // Hàm fetcher giả lập truy vấn bất đồng bộ một sản phẩm kèm liên kết
+  const fetcher = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let storedProducts = localStorage.getItem("gm_products_db_v3");
+        if (storedProducts) {
+          try {
+            const parsed = JSON.parse(storedProducts);
+            if (parsed.length > 0 && parsed[0].url && !parsed[0].url.startsWith("http")) {
+              localStorage.removeItem("gm_products_db_v3");
+              storedProducts = null;
             }
-          }
-          recentlyViewedList = recentlyViewedList.filter((item) => item.sku !== data.sku);
-          recentlyViewedList.unshift({
-            sku: data.sku,
-            name: data.name,
-            price: data.price,
-            thumbnail: data.thumbnail,
-          });
-          if (recentlyViewedList.length > 5) {
-            recentlyViewedList = recentlyViewedList.slice(0, 5);
-          }
-          localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewedList));
-        } else {
-          setError("Không tìm thấy sản phẩm này trên hệ thống.");
+          } catch (e) {}
         }
-      } catch (err) {
-        setError("Không thể kết nối đến máy chủ API.");
-      } finally {
-        setLoading(false);
+        if (!storedProducts) {
+          localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
+          storedProducts = JSON.stringify(productsData);
+        }
+        const allProducts = JSON.parse(storedProducts);
+        const currentProduct = allProducts.find(p => p.sku === sku);
+        
+        if (currentProduct) {
+          // Lấy các sản phẩm có cùng bộ sưu tập hoặc loại kính để làm "Similar Frames"
+          const similar = allProducts
+            .filter(p => p.sku !== sku && p.collection === currentProduct.collection)
+            .slice(0, 6);
+            
+          // Lấy các màu sắc khác có cùng tên cơ bản (ví dụ: "Musubi") để làm Colorways
+          // Tách từ đầu tiên của name làm keyword so khớp
+          const baseName = currentProduct.name.split(" ")[0];
+          const colorways = allProducts
+            .filter(p => p.name.startsWith(baseName))
+            .map(p => ({
+              sku: p.sku,
+              name: p.name,
+              thumbnail: p.thumbnail,
+              collection: p.collection
+            }));
+            
+          resolve({
+            ...currentProduct,
+            similarFrames: similar,
+            colorways: colorways
+          });
+        } else {
+          reject(new Error("Product not found"));
+        }
+      }, 400); // 400ms delay
+    });
+  };
+
+  const { data: product = null, isLoading: loading, error } = useSWR(
+    `product-${sku}`,
+    fetcher
+  );
+
+  // Sync recently viewed on product resolution
+  useEffect(() => {
+    if (product) {
+      window.scrollTo(0, 0);
+
+      // Lưu vào danh sách vừa xem gần đây (Recently Viewed)
+      const savedStr = localStorage.getItem("recentlyViewed");
+      let recentlyViewedList = [];
+      if (savedStr) {
+        try {
+          recentlyViewedList = JSON.parse(savedStr);
+        } catch (err) {
+          console.error(err);
+        }
       }
-    };
-    fetchProductDetails();
-  }, [sku]);
+      recentlyViewedList = recentlyViewedList.filter((item) => item.sku !== product.sku);
+      recentlyViewedList.unshift({
+        sku: product.sku,
+        name: product.name,
+        price: product.price,
+        thumbnail: product.thumbnail,
+      });
+      if (recentlyViewedList.length > 5) {
+        recentlyViewedList = recentlyViewedList.slice(0, 5);
+      }
+      localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewedList));
+    }
+  }, [product]);
 
   if (loading) {
     return (

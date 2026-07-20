@@ -76,10 +76,10 @@ export const products = [
     "slug": "zest01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/fcd58405-b0e0-4dec-aca7-e337f27395bf/11005140_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/fcd58405-b0e0-4dec-aca7-e337f27395bf/11005140_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500904/cd57487c-bf89-402b-9a54-e91b0012d59c/11500904_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/f6ec7b4c-8d16-4b41-8993-9402099297a2/11005140_D_45.jpg?width=1400",
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/87b64459-72f1-4f25-a311-83904d5a3ec3/11005140_LOOK_BOOK_FIRST.jpg?width=1400",
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/87b64459-72f1-4f25-a311-83904d5a3ec3/11005140_FRONT.jpg?width=1400"
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/87b64459-72f1-4f25-a311-83904d5a3ec3/11005140_LOOK_BOOK_FIRST.jpg?width=1400"  
     ]
   },
   {
@@ -163,10 +163,10 @@ export const products = [
     "slug": "harvt1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXFG736K/b179cac6-b675-46e6-88c4-aa684a75583b/11005093_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXFG736K/b179cac6-b675-46e6-88c4-aa684a75583b/11005093_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500904/cd57487c-bf89-402b-9a54-e91b0012d59c/11500904_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXFG736K/dcf51f67-029e-4997-9c56-d8fc9eb209c1/11005093_D_45.jpg?width=1400",
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXFG736K/bf50ef35-a83e-4eb8-bd9a-c2ebb9e589a5/11005093_LOOK_BOOK_FIRST.jpg?width=1400",
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXFG736K/bf50ef35-a83e-4eb8-bd9a-c2ebb9e589a5/11005093_FRONT.jpg?width=1400"
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXFG736K/bf50ef35-a83e-4eb8-bd9a-c2ebb9e589a5/11005093_LOOK_BOOK_FIRST.jpg?width=1400"
     ]
   },
   {
@@ -205,11 +205,12 @@ export const products = [
     "slug": "oatt02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/8fd24024-bf08-4ca9-b25f-1ba889345d60/11005144_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/8fd24024-bf08-4ca9-b25f-1ba889345d60/11005144_FRONT.jpg",
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/ba3e4065-9733-4781-b117-368612fae32d/11005144_LOOK_BOOK_FIRST.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500904/cd57487c-bf89-402b-9a54-e91b0012d59c/11500904_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/34681a78-ea4a-4ffd-97d5-0a0273aeddfb/11005144_POSTER_AFTER_LOOK_BOOK_FIRST_1.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/bafa4d1c-c7e6-484d-8dd5-f4ff108e9646/11005144_AFTER_LOOK_BOOK_FIRST_1.mp4",
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/ba3e4065-9733-4781-b117-368612fae32d/11005144_LOOK_BOOK_FIRST.jpg?width=1400",
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/ba3e4065-9733-4781-b117-368612fae32d/11005144_FRONT.jpg?width=1400"
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/ba3e4065-9733-4781-b117-368612fae32d/11005144_LOOK_BOOK_FIRST.jpg?width=1400"
     ]
   },
   {
@@ -225,6 +226,7 @@ export const products = [
     "slug": "disneyf1-wing4r13",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ09X6ASH7/38e8cb74-2c51-41a0-872b-8089774a9a94/11005049_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ09X6ASH7/38e8cb74-2c51-41a0-872b-8089774a9a94/11005049_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500902/a7500ee2-4d0d-4766-b0a1-1725548c6943/11500902_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ09X6ASH7/15c2e042-60be-46ff-9910-ca818bc8887d/11005049_D_45.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ09X6ASH7/090c311a-e01b-4e21-923e-95cb7b84e5a3/11005049_LOOK_BOOK_FIRST.jpg?width=1400",
@@ -247,6 +249,7 @@ export const products = [
     "slug": "gamot02-gr",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBBNF0QH/a7270bb4-4fc3-47ab-883f-78f4e197de98/11005026_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBBNF0QH/a7270bb4-4fc3-47ab-883f-78f4e197de98/11005026_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBBDF0J2/0c0dcea6-5f99-4d72-aa4f-1ad9910af939/11005025_LOOK_BOOK_FIRST.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500340/68c371fa-bfc2-4519-9db1-bddaca415f94/11500340_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBBNF0QH/f1625449-078a-4880-b862-addaee25e662/11005026_D_45.jpg?width=1400",
@@ -270,6 +273,7 @@ export const products = [
     "slug": "musubi02-brg",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBAXF0JB/10b86dd5-0ca3-4ea2-942b-f420c270a5da/11005028_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBAXF0JB/10b86dd5-0ca3-4ea2-942b-f420c270a5da/11005028_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500340/68c371fa-bfc2-4519-9db1-bddaca415f94/11500340_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBAXF0JB/c002658a-8185-44e8-b57c-b44cd28b4c55/11005028_D_45.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBAXF0JB/20732675-02bf-4764-b05b-45d0701f18ee/11005028_LOOK_BOOK_FIRST.jpg?width=1400",
@@ -289,6 +293,7 @@ export const products = [
     "slug": "velom01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A8AASR8/790630bf-102d-4af8-9c32-c90972bcc912/11005074_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A8AASR8/790630bf-102d-4af8-9c32-c90972bcc912/11005074_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500901/f9a62d2c-1f92-41ab-b9eb-d598bc64d594/11500901_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A8AASR8/91f2b8d0-547d-4786-ba2c-cd850fa48b5d/11005074_D_45.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A8AASR8/1fa4d6ff-e3ba-4a39-bab0-8e4c66623c36/11005074_LOOK_BOOK_FIRST.jpg?width=1400",
@@ -309,6 +314,7 @@ export const products = [
     "slug": "vanilla01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRNF0N6/0dd1f7fd-2265-45db-8c4d-9cb0912bc648/11004981_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRNF0N6/0dd1f7fd-2265-45db-8c4d-9cb0912bc648/11004981_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRSF0KX/58b78919-520b-47d4-8a9f-c3c8ac4105e6/11004982_LOOK_BOOK_FIRST.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500340/68c371fa-bfc2-4519-9db1-bddaca415f94/11500340_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRNF0N6/f8c3193a-13cf-4980-94fc-7accfebff502/11004981_D_45.jpg?width=1400",
@@ -333,6 +339,7 @@ export const products = [
     "slug": "futura03",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBCXF0P1/6fe92ffe-f442-4e04-93dd-007db8f3c234/11004956_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBCXF0P1/6fe92ffe-f442-4e04-93dd-007db8f3c234/11004956_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBCNF0J0/4552b57b-dc89-4282-88bc-30c08341b680/11004955_LOOK_BOOK_FIRST.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500340/68c371fa-bfc2-4519-9db1-bddaca415f94/11500340_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBCXF0P1/b07e898f-d1de-403d-857a-cf9f5639e300/11004956_D_45.jpg?width=1400",
@@ -354,6 +361,7 @@ export const products = [
     "slug": "vanilla01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRNF0N6/0dd1f7fd-2265-45db-8c4d-9cb0912bc648/11004981_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRSF0KX/a31b052c-a1ec-44b5-b615-a208cf85b0f2/11004982_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRSF0KX/58b78919-520b-47d4-8a9f-c3c8ac4105e6/11004982_LOOK_BOOK_FIRST.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500340/68c371fa-bfc2-4519-9db1-bddaca415f94/11500340_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRNF0N6/f8c3193a-13cf-4980-94fc-7accfebff502/11004981_D_45.jpg?width=1400",
@@ -376,6 +384,7 @@ export const products = [
     "slug": "cuscusbrc21",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBT1F0KE/cb184d41-cf3c-4221-8331-eebcd7a7f78d/11005039_FRONT.jpg?width=1400",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBSNF0JH/5551d57f-7fbb-43ca-b5db-82d79b7d5f90/11005036_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBSNF0JH/64f8ab68-5d59-4236-8457-9cb6b539717c/11005036_LOOK_BOOK_FIRST.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500340/68c371fa-bfc2-4519-9db1-bddaca415f94/11500340_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBT1F0KE/83e38c63-72cb-4676-8d92-a4bb127a49f6/11005039_D_45.jpg?width=1400",
@@ -522,11 +531,11 @@ export const products = [
     "collections": [
       "LATEST"
     ],
-    "url": "https://www.gentlemonster.com/int/en",
+    "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBC5F0NK/origami031",
     "slug": "origami-031",
     "image": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBC5F0NK/8745fc8c-3c4e-45c5-9098-68f85d4041e3/11005035_FRONT.jpg?width=1400",
     "gallery": [
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBC5F0NK/8745fc8c-3c4e-45c5-9098-68f85d4041e3/11005035_FRONT.jpg?width=1400",
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBC5F0NK/07ebad42-fb45-4573-995b-b7ed6bc980cf/11005035_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBC5F0NK/8745fc8c-3c4e-45c5-9098-68f85d4041e3/11005035_LOOK_BOOK_FIRST.jpg?width=1400"
     ]
   },
@@ -539,11 +548,11 @@ export const products = [
     "collections": [
       "LATEST"
     ],
-    "url": "https://www.gentlemonster.com/int/en",
+    "url": "https://www.gentlemonster.com/int/en/item/0P0M4JB3XF0QM/bouquet02",
     "slug": "bouquet-02",
     "image": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JB3XF0QM/d721c870-5fe8-42ac-84bd-30fa5f7bc3df/11005047_FRONT.jpg?width=1400",
     "gallery": [
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JB3XF0QM/d721c870-5fe8-42ac-84bd-30fa5f7bc3df/11005047_FRONT.jpg?width=1400",
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JB3XF0QM/f98711dd-66c2-444e-bba1-600b142d18ad/11005047_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JB3XF0QM/d721c870-5fe8-42ac-84bd-30fa5f7bc3df/11005047_LOOK_BOOK_FIRST.jpg?width=1400"
     ]
   },
@@ -1003,3 +1012,5 @@ export const products = [
     ]
   }
 ];
+
+export const productsData = products;

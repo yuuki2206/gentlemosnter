@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/free-mode";
+import { FreeMode } from "swiper/modules";
 import ProductCard from "./ProductCard";
 
 /**
@@ -32,6 +34,8 @@ const ProductSlider = ({ title, products = [] }) => {
           - overflow-visible: Cho phép ảnh tràn lề tự nhiên để tạo hiệu ứng thị giác tốt hơn.
       */}
       <Swiper
+        modules={[FreeMode]}
+        freeMode={true}
         breakpoints={{
           320: { slidesPerView: 1.5, spaceBetween: 20 },
           768: { slidesPerView: 3.5, spaceBetween: 30 },
