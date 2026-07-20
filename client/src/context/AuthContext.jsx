@@ -95,10 +95,17 @@ export const AuthProvider = ({ children }) => {
 
     // Xác định vai trò user (nếu điền đúng adminKey)
     const role = userData.adminKey === "123456789" ? "admin" : "user";
+    const fullName = `${userData.firstName || ""} ${userData.lastName || ""}`.trim() || userData.name || userData.email;
+
     const newUser = {
       email: userData.email,
       password: userData.password,
-      name: userData.name,
+      firstName: userData.firstName || "",
+      lastName: userData.lastName || "",
+      name: fullName,
+      country: userData.country || "Vietnam",
+      phone: userData.phone || "",
+      walletAddress: userData.walletAddress || "",
       role: role,
       purchases: [],
     };
