@@ -12,7 +12,7 @@ import { usePrivy } from "@privy-io/react-auth";
 
 const Account = () => {
   const navigate = useNavigate();
-  const { user, users, logout, updateProfile, deleteAccount, adminDeleteUser } = useContext(AuthContext);
+  const { user, loading: authLoading, users, logout, updateProfile, deleteAccount, adminDeleteUser } = useContext(AuthContext);
   const { wishlist, removeFromWishlist, addToCart } = useContext(CartContext);
   const { logout: privyLogout } = usePrivy();
 
@@ -25,20 +25,22 @@ const Account = () => {
   const [phone, setPhone] = useState("");
   const [saveSuccess, setSaveSuccess] = useState(false);
 
-  // Bảo vệ route: Nếu chưa đăng nhập, chuyển hướng về trang chủ
+  // Bảo vệ route: Chỉ chuyển hướng khi đã tải xong trạng thái xác thực và KHÔNG có user
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-    } else {
-      // Prefill dữ liệu khi có user
-      setFirstName(user.firstName || "");
-      setLastName(user.lastName || "");
-      setCountry(user.country || "Vietnam");
-      setPhone(user.phone || "");
+    if (!authLoading) {
+      if (!user) {
+        navigate("/");
+      } else {
+        // Prefill dữ liệu khi có user
+        setFirstName(user.firstName || "");
+        setLastName(user.lastName || "");
+        setCountry(user.country || "Vietnam");
+        setPhone(user.phone || "");
+      }
     }
-  }, [user, navigate]);
+  }, [user, authLoading, navigate]);
 
-  if (!user) return null;
+  if (authLoading || !user) return null;
 
   // Xử lý lưu thay đổi thông tin cá nhân
   const handleSaveProfile = async (e) => {
