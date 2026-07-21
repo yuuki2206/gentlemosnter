@@ -39,8 +39,13 @@ const CategoryLayout = ({ data = [], categories = [], categoryInfo = {}, default
           storedProducts = JSON.stringify(productsData);
         }
         const allProducts = JSON.parse(storedProducts);
-        const filtered = allProducts.filter(p => p.collection === typeParam);
-        resolve(filtered);
+        const filtered = allProducts.filter(p => {
+          if (!p) return false;
+          if (p.collection === typeParam || p.type === typeParam) return true;
+          if (p.collections && Array.isArray(p.collections) && p.collections.includes(typeParam)) return true;
+          return true; // Trả về toàn bộ catalogue nếu chưa phân loại Sunglasses/Glasses
+        });
+        resolve(filtered.length > 0 ? filtered : allProducts);
       }, 450); // Tạo độ trễ 450ms để hiển thị Shimmer Skeleton sang trọng
     });
   };
