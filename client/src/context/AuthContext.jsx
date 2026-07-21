@@ -170,13 +170,18 @@ export const AuthProvider = ({ children }) => {
   const checkEmailExists = async (email) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
-    // 1. Thử kiểm tra qua Server MongoDB trước
+    // 1. Thử kiểm tra qua Server MongoDB trước (Timeout 1s)
     try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 1000);
+
       const res = await fetch(`${API_BASE_URL}/auth/check-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: cleanEmail }),
+        signal: controller.signal,
       });
+      clearTimeout(timer);
       if (res.ok) {
         const data = await res.json();
         if (data.exists) return true;
@@ -197,13 +202,18 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
-    // 1. Thử đăng nhập qua Server MongoDB
+    // 1. Thử đăng nhập qua Server MongoDB (Timeout 1s)
     try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 1000);
+
       const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: cleanEmail, password }),
+        signal: controller.signal,
       });
+      clearTimeout(timer);
       const data = await res.json();
       if (res.ok && data.token) {
         localStorage.setItem("gm_auth_token", data.token);
@@ -226,6 +236,9 @@ export const AuthProvider = ({ children }) => {
 
       // Tự động đồng bộ tài khoản này lên MongoDB Server nếu server đang bật
       try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 1000);
+
         const regRes = await fetch(`${API_BASE_URL}/auth/register`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -239,7 +252,9 @@ export const AuthProvider = ({ children }) => {
             walletAddress: foundUser.walletAddress || "",
             adminKey: foundUser.role === "admin" ? "123456789" : "",
           }),
+          signal: controller.signal,
         });
+        clearTimeout(timer);
         const regData = await regRes.json();
         if (regRes.ok && regData.token) {
           localStorage.setItem("gm_auth_token", regData.token);
@@ -257,8 +272,11 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     const fullName = `${userData.firstName || ""} ${userData.lastName || ""}`.trim() || userData.name || userData.email;
 
-    // 1. Thử đăng ký qua Server MongoDB
+    // 1. Thử đăng ký qua Server MongoDB (Timeout 1s)
     try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 1000);
+
       const res = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -272,7 +290,9 @@ export const AuthProvider = ({ children }) => {
           walletAddress: userData.walletAddress || "",
           adminKey: userData.adminKey || "",
         }),
+        signal: controller.signal,
       });
+      clearTimeout(timer);
       const data = await res.json();
       if (res.ok && data.token) {
         localStorage.setItem("gm_auth_token", data.token);
@@ -284,7 +304,7 @@ export const AuthProvider = ({ children }) => {
         }
       }
     } catch (e) {
-      console.log("[Offline Mode] Server MongoDB chưa bật, sử dụng đăng ký LocalStorage");
+      console.log("[Offline Mode] Server MongoDB chưa bật, sử dụng đăng nhập LocalStorage");
     }
 
     // 2. Dự phòng LocalStorage Mock DB
