@@ -287,7 +287,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
               <User size={20} strokeWidth={1.5} />
               {user && (
                 <span className="text-[11px] font-semibold lowercase max-md:hidden">
-                  {user.firstName}
+                  {user.firstName || user.name || user.email?.split('@')[0] || "account"}
                 </span>
               )}
             </button>

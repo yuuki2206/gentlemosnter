@@ -120,7 +120,7 @@ const Account = () => {
             
             {/* Lời chào chào đón */}
             <h1 className="text-sm font-bold tracking-[0.25em] uppercase text-black mt-6">
-              HELLO, {user.firstName.toUpperCase()}
+              HELLO, {(user.firstName || user.name || user.email || "USER").toUpperCase()}
             </h1>
 
             {/* Mục: Recent Purchases */}
@@ -135,23 +135,23 @@ const Account = () => {
               ) : (
                 <div className="space-y-4 py-2">
                   {purchases.slice(0, 1).map((purchase) => (
-                    <div key={purchase.id} className="border border-gray-100 p-4 text-[11px] bg-[#fdfdfd]">
+                    <div key={purchase.id || purchase._id || Math.random()} className="border border-gray-100 p-4 text-[11px] bg-[#fdfdfd]">
                       <div className="flex justify-between items-center border-b border-gray-100 pb-2 mb-3">
-                        <span className="font-semibold text-black">{purchase.id} - {purchase.date}</span>
-                        <span className="text-blue-600 font-bold uppercase tracking-wider text-[9px]">{purchase.type} Payment</span>
+                        <span className="font-semibold text-black">{purchase.id || purchase.orderId || purchase._id} - {purchase.date || "Today"}</span>
+                        <span className="text-blue-600 font-bold uppercase tracking-wider text-[9px]">{purchase.type || "Web3"} Payment</span>
                       </div>
                       <div className="space-y-2">
-                        {purchase.items.map((item) => (
-                          <div key={item.sku} className="flex justify-between items-center text-[10px] text-gray-600">
-                            <span>{item.name} x{item.quantity}</span>
-                            <span>₫ {Number(item.price * item.quantity).toLocaleString()}</span>
+                        {(purchase.items || []).map((item, idx) => (
+                          <div key={item.sku || idx} className="flex justify-between items-center text-[10px] text-gray-600">
+                            <span>{item.name || "Gentle Monster Frame"} x{item.quantity || 1}</span>
+                            <span>₫ {Number((item.price || 0) * (item.quantity || 1)).toLocaleString()}</span>
                           </div>
                         ))}
                       </div>
                       <div className="border-t border-gray-100 pt-2 mt-3 flex justify-between font-semibold text-[11px]">
                         <span>TOTAL</span>
                         <span className="text-blue-600">
-                          {purchase.ethTotal ? `${purchase.ethTotal} ETH` : `₫ ${purchase.total.toLocaleString()}`}
+                          {purchase.ethTotal ? `${purchase.ethTotal} ETH` : `₫ ${Number(purchase.total || 0).toLocaleString()}`}
                         </span>
                       </div>
                     </div>
@@ -176,7 +176,7 @@ const Account = () => {
                       <img src={item.thumbnail} alt={item.name} className="w-16 h-12 object-contain bg-[#f4f4f4]" />
                       <div className="flex-grow min-w-0">
                         <h4 className="text-[11px] font-semibold tracking-wider text-black truncate">{item.name}</h4>
-                        <p className="text-[10px] text-gray-600 mt-0.5">₫ {Number(item.price).toLocaleString("en-US")}</p>
+                        <p className="text-[10px] text-gray-600 mt-0.5">₫ {Number(item.price || 0).toLocaleString("en-US")}</p>
                       </div>
                     </div>
                   ))}
@@ -190,10 +190,10 @@ const Account = () => {
                 PROFILE
               </h3>
               <div className="text-[11px] text-black font-light tracking-wide space-y-1 py-2">
-                <p className="font-semibold text-black">{user.firstName} {user.lastName}</p>
+                <p className="font-semibold text-black">{user.firstName || user.name || "Customer"} {user.lastName || ""}</p>
                 <p className="text-gray-500">{user.email}</p>
                 {user.phone && <p className="text-gray-500">{user.phone}</p>}
-                <p className="text-gray-500">{user.country}</p>
+                <p className="text-gray-500">{user.country || "Vietnam"}</p>
                 
                 {/* ĐỊA CHỈ VÍ WEB3 NHÚNG TỰ ĐỘNG TẠO QUA GOOGLE LOGIN */}
                 {user.walletAddress ? (
