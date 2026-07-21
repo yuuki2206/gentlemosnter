@@ -121,7 +121,9 @@ router.post("/login", async (req, res) => {
           walletAddress: user.walletAddress,
           role: user.role,
           registrationIp: user.registrationIp,
-          purchases: await Order.find({ user: user._id }).sort({ createdAt: -1 }),
+          purchases: await Order.find({
+          $or: [{ user: user._id }, { userEmail: user.email }],
+        }).sort({ createdAt: -1 }),
         },
       });
     } else {
@@ -178,7 +180,9 @@ router.put("/profile", protect, async (req, res) => {
 router.get("/profile", protect, async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
-    const orders = await Order.find({ user: user._id }).sort({ createdAt: -1 });
+    const orders = await Order.find({
+      $or: [{ user: user._id }, { userEmail: user.email }],
+    }).sort({ createdAt: -1 });
     const userObj = user.toObject();
     userObj.purchases = orders;
     res.json(userObj);
@@ -223,6 +227,9 @@ router.delete("/users/:email", protect, async (req, res) => {
     const userToDelete = await User.findOne({ email: req.params.email });
     if (!userToDelete) {
       return res.status(404).json({ message: "Không tìm thấy người dùng." });
+    }
+    if (userToDelete.role === "admin") {
+      return res.status(403).json({ message: "Bảo mật: Không thể xóa tài khoản Admin." });
     }
     await User.findByIdAndDelete(userToDelete._id);
     await Order.deleteMany({ user: userToDelete._id });

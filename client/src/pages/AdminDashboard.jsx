@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { productsData } from "../data/products";
 import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History } from "lucide-react";
 import Header from "../components/Header";
+import { API_BASE_URL, getAuthHeaders } from "../config/api";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -54,26 +55,44 @@ const AdminDashboard = () => {
     }
   }, [user, navigate]);
 
-  // Tải danh sách sản phẩm từ localStorage (Offline DB)
-  const fetchAllProducts = () => {
+  // Tải danh sách sản phẩm từ Server MongoDB + LocalStorage (Đầy đủ Catalogue sản phẩm)
+  const fetchAllProducts = async () => {
     setLoadingProducts(true);
+    let serverProducts = [];
+
+    // 1. Thử nạp danh sách từ MongoDB Server
+    try {
+      const res = await fetch(`${API_BASE_URL}/products`);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          serverProducts = data;
+        }
+      }
+    } catch (e) {
+      console.log("[Offline Mode] Nạp sản phẩm từ bộ dữ liệu mẫu LocalStorage");
+    }
+
+    // 2. Gom kết hợp bộ dữ liệu mẫu 47 mẫu kính cao cấp Gentle Monster
     try {
       let storedProducts = localStorage.getItem("gm_products_db_v3");
-      if (storedProducts) {
-        try {
-          const parsed = JSON.parse(storedProducts);
-          if (parsed.length > 0 && parsed[0].url && !parsed[0].url.startsWith("http")) {
-            localStorage.removeItem("gm_products_db_v3");
-            storedProducts = null;
-          }
-        } catch (e) {}
-      }
       if (!storedProducts) {
         localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
         storedProducts = JSON.stringify(productsData);
       }
-      const data = JSON.parse(storedProducts);
-      setProducts(data);
+      const localData = JSON.parse(storedProducts);
+
+      const combined = [...serverProducts, ...localData];
+      const uniqueMap = new Map();
+
+      combined.forEach((p) => {
+        const key = p.sku || p.id || p._id || p.name;
+        if (key && !uniqueMap.has(key)) {
+          uniqueMap.set(key, p);
+        }
+      });
+
+      setProducts(Array.from(uniqueMap.values()));
     } catch (err) {
       console.error("Failed to load products:", err);
     } finally {
@@ -81,24 +100,87 @@ const AdminDashboard = () => {
     }
   };
 
-  // Tải danh sách tất cả đơn hàng từ localStorage (Offline DB)
-  const fetchAllOrders = () => {
+  // Tải danh sách tất cả đơn hàng từ Server MongoDB + LocalStorage (Tập trung toàn hệ thống)
+  const fetchAllOrders = async () => {
     setLoadingOrders(true);
+    let serverOrders = [];
+    let localOrders = [];
+
+    // 1. Thử lấy danh sách đơn hàng từ Server MongoDB
     try {
-      const storedOrders = localStorage.getItem("gm_mock_orders");
-      const data = storedOrders ? JSON.parse(storedOrders) : [];
-      setOrders(data);
+      const res = await fetch(`${API_BASE_URL}/orders`, {
+        headers: getAuthHeaders(),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          serverOrders = data;
+        }
+      }
     } catch (err) {
-      console.error("Failed to load orders:", err);
-    } finally {
-      setLoadingOrders(false);
+      console.log("[Offline Mode] Chưa thể tải đơn hàng từ Server MongoDB, nạp dữ liệu LocalStorage");
     }
+
+    // 2. Gom tất cả đơn hàng từ LocalStorage (bao gồm gm_mock_orders và lịch sử cá nhân của tất cả Users/Admins)
+    try {
+      const storedGlobal = JSON.parse(localStorage.getItem("gm_mock_orders") || "[]");
+      const storedUsers = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
+
+      let userPurchases = [];
+      storedUsers.forEach((u) => {
+        if (u.purchases && Array.isArray(u.purchases)) {
+          // Gán thông tin email nếu đơn hàng chưa có
+          const purchasesWithEmail = u.purchases.map((p) => ({
+            ...p,
+            userEmail: p.userEmail || u.email,
+          }));
+          userPurchases = [...userPurchases, ...purchasesWithEmail];
+        }
+      });
+
+      localOrders = [...storedGlobal, ...userPurchases];
+    } catch (err) {
+      console.error("Lỗi đọc LocalStorage orders:", err);
+    }
+
+    // 3. Hợp nhập và loại bỏ trùng lặp đơn hàng theo orderId, _id hoặc txHash
+    const combined = [...serverOrders, ...localOrders];
+    const uniqueMap = new Map();
+
+    combined.forEach((ord) => {
+      const key = ord.orderId || ord._id || ord.id || ord.txHash;
+      if (key && !uniqueMap.has(key)) {
+        // Chuẩn hóa dữ liệu đơn hàng
+        uniqueMap.set(key, {
+          ...ord,
+          orderId: ord.orderId || ord.id || ord._id,
+          userEmail: ord.userEmail || ord.user || "customer@gentlemonster.com",
+          total: Number(ord.total) || 0,
+          ethTotal: typeof ord.ethTotal === "number" ? ord.ethTotal : parseFloat(ord.ethTotal || 0),
+          items: ord.items || [],
+          type: ord.type || "Web3",
+          createdAt: ord.createdAt || ord.date || new Date().toISOString(),
+        });
+      }
+    });
+
+    setOrders(Array.from(uniqueMap.values()));
+    setLoadingOrders(false);
   };
 
   useEffect(() => {
     if (user && user.role === "admin") {
       fetchAllProducts();
       fetchAllOrders();
+
+      const handleStorageChange = (e) => {
+        if (e.key === "gm_mock_orders" || e.key === "gm_mock_users" || e.key === "gm_products_db_v3") {
+          fetchAllOrders();
+          fetchAllProducts();
+        }
+      };
+      window.addEventListener("storage", handleStorageChange);
+      return () => window.removeEventListener("storage", handleStorageChange);
     }
   }, [user]);
 
@@ -296,12 +378,7 @@ const AdminDashboard = () => {
           </div>
 
           <div className="mt-8 pt-8 border-t border-gray-100 hidden md:block">
-            <button
-              onClick={() => navigate("/")}
-              className="w-full text-center border border-black hover:bg-black hover:text-white text-black text-[10px] font-bold tracking-widest uppercase py-3 transition-colors rounded-none"
-            >
-              Xem Cửa Hàng (Store)
-            </button>
+          
           </div>
         </div>
 
@@ -425,7 +502,11 @@ const AdminDashboard = () => {
                           )}
                         </td>
                         <td className="px-6 py-4 text-center">
-                          {u.email !== user.email && (
+                          {u.role === "admin" ? (
+                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider italic">
+                              Protected (Admin)
+                            </span>
+                          ) : (
                             <button
                               onClick={() => {
                                 if (window.confirm(`Bạn có chắc muốn xóa tài khoản ${u.email}?`)) {

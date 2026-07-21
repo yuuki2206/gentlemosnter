@@ -41,17 +41,19 @@ const Account = () => {
   if (!user) return null;
 
   // Xử lý lưu thay đổi thông tin cá nhân
-  const handleSaveProfile = (e) => {
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
     setSaveSuccess(false);
-    updateProfile({
+    const result = await updateProfile({
       firstName,
       lastName,
       country,
       phone,
     });
-    setSaveSuccess(true);
-    setTimeout(() => setSaveSuccess(false), 3000);
+    if (result?.success) {
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
+    }
   };
 
   // Xử lý xóa tài khoản

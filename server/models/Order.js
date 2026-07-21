@@ -5,33 +5,33 @@ const orderSchema = new mongoose.Schema(
     orderId: {
       type: String,
       required: true,
-      unique: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
     userEmail: {
       type: String,
       required: true,
+      default: "customer@gentlemonster.com",
     },
     items: [
       {
-        sku: { type: String, required: true },
-        name: { type: String, required: true },
-        price: { type: Number, required: true },
-        quantity: { type: Number, required: true },
-        thumbnail: { type: String, required: true },
+        sku: { type: String, default: "N/A" },
+        name: { type: String, default: "Product" },
+        price: { type: Number, default: 0 },
+        quantity: { type: Number, default: 1 },
+        thumbnail: { type: String, default: "" },
       },
     ],
     total: {
       type: Number,
-      required: true,
+      default: 0,
     },
     ethTotal: {
-      type: Number,
-      default: 0,
+      type: mongoose.Schema.Types.Mixed,
+      default: "0",
     },
     txHash: {
       type: String,
@@ -51,7 +51,6 @@ const orderSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["Web2", "Web3"],
       default: "Web3",
     },
   },
