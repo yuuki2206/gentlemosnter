@@ -12,7 +12,7 @@ import { usePrivy } from "@privy-io/react-auth";
 
 const Account = () => {
   const navigate = useNavigate();
-  const { user, users, logout, updateProfile, deleteAccount, adminDeleteUser } = useContext(AuthContext);
+  const { user, users, logout, updateProfile, deleteAccount, adminDeleteUser, loading } = useContext(AuthContext);
   const { wishlist, removeFromWishlist, addToCart } = useContext(CartContext);
   const { logout: privyLogout } = usePrivy();
 
@@ -25,20 +25,45 @@ const Account = () => {
   const [phone, setPhone] = useState("");
   const [saveSuccess, setSaveSuccess] = useState(false);
 
-  // Bảo vệ route: Nếu chưa đăng nhập, chuyển hướng về trang chủ
+  // Prefill dữ liệu khi có user
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-    } else {
-      // Prefill dữ liệu khi có user
+    if (user) {
       setFirstName(user.firstName || "");
       setLastName(user.lastName || "");
       setCountry(user.country || "Vietnam");
       setPhone(user.phone || "");
     }
-  }, [user, navigate]);
+  }, [user]);
 
-  if (!user) return null;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col justify-center items-center font-mono text-xs uppercase tracking-widest text-black">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col">
+        <Header />
+        <div className="flex-1 flex flex-col justify-center items-center px-6 text-center pt-32 pb-16">
+          <h1 className="text-lg font-bold tracking-[0.25em] uppercase text-black mb-3">
+            ACCOUNT ACCESS
+          </h1>
+          <p className="text-xs text-gray-500 tracking-wider mb-8 max-w-md">
+            Please sign in to view your profile, purchase history, wishlist, and manage your account.
+          </p>
+          <button
+            onClick={() => navigate("/signup")}
+            className="bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-[0.25em] uppercase px-8 py-4 transition-all rounded-none"
+          >
+            LOG IN / SIGN UP
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // Xử lý lưu thay đổi thông tin cá nhân
   const handleSaveProfile = async (e) => {
