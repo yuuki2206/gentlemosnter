@@ -12,6 +12,14 @@ const Preloader = ({ ready, onComplete }) => {
     readyRef.current = ready;
   }, [ready]);
 
+  // Fallback safety: Nếu quá 3 giây chưa ready (do mạng hoặc API offline), tự động mở trang
+  useEffect(() => {
+    const safetyTimer = setTimeout(() => {
+      readyRef.current = true;
+    }, 3000);
+    return () => clearTimeout(safetyTimer);
+  }, []);
+
   useEffect(() => {
     // Vô hiệu hóa cuộn trang trong lúc loading
     document.body.style.overflow = "hidden";

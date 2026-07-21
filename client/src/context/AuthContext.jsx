@@ -75,11 +75,16 @@ export const AuthProvider = ({ children }) => {
     const initAuth = async () => {
       const token = localStorage.getItem("gm_auth_token");
       if (token) {
-        // 1. Thử nạp hồ sơ từ Server Backend MongoDB
+        // 1. Thử nạp hồ sơ từ Server Backend MongoDB (Timeout 2s cho Vercel/Offline)
         try {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 2000);
+
           const res = await fetch(`${API_BASE_URL}/auth/profile`, {
             headers: getAuthHeaders(),
+            signal: controller.signal,
           });
+          clearTimeout(timer);
           if (res.ok) {
             const data = await res.json();
             setUser(mergePurchases(data));
