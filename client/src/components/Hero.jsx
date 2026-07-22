@@ -85,13 +85,14 @@ const Hero = () => {
           <SwiperSlide key={item.id}>
             <div className="relative w-full h-full">
               
-              {/* Thẻ Video CDN với Poster Image và Lazy Preloading */}
+              {/* Thẻ Video CDN với Lazy Source Attachment (Chỉ nạp src cho slide đang active) */}
               <video
-                autoPlay
+                autoPlay={index === activeIndex}
                 muted
                 playsInline
                 poster={item.poster}
                 preload={index === activeIndex ? "auto" : "none"}
+                src={index === activeIndex ? item.video : undefined}
                 onTimeUpdate={(e) => {
                   if (e.target.duration) {
                     setVideoProgress((e.target.currentTime / e.target.duration) * 100);
@@ -99,9 +100,7 @@ const Hero = () => {
                 }}
                 onEnded={() => swiperInstance && swiperInstance.slideNext()}
                 className="w-full h-full object-cover z-0 pointer-events-none"
-              >
-                <source src={item.video} type="video/mp4" />
-              </video>
+              />
               
               {/* Lớp phủ tối mờ (overlay) */}
               <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none"></div>

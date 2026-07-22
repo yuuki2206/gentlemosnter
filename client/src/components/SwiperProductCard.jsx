@@ -70,7 +70,7 @@ const SwiperProductCard = ({ item, loading = false }) => {
         {/* Ảnh trực diện (Ảnh 1) */}
         <div className={`w-full h-full flex justify-center items-center p-6 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
           {image1 && image1.toLowerCase().includes(".mp4") ? (
-            <video src={image1} autoPlay loop muted playsInline preload="none" className="w-full h-full object-contain" />
+            <video src={isHovered ? image1 : undefined} autoPlay loop muted playsInline preload="none" className="w-full h-full object-contain" />
           ) : (
             <img src={image1} alt={item.name} loading="lazy" className="w-full h-full object-contain" onError={handleImageError} />
           )}
@@ -79,7 +79,7 @@ const SwiperProductCard = ({ item, loading = false }) => {
         {/* Ảnh góc nghiêng / mẫu (Ảnh 2) */}
         <div className={`w-full h-full flex justify-center items-center p-6 absolute inset-0 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"}`}>
           {image2 && image2.toLowerCase().includes(".mp4") ? (
-            <video src={image2} autoPlay loop muted playsInline preload="none" className="w-full h-full object-contain" />
+            <video src={isHovered ? image2 : undefined} autoPlay loop muted playsInline preload="none" className="w-full h-full object-contain" />
           ) : (
             <img src={image2} alt={`${item.name} hover`} loading="lazy" className="w-full h-full object-contain" onError={handleImageError} />
           )}
