@@ -66,7 +66,7 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
           if (video && index) {
             // Lazy-load gán nguồn video nếu chưa được gán
             if (!video.src || video.src === "") {
-              video.src = getMediaUrl(`/Veggie%20collection/folding_${index}_pc.mp4`);
+              video.src = `https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/folding_${index}_pc.mp4`;
               video.load(); // Khởi chạy tải video khi thay đổi thuộc tính src trên di động
             }
             video.loop = false;
@@ -266,11 +266,12 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
           <div className="veggie-collection-video-wrapper mb-16">
             <div className="veggie-collection-video relative w-full overflow-hidden rounded-[80px] mx-auto max-w-[1112px]">
               <video
-                src={getMediaUrl("/Veggie%20collection/random_1_pc.mp4")}
+                src="https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/random_1_pc.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
+                preload="none"
                 className="w-full h-full object-cover"
               />
             </div>
