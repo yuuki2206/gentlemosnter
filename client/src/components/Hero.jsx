@@ -83,24 +83,32 @@ const Hero = () => {
       >
         {collections.map((item, index) => (
           <SwiperSlide key={item.id}>
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full bg-black">
               
-              {/* Thẻ Video CDN với Lazy Source Attachment (Chỉ nạp src cho slide đang active) */}
+              {/* Ảnh nền fallback hiển thị tức thì 100% trên điện thoại (Tránh lỗi màn hình đen) */}
+              <img
+                src={item.poster}
+                alt={item.title}
+                className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+              />
+
+              {/* Thẻ Video phát đè lên ảnh khi tải xong (Tối ưu iOS Safari & Mobile) */}
               <video
-                autoPlay={index === activeIndex}
+                autoPlay
                 muted
                 playsInline
                 poster={item.poster}
-                preload={index === activeIndex ? "auto" : "none"}
-                src={index === activeIndex ? item.video : undefined}
+                preload={index === activeIndex ? "metadata" : "none"}
                 onTimeUpdate={(e) => {
                   if (e.target.duration) {
                     setVideoProgress((e.target.currentTime / e.target.duration) * 100);
                   }
                 }}
                 onEnded={() => swiperInstance && swiperInstance.slideNext()}
-                className="w-full h-full object-cover z-0 pointer-events-none"
-              />
+                className="absolute inset-0 w-full h-full object-cover z-[1] pointer-events-none"
+              >
+                <source src={item.video} type="video/mp4" />
+              </video>
               
               {/* Lớp phủ tối mờ (overlay) */}
               <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none"></div>
