@@ -87,14 +87,13 @@ const Hero = () => {
           <SwiperSlide key={item.id} className="w-full h-full !w-full">
             <div className="relative w-full h-full bg-black overflow-hidden">
               
-              {/* Thẻ Video HTML5 toàn màn hình sắc nét với poster xem trước và fetchpriority tối ưu */}
+              {/* Thẻ Video HTML5 toàn màn hình sắc nét với poster xem trước */}
               <video
                 autoPlay
                 muted
                 playsInline
                 poster={item.poster}
-                preload={index === 0 ? "auto" : "none"}
-                fetchpriority={index === 0 ? "high" : "low"}
+                preload={index === 0 ? "metadata" : "none"}
                 src={item.video}
                 onTimeUpdate={(e) => {
                   if (e.target.duration) {
