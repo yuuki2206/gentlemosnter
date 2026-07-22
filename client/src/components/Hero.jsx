@@ -5,41 +5,43 @@ import "swiper/css";
 
 /**
  * Component Hero hiển thị thanh trượt Banner Video chiếm toàn màn hình (full-screen) trên trang chủ.
- * Hỗ trợ tự động chuyển slide khi video phát xong (onEnded) và đồng bộ thanh tiến trình (progress indicator).
+ * Hỗ trợ tự động chuyển slide khi video phát xong (onEnded) và đồng bộ thanh tiến trình thời gian thực.
  */
 const Hero = () => {
   // Chỉ số slide hiện tại đang hoạt động
   const [activeIndex, setActiveIndex] = useState(0);
+  // Tiến trình chạy video hiện tại (0% -> 100%)
+  const [videoProgress, setVideoProgress] = useState(0);
   // Lưu instance của Swiper để điều khiển trượt slide bằng code
   const [swiperInstance, setSwiperInstance] = useState(null);
 
-  // Danh sách các bộ sưu tập nổi bật hiển thị ở banner trang chủ kèm link chuyển tiếp
+  // Danh sách các bộ sưu tập nổi bật với link CDN trực tiếp từ Gentle Monster (Tối ưu Mobile & CDN)
   const collections = [
     { 
       id: 0, 
       title: "VEGGIE COLLECTION", 
-      video: "/Veggie.mp4",
+      video: "https://gm-prd-resource.gentlemonster.com/main/banner/844160776311460281/9b68ad1a-6e18-41e6-b18c-518ea111cc88/main_global_pc_1920*990.mp4",
       shopUrl: "/sunglasses?category=Veggie%20Collection",
       campaignUrl: "/stories/850266286345551416"
     },
     { 
       id: 1, 
       title: "2026 COLLECTION", 
-      video: "/2026Collection.mp4",
+      video: "https://gm-prd-resource.gentlemonster.com/main/banner/798372671433820827/6fc4e780-c8ce-48bd-a8dd-3abff6ab7f8d/main_pc_1920*990.mp4",
       shopUrl: "/sunglasses?category=2026%20Collection",
       campaignUrl: "/stories/799785239610919992"
     },
     { 
       id: 2, 
       title: "BOLD COLLECTION", 
-      video: "/Boldcollection.mp4",
+      video: "https://gm-prd-resource.gentlemonster.com/main/banner/745797614844190277/dc673826-17a9-4253-b4e5-d0f681db7017/main_0_pc_1920*990.mp4",
       shopUrl: "/sunglasses?category=BOLD%20Collection",
       campaignUrl: "/stories/751335364734384213"
     },
     { 
       id: 3, 
       title: "FALL COLLECTION", 
-      video: "/Fallcollection.mp4",
+      video: "https://gm-prd-resource.gentlemonster.com/main/banner/770800970997325499/acc3f823-6a91-4897-b629-3891b5632fe9/main_0_pc_1920*990.mp4",
       shopUrl: "/sunglasses?category=2025%20FALL",
       campaignUrl: "/stories/773503337115322557"
     },
@@ -48,13 +50,7 @@ const Hero = () => {
   return (
     <section className="relative w-full h-screen bg-black">
       
-      {/* KHUNG TRƯỢT BANNER
-          - loop={true}: Quay vòng tròn slide vô tận.
-          - grabCursor={false}: Tắt con trỏ dạng bàn tay nắm để tránh cản trở UX của video.
-          - onSlideChange: Sự kiện kích hoạt mỗi khi slide thay đổi:
-            + Cập nhật activeIndex để thanh tiến trình chạy đúng vị trí.
-            + Tìm tất cả các thẻ video trong các slide và thực hiện cơ chế: slide nào hiển thị thì play(), các slide khác thì pause() để tiết kiệm CPU/Ram cho trình duyệt.
-      */}
+      {/* KHUNG TRƯỢT BANNER SWIPER */}
       <Swiper
         className="w-full h-full"
         data-cursor="drag"
@@ -62,7 +58,9 @@ const Hero = () => {
         grabCursor={false} 
         onSwiper={setSwiperInstance}
         onSlideChange={(swiper) => {
-          setActiveIndex(swiper.realIndex);
+          const realIdx = swiper.realIndex;
+          setActiveIndex(realIdx);
+          setVideoProgress(0);
           
           // Tối ưu hóa hiệu năng Video: Play video ở slide active, pause video ở các slide ẩn
           const slides = swiper.slides;
@@ -79,25 +77,31 @@ const Hero = () => {
           });
         }}
       >
-        {collections.map((item) => (
+        {collections.map((item, index) => (
           <SwiperSlide key={item.id}>
             <div className="relative w-full h-full">
               
-              {/* Thẻ Video: pointer-events-none để tránh click nhầm làm dừng/phát video */}
+              {/* Thẻ Video CDN với Lazy Preloading */}
               <video
                 autoPlay
                 muted
                 playsInline
+                preload={index === activeIndex ? "auto" : "none"}
+                onTimeUpdate={(e) => {
+                  if (e.target.duration) {
+                    setVideoProgress((e.target.currentTime / e.target.duration) * 100);
+                  }
+                }}
                 onEnded={() => swiperInstance && swiperInstance.slideNext()}
                 className="w-full h-full object-cover z-0 pointer-events-none"
               >
                 <source src={item.video} type="video/mp4" />
               </video>
               
-              {/* Lớp phủ tối mờ (overlay) để đảm bảo chữ trắng luôn đọc được tốt */}
+              {/* Lớp phủ tối mờ (overlay) */}
               <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none"></div>
 
-              {/* KHU VỰC THÔNG TIN BANNER (Căn giữa ngang, đẩy sát đáy theo tỉ lệ Gentle Monster) */}
+              {/* KHU VỰC THÔNG TIN BANNER */}
               <div className="absolute bottom-[106px] md:bottom-[113px] left-1/2 -translate-x-1/2 w-full px-4 text-center z-20 cursor-auto">
                 <h1 className="text-[20px] md:text-[24px] font-serif leading-[24px] md:leading-[28px] text-white uppercase drop-shadow-md pointer-events-none">
                   {item.title}
@@ -118,23 +122,31 @@ const Hero = () => {
         ))}
       </Swiper>
 
-      {/* THANH TIẾN TRÌNH DƯỚI ĐÁY BANNER (Pagination lines)
-          - Mô phỏng đúng dạng 4 thanh progress chạy tuyến tính của Gentle Monster.
-          - duration-[5000ms] ease-linear: Đồng bộ hiệu ứng chạy đầy thanh ngang khớp với thời gian chuyển slide.
+      {/* THANH TIẾN TRÌNH DƯỚI ĐÁY BANNER (Real-time Video Progress Sync)
+          - 4 thanh progress chạy chính xác theo % thời lượng video đang phát.
+          - Đồng bộ chuẩn đét mẫu website Gentle Monster gốc.
       */}
       <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex justify-center gap-2 z-30 pointer-events-none w-full px-4">
-        {collections.map((_, index) => (
-          <div 
-            key={index}
-            className="h-[1px] w-[102px] max-w-[20%] rounded-full overflow-hidden bg-white/40"
-          >
+        {collections.map((_, index) => {
+          let barWidth = "0%";
+          if (index < activeIndex) {
+            barWidth = "100%";
+          } else if (index === activeIndex) {
+            barWidth = `${videoProgress}%`;
+          }
+
+          return (
             <div 
-              className={`h-full bg-white transition-all duration-[5000ms] ease-linear ${
-                activeIndex === index ? "w-full" : (index < activeIndex ? "w-full" : "w-0")
-              }`}
-            ></div>
-          </div>
-        ))}
+              key={index}
+              className="h-[1.5px] w-[102px] max-w-[20%] rounded-full overflow-hidden bg-white/30"
+            >
+              <div 
+                className="h-full bg-white transition-all duration-75 ease-linear"
+                style={{ width: barWidth }}
+              ></div>
+            </div>
+          );
+        })}
       </div>
 
     </section>

@@ -208,17 +208,11 @@ const CartOverlay = ({ isOpen, onClose, initialTab = "BAG" }) => {
                 <p className="text-sm font-bold text-black mt-1">
                   ₫ {receiptData.total.toLocaleString("en-US")}
                 </p>
-                <p className="text-[10px] text-gray-500 font-medium mt-0.5">
-                  ≈ ${Number(receiptData.total / 25400).toFixed(2)} USD
-                </p>
               </div>
               <div className="text-right">
-                <p className="text-[9px] font-bold text-blue-500 uppercase tracking-widest">CRYPTO VALUE (WEB3)</p>
+                <p className="text-[9px] font-bold text-blue-500 uppercase tracking-widest">CRYPTO VALUE</p>
                 <p className="text-sm font-bold text-blue-600 mt-1">
                   {receiptData.ethTotal} ETH
-                </p>
-                <p className="text-[9px] text-blue-500 font-mono mt-0.5">
-                  (Rate: 1 ETH = 5,000,000 ₫)
                 </p>
               </div>
             </div>
