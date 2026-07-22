@@ -85,27 +85,20 @@ const Hero = () => {
           <SwiperSlide key={item.id}>
             <div className="relative w-full h-full bg-black">
               
-              {/* Ảnh nền fallback hiển thị tức thì 100% trên điện thoại (Tránh lỗi màn hình đen) */}
-              <img
-                src={item.poster}
-                alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-              />
-
-              {/* Thẻ Video phát đè lên ảnh khi tải xong (Tối ưu iOS Safari & Mobile) */}
+              {/* Thẻ Video HTML5 chuẩn với thuộc tính poster xem trước và preload hợp lý */}
               <video
                 autoPlay
                 muted
                 playsInline
                 poster={item.poster}
-                preload={index === activeIndex ? "metadata" : "none"}
+                preload={index === 0 ? "auto" : "none"}
                 onTimeUpdate={(e) => {
                   if (e.target.duration) {
                     setVideoProgress((e.target.currentTime / e.target.duration) * 100);
                   }
                 }}
                 onEnded={() => swiperInstance && swiperInstance.slideNext()}
-                className="absolute inset-0 w-full h-full object-cover z-[1] pointer-events-none"
+                className="w-full h-full object-cover z-0 pointer-events-none"
               >
                 <source src={item.video} type="video/mp4" />
               </video>
