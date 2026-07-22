@@ -57,16 +57,22 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
       threshold: 0.1, // Giảm xuống 10% để dễ dàng kích hoạt trên màn hình điện thoại di động
     };
 
+    const foldingUrls = {
+      "1": "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/folding_1_pc.mp4",
+      "2": "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/folding_2_pc.mp4",
+      "3": "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/folding_3_pc.mp4",
+    };
+
     const handleIntersection = (entries, observer) => {
       entries.forEach((entry) => {
         // Chỉ xử lý khi phần tử thực sự hiển thị và chiều cao hợp lệ
         if (entry.isIntersecting && entry.boundingClientRect.height > 100) {
           const video = entry.target;
           const index = video.getAttribute("data-index");
-          if (video && index) {
-            // Lazy-load gán nguồn video nếu chưa được gán
-            if (!video.src || video.src === "") {
-              video.src = `https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/folding_${index}_pc.mp4`;
+          if (video && index && foldingUrls[index]) {
+            // Lazy-load gán nguồn video CDN trực tiếp
+            if (!video.src || video.src === "" || video.src.includes("localhost")) {
+              video.src = foldingUrls[index];
               video.load(); // Khởi chạy tải video khi thay đổi thuộc tính src trên di động
             }
             video.loop = false;
@@ -90,6 +96,8 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
     };
   }, [story]);
 
+  const heroVideoUrl = "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/hero_short_pc.mp4";
+
   return (
     <div className="min-h-screen bg-[#DEE6F0] text-black font-sans antialiased overflow-x-hidden">
       {/* Khóa Header trong suốt để tương thích video nền xanh */}
@@ -109,7 +117,7 @@ const VeggieCollection = ({ story, veggieDisplayItems }) => {
               {/* Trình phát video inline */}
               <video
                 id="hero-campaign-video"
-                src={getMediaUrl("/Veggie%20collection/Veggie.mp4")}
+                src={heroVideoUrl}
                 poster={isCampaignPlaying ? "" : "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/hero_short_thumb_pc.jpg"}
                 className="w-full h-full object-cover"
                 muted={!isCampaignPlaying}
