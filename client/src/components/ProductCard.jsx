@@ -72,7 +72,7 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
     >
       {/* Khung ảnh chính */}
       <div className="w-full aspect-square md:aspect-[4/3] flex justify-center items-center overflow-hidden mb-4 bg-[#f4f4f4] relative rounded-xs">
-        <Link to={`/shop/${item.sku}`} data-cursor="view" className="w-full h-full flex justify-center items-center">
+        <Link to={`/shop/${item.sku}`} aria-label={`View ${item.name} details`} data-cursor="view" className="w-full h-full flex justify-center items-center">
           {isVideo ? (
             <video
               autoPlay loop muted playsInline

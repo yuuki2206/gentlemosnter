@@ -60,6 +60,7 @@ const SwiperProductCard = ({ item, loading = false }) => {
   return (
     <Link
       to={`/shop/${item.sku}`}
+      aria-label={`View ${item.name} details`}
       className="group flex flex-col cursor-pointer pb-8 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
