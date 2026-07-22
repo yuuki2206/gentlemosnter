@@ -65,18 +65,18 @@ const SwiperProductCard = ({ item, loading = false }) => {
       {/* Khung ảnh chính với hiệu ứng Hover Image Swap */}
       <div className="w-full aspect-[4/3] flex justify-center items-center relative mb-3 bg-[#f4f4f4] overflow-hidden rounded-xs">
         {/* Media 1 (Video MP4 / Ảnh tĩnh trực diện) */}
-        <div className={`w-full h-full flex justify-center items-center p-6 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+        <div className={`w-full h-full flex justify-center items-center p-2 md:p-3 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
           {image1 && image1.toLowerCase().endsWith(".mp4") ? (
-            <video src={image1} autoPlay loop muted playsInline preload="auto" className="w-full h-full object-contain pointer-events-none" />
+            <video src={image1} autoPlay loop muted playsInline preload="auto" className="w-[92%] h-[92%] object-contain pointer-events-none" />
           ) : (
-            <img src={image1} alt={item.name} loading="lazy" width="400" height="300" className="w-full h-full object-contain" onError={handleImageError} />
+            <img src={image1} alt={item.name} loading="lazy" width="400" height="300" className="w-[92%] h-[92%] object-contain" onError={handleImageError} />
           )}
         </div>
 
         {/* Media 2 (Ảnh góc nghiêng / mẫu hover) */}
-        <div className={`w-full h-full flex justify-center items-center p-6 absolute inset-0 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"}`}>
+        <div className={`w-full h-full flex justify-center items-center p-2 md:p-3 absolute inset-0 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"}`}>
           {image2 && image2.toLowerCase().endsWith(".mp4") ? (
-            <video src={image2} autoPlay loop muted playsInline preload="metadata" className="w-full h-full object-contain pointer-events-none" />
+            <video src={image2} autoPlay loop muted playsInline preload="metadata" className="w-[92%] h-[92%] object-contain pointer-events-none" />
           ) : (
             <img src={image2} alt={`${item.name} hover`} loading="lazy" width="400" height="300" className="w-full h-full object-contain" onError={handleImageError} />
           )}

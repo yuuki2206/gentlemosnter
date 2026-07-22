@@ -76,7 +76,7 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
           {isVideo ? (
             <video
               autoPlay loop muted playsInline
-              className={`w-full h-full object-cover object-center ${viewMode === "product" ? "object-contain w-[80%]" : ""}`}
+              className={`w-full h-full object-cover object-center ${viewMode === "product" ? "object-contain w-[94%] h-[94%]" : ""}`}
             >
               <source src={mediaUrl} type="video/mp4" />
             </video>
@@ -84,7 +84,7 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
             <img
               src={mediaUrl}
               alt={item.name}
-              className={`transition-transform duration-700 group-hover:scale-105 ${viewMode === "product" ? "w-[80%] h-auto object-contain" : "w-full h-full object-cover"}`}
+              className={`transition-transform duration-700 group-hover:scale-105 ${viewMode === "product" ? "w-[94%] h-[94%] object-contain" : "w-full h-full object-cover"}`}
               onError={handleImageError}
             />
           )}
