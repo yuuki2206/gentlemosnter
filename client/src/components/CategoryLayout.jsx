@@ -28,7 +28,8 @@ const CategoryLayout = ({ data = [], categories = [], categoryInfo = {}, default
         if (storedProducts) {
           try {
             const parsed = JSON.parse(storedProducts);
-            if (parsed.length > 0 && parsed[0].url && !parsed[0].url.startsWith("http")) {
+            // Tự động xóa bộ nhớ đệm Localhost cũ nếu chứa giá USD cũ (< 1000) hoặc link cũ
+            if (parsed.length > 0 && (parsed[0].price < 1000 || (parsed[0].url && !parsed[0].url.startsWith("http")))) {
               localStorage.removeItem("gm_products_db_v3");
               storedProducts = null;
             }
