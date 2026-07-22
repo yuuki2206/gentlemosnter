@@ -23,7 +23,7 @@ const SwiperProductCard = ({ item, loading = false }) => {
 
   const isWishlisted = wishlist.some((w) => w.sku === item?.sku);
 
-  // Lọc và sắp xếp ảnh
+  // Lọc và sắp xếp ảnh: Ưu tiên ảnh tĩnh FRONT.jpg làm ảnh chính (image1) giúp điện thoại nạp siêu nhanh
   const rawMediaList = Array.from(new Set([item.thumbnail, ...(item.gallery || [])].filter(Boolean)));
   const sortedMediaList = rawMediaList.sort((a, b) => {
     const aLower = a.toLowerCase();
@@ -32,21 +32,21 @@ const SwiperProductCard = ({ item, loading = false }) => {
     const isVideoB = bLower.endsWith(".mp4");
     const isPackagingA = a.includes("S11500904") || aLower.includes("package");
     const isPackagingB = b.includes("S11500904") || bLower.includes("package");
-    const isFrontA = a.includes("FRONT");
-    const isFrontB = b.includes("FRONT");
+    const isFrontA = a.includes("FRONT") && !a.includes("POSTER") && !isVideoA;
+    const isFrontB = b.includes("FRONT") && !b.includes("POSTER") && !isVideoB;
 
     if (isPackagingA && !isPackagingB) return 1;
     if (!isPackagingA && isPackagingB) return -1;
-    if (isVideoA && !isVideoB) return -1;
-    if (!isVideoA && isVideoB) return 1;
     if (isFrontA && !isFrontB) return -1;
     if (!isFrontA && isFrontB) return 1;
+    if (isVideoA && !isVideoB) return 1;
+    if (!isVideoA && isVideoB) return -1;
     return 0;
   });
 
   const mediaList = sortedMediaList;
   const image1 = mediaList[0];
-  // Dùng ảnh thứ 2 làm ảnh góc nghiêng/model hover. Nếu không có thì dùng chính ảnh 1.
+  // Dùng ảnh thứ 2 làm ảnh góc nghiêng/mẫu hover. Nếu không có thì dùng chính ảnh 1.
   const image2 = mediaList[1] || mediaList[0];
 
   const handleQuickAdd = (e) => {
@@ -67,21 +67,21 @@ const SwiperProductCard = ({ item, loading = false }) => {
     >
       {/* Khung ảnh chính với hiệu ứng Hover Image Swap */}
       <div className="w-full aspect-[4/3] flex justify-center items-center relative mb-3 bg-[#f4f4f4] overflow-hidden rounded-xs">
-        {/* Ảnh trực diện (Ảnh 1) */}
+        {/* Ảnh trực diện (Ảnh 1 - Nạp tức thì trên di động) */}
         <div className={`w-full h-full flex justify-center items-center p-6 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
-          {image1 && image1.toLowerCase().includes(".mp4") ? (
-            <video src={isHovered ? image1 : undefined} autoPlay loop muted playsInline preload="none" className="w-full h-full object-contain" />
+          {image1 && image1.toLowerCase().endsWith(".mp4") ? (
+            <video src={image1} autoPlay loop muted playsInline preload="metadata" className="w-full h-full object-contain" />
           ) : (
-            <img src={image1} alt={item.name} loading="lazy" className="w-full h-full object-contain" onError={handleImageError} />
+            <img src={image1} alt={item.name} loading="lazy" width="400" height="300" className="w-full h-full object-contain" onError={handleImageError} />
           )}
         </div>
 
         {/* Ảnh góc nghiêng / mẫu (Ảnh 2) */}
         <div className={`w-full h-full flex justify-center items-center p-6 absolute inset-0 transition-[opacity,transform] duration-700 ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"}`}>
-          {image2 && image2.toLowerCase().includes(".mp4") ? (
+          {image2 && image2.toLowerCase().endsWith(".mp4") ? (
             <video src={isHovered ? image2 : undefined} autoPlay loop muted playsInline preload="none" className="w-full h-full object-contain" />
           ) : (
-            <img src={image2} alt={`${item.name} hover`} loading="lazy" className="w-full h-full object-contain" onError={handleImageError} />
+            <img src={image2} alt={`${item.name} hover`} loading="lazy" width="400" height="300" className="w-full h-full object-contain" onError={handleImageError} />
           )}
         </div>
 
