@@ -47,8 +47,8 @@ const Preloader = ({ ready, onComplete }) => {
             setIsHidden(true); // Gỡ bỏ khỏi DOM
             document.body.style.overflow = ""; // Khôi phục cuộn trang
             if (onComplete) onComplete();
-          }, 800); // Khớp với duration-800
-        }, 600); // Giữ ở mức 100% một khoảng nhỏ để tạo điểm dừng sang trọng
+          }, 300);
+        }, 100);
       }
     }, 60);
 

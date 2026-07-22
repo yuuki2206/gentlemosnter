@@ -15,12 +15,13 @@ const Hero = () => {
   // Lưu instance của Swiper để điều khiển trượt slide bằng code
   const [swiperInstance, setSwiperInstance] = useState(null);
 
-  // Danh sách các bộ sưu tập nổi bật với link CDN trực tiếp từ Gentle Monster (Tối ưu Mobile & CDN)
+  // Danh sách các bộ sưu tập nổi bật với link CDN trực tiếp từ Gentle Monster kèm ảnh poster xem trước
   const collections = [
     { 
       id: 0, 
       title: "VEGGIE COLLECTION", 
       video: "https://gm-prd-resource.gentlemonster.com/main/banner/844160776311460281/9b68ad1a-6e18-41e6-b18c-518ea111cc88/main_global_pc_1920*990.mp4",
+      poster: "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/video/hero_short_thumb_pc.jpg",
       shopUrl: "/sunglasses?category=Veggie%20Collection",
       campaignUrl: "/stories/850266286345551416"
     },
@@ -28,6 +29,7 @@ const Hero = () => {
       id: 1, 
       title: "2026 COLLECTION", 
       video: "https://gm-prd-resource.gentlemonster.com/main/banner/798372671433820827/6fc4e780-c8ce-48bd-a8dd-3abff6ab7f8d/main_pc_1920*990.mp4",
+      poster: "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXM47349/a85726af-246f-430b-953d-fd0a92e47d38/11005102_FRONT.jpg",
       shopUrl: "/sunglasses?category=2026%20Collection",
       campaignUrl: "/stories/799785239610919992"
     },
@@ -35,6 +37,7 @@ const Hero = () => {
       id: 2, 
       title: "BOLD COLLECTION", 
       video: "https://gm-prd-resource.gentlemonster.com/main/banner/745797614844190277/dc673826-17a9-4253-b4e5-d0f681db7017/main_0_pc_1920*990.mp4",
+      poster: "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/image/steel_cut_1.jpg",
       shopUrl: "/sunglasses?category=BOLD%20Collection",
       campaignUrl: "/stories/751335364734384213"
     },
@@ -42,6 +45,7 @@ const Hero = () => {
       id: 3, 
       title: "FALL COLLECTION", 
       video: "https://gm-prd-resource.gentlemonster.com/main/banner/770800970997325499/acc3f823-6a91-4897-b629-3891b5632fe9/main_0_pc_1920*990.mp4",
+      poster: "https://gm-prd-resource.gentlemonster.com/assets/stories/veggie-collection/image/steel_cut_4.jpg",
       shopUrl: "/sunglasses?category=2025%20FALL",
       campaignUrl: "/stories/773503337115322557"
     },
@@ -81,11 +85,12 @@ const Hero = () => {
           <SwiperSlide key={item.id}>
             <div className="relative w-full h-full">
               
-              {/* Thẻ Video CDN với Lazy Preloading */}
+              {/* Thẻ Video CDN với Poster Image và Lazy Preloading */}
               <video
                 autoPlay
                 muted
                 playsInline
+                poster={item.poster}
                 preload={index === activeIndex ? "auto" : "none"}
                 onTimeUpdate={(e) => {
                   if (e.target.duration) {
