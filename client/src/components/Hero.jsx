@@ -85,13 +85,14 @@ const Hero = () => {
           <SwiperSlide key={item.id}>
             <div className="relative w-full h-full bg-black">
               
-              {/* Thẻ Video HTML5 chuẩn với thuộc tính poster xem trước và preload hợp lý */}
+              {/* Thẻ Video HTML5 với thuộc tính poster xem trước và nạp video thông minh (Tránh nạp ngầm 31.5MB video ẩn khi vừa mở trang) */}
               <video
                 autoPlay
                 muted
                 playsInline
                 poster={item.poster}
                 preload={index === 0 ? "auto" : "none"}
+                src={index === 0 || index === activeIndex ? item.video : undefined}
                 onTimeUpdate={(e) => {
                   if (e.target.duration) {
                     setVideoProgress((e.target.currentTime / e.target.duration) * 100);
@@ -99,9 +100,7 @@ const Hero = () => {
                 }}
                 onEnded={() => swiperInstance && swiperInstance.slideNext()}
                 className="w-full h-full object-cover z-0 pointer-events-none"
-              >
-                <source src={item.video} type="video/mp4" />
-              </video>
+              />
               
               {/* Lớp phủ tối mờ (overlay) */}
               <div className="absolute inset-0 bg-black/15 z-10 pointer-events-none"></div>
