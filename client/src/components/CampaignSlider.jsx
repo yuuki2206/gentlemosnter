@@ -93,7 +93,7 @@ const CampaignSlider = ({ products = [] }) => {
 
           return (
             <SwiperSlide key={item.sku || idx}>
-              <a href={item.url || '#'} className={`relative group w-full aspect-[3/4] flex flex-col justify-end block ${viewMode === "product" ? "bg-[#f4f4f4]" : "bg-transparent"}`}>
+              <a href={item.url || '#'} aria-label={`View ${item.name} details`} className={`relative group w-full aspect-[3/4] flex flex-col justify-end block ${viewMode === "product" ? "bg-[#f4f4f4]" : "bg-transparent"}`}>
                 
                 {/* Media Renderer */}
                 <div className="absolute inset-0 w-full h-full">

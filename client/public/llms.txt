@@ -1,0 +1,19 @@
+# Gentle Monster Web3 E-Commerce Store
+
+Gentle Monster is a luxury eyewear brand featuring sunglasses, optical glasses, and Web3 cryptocurrency payment integrations.
+
+## Core Navigation & Features
+
+- [Home Page](https://gentlemonstercl.vercel.app/)
+- [Sunglasses Collection](https://gentlemonstercl.vercel.app/sunglasses)
+- [Optical Glasses Collection](https://gentlemonstercl.vercel.app/glasses)
+- [Intelligent Eyewear](https://gentlemonstercl.vercel.app/intelligent-eyewear)
+- [Stories & Campaigns](https://gentlemonstercl.vercel.app/stories)
+- [User Account Dashboard](https://gentlemonstercl.vercel.app/account)
+- [Admin Management Panel](https://gentlemonstercl.vercel.app/admin)
+
+## Technology Architecture
+
+- Frontend: React 19, Tailwind CSS 4.0, SwiperJS
+- Web3 Payments: MetaMask RPC Integration, Privy Embedded Wallets, Ganache/Sepolia Testnet
+- Data Layer: MongoDB Atlas Cloud API with Client LocalStorage Fault-Tolerant Fallback

@@ -174,6 +174,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
             {/* NÚT HAMBURGER / CLOSE: Chỉ hiện trên Mobile (lg:hidden) */}
             <button
               className="lg:hidden p-1 hover:opacity-70 transition-opacity"
+              aria-label="Toggle navigation menu"
               onClick={() => {
                 if (isOpen) {
                   setIsOpen(false);
@@ -186,17 +187,12 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
               {isOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
             </button>
 
-            {/* MENU NGANG DESKTOP: Ẩn trên Mobile (hidden lg:flex)
-                === KỸ THUẬT CSS GROUP HOVER ===
-                - Thẻ cha có class "group", thẻ con dropdown có class "group-hover:visible group-hover:opacity-100".
-                - Khi hover chuột vào thẻ cha, Tailwind CSS tự động kích hoạt các class trên thẻ con.
-                - Hoàn toàn không cần JavaScript để xử lý hover, giúp giảm re-render React không cần thiết.
-            */}
+            {/* MENU NGANG DESKTOP: Ẩn trên Mobile (hidden lg:flex) */}
             <nav className="hidden lg:flex gap-6 xl:gap-8 text-sm font-medium tracking-wide whitespace-nowrap">
               {Object.keys(menuData).map((item) => (
                 <div key={item} className="group py-2">
                   
-                  {/* Link mục chính: Điều hướng bằng React Router <Link> thay vì <a> để tránh tải lại trang (SPA behavior) */}
+                  {/* Link mục chính */}
                   <Link
                     to={
                       item === "Sunglasses" || item === "Glasses" ? `/${item.toLowerCase()}`
@@ -208,7 +204,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
                     {item}
                   </Link>
 
-                  {/* DROPDOWN SUB-MENU: Chỉ render nếu mục có sub-items (Conditional Rendering) */}
+                  {/* DROPDOWN SUB-MENU */}
                   {menuData[item].length > 0 && (
                     <div
                       className={`fixed left-0 top-[50px] w-full h-fit
@@ -268,11 +264,12 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
             )}
             <button 
               onClick={() => { closeAllDrawers(); setIsSearchOpen(true); }}
+              aria-label="Search products"
               className="hover:opacity-70 transition-opacity"
             >
               <Search size={20} strokeWidth={1.5} />
             </button>
-            {/* Nút User: Bấm chuyển sang /account nếu đã đăng nhập, hoặc mở sidebar đăng nhập nếu chưa */}
+            {/* Nút User */}
             <button
               onClick={() => {
                 if (user) {
@@ -282,6 +279,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
                   setIsAuthOpen(true);
                 }
               }}
+              aria-label="User account"
               className="hidden sm:flex items-center gap-1.5 hover:opacity-70 transition-opacity"
             >
               <User size={20} strokeWidth={1.5} />
@@ -297,6 +295,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
                 setCartActiveTab("BAG");
                 setIsCartOpen(true);
               }}
+              aria-label="Shopping bag"
               className="hover:opacity-70 transition-opacity flex items-center gap-1.5 text-xs tracking-wider"
             >
               <ShoppingBag size={20} strokeWidth={1.5} />
