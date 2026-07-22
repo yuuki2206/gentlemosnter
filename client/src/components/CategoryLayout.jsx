@@ -20,39 +20,19 @@ const CategoryLayout = ({ data = [], categories = [], categoryInfo = {}, default
 
   const typeParam = defaultTitle === "SUNGLASSES" ? "Sunglasses" : "Glasses";
 
-  // Hàm fetcher giả lập truy vấn bất đồng bộ từ localStorage (Offline DB)
+  // Ưu tiên danh mục sản phẩm truyền từ prop (sunglasses hoặc glasses) để phân định chuẩn 100%
+  const sourceProducts = data && data.length > 0 ? data : productsData;
+
   const fetcher = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        let storedProducts = localStorage.getItem("gm_products_db_v3");
-        if (storedProducts) {
-          try {
-            const parsed = JSON.parse(storedProducts);
-            // Tự động xóa bộ nhớ đệm Localhost cũ nếu chứa giá USD cũ (< 1000) hoặc link cũ
-            if (parsed.length > 0 && (parsed.some(p => p.price < 1000) || (parsed[0].url && !parsed[0].url.startsWith("http")))) {
-              localStorage.removeItem("gm_products_db_v3");
-              storedProducts = null;
-            }
-          } catch (e) {}
-        }
-        if (!storedProducts) {
-          localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
-          storedProducts = JSON.stringify(productsData);
-        }
-        const allProducts = JSON.parse(storedProducts);
-        const filtered = allProducts.filter(p => {
-          if (!p) return false;
-          if (p.collection === typeParam || p.type === typeParam) return true;
-          if (p.collections && Array.isArray(p.collections) && p.collections.includes(typeParam)) return true;
-          return true; // Trả về toàn bộ catalogue nếu chưa phân loại Sunglasses/Glasses
-        });
-        resolve(filtered.length > 0 ? filtered : allProducts);
-      }, 450); // Tạo độ trễ 450ms để hiển thị Shimmer Skeleton sang trọng
+        resolve(sourceProducts);
+      }, 250); // Tạo độ trễ 250ms nhẹ nhàng cho hiệu ứng Shimmer Skeleton
     });
   };
 
   const { data: products = [], isLoading: loading } = useSWR(
-    `products-${typeParam}`,
+    `products-${defaultTitle}`,
     fetcher
   );
 
