@@ -1,4 +1,4 @@
-export const productsData = [
+export const products = [
   {
     "sku": "0Q04AJXKR7376",
     "name": "Tofi 02",
@@ -1011,5 +1011,3 @@ export const productsData = [
     ]
   }
 ];
-
-export const products = productsData;
