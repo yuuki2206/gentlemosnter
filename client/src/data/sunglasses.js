@@ -2,7 +2,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXM47349",
     "name": "Vert 02(CM)",
-    "price": 345,
+    "price": 9385600,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXM47349/vert02-cm",
     "slug": "vert02-cm",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXM47349/9f483608-1809-45ff-90ff-2c92ab070c44/11005102_AFTER_FRONT_1.mp4",
@@ -24,7 +24,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXJG733T",
     "name": "Mori 02(GR)",
-    "price": 335,
+    "price": 9113600,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXJG733T/mori02-gr",
     "slug": "mori02-gr",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJG733T/4afee341-1eee-4bf7-817d-16ffc5a61cf3/11005085_FRONT.jpg",
@@ -46,7 +46,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXE8736R",
     "name": "Aden 02(GRM)",
-    "price": 345,
+    "price": 9385600,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXE8736R/aden02-grm",
     "slug": "aden02-grm",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXE8736R/a6e670b8-92a7-4e0b-91bb-e7d4f827f632/11005138_FRONT.jpg",
@@ -68,7 +68,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXKR7376",
     "name": "Tofi 02(CM)",
-    "price": 355,
+    "price": 9657700,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXKR7376/tofi02-cm",
     "slug": "tofi02-cm",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKR7376/6f62ea97-9e3e-405a-bf32-827586503b86/11005120_AFTER_FRONT_1.mp4",
@@ -90,7 +90,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXMC733C",
     "name": "Zest 01",
-    "price": 325,
+    "price": 8841600,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXMC733C/zest01",
     "slug": "zest01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/fcd58405-b0e0-4dec-aca7-e337f27395bf/11005140_FRONT.jpg",
@@ -114,7 +114,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXHC7333",
     "name": "Jasmin 01(BL)",
-    "price": 315,
+    "price": 8569500,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXHC7333/jasmin01-bl",
     "slug": "jasmin01-bl",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXHC7333/739a4010-cf17-4c7f-9935-d8092cbd5156/11005095_FRONT.jpg",
@@ -138,7 +138,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXGW732X",
     "name": "Ivy T1",
-    "price": 325,
+    "price": 8841600,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXGW732X/ivyt1",
     "slug": "ivyt1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXGW732X/b93eff00-91f4-4c41-8a43-32c8f391c3ad/11005089_FRONT.jpg",
@@ -162,7 +162,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXKC733N",
     "name": "Radi 02(Y)",
-    "price": 335,
+    "price": 9113600,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXKC733N/radi02-y",
     "slug": "radi02-y",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKC733N/59b0fce6-54ee-4e3c-b112-49d442830842/11005099_FRONT.jpg",
@@ -185,7 +185,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXJM7349",
     "name": "Oatt 02",
-    "price": 315,
+    "price": 8569500,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXJM7349/oatt02",
     "slug": "oatt02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXJM7349/8fd24024-bf08-4ca9-b25f-1ba889345d60/11005144_FRONT.jpg",
@@ -210,7 +210,7 @@ export const sunglasses = [
   {
     "sku": "0Q04AJXFG736K",
     "name": "Harv T1",
-    "price": 325,
+    "price": 8841600,
     "url": "https://www.gentlemonster.com/int/en/item/0Q04AJXFG736K/harvt1",
     "slug": "harvt1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXFG736K/b179cac6-b675-46e6-88c4-aa684a75583b/11005093_FRONT.jpg",
@@ -234,7 +234,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ09X6ASH7",
     "name": "Disney F1® - Wing 4 R13",
-    "price": 395,
+    "price": 10745900,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ09X6ASH7/disneyf1-wing4r13",
     "slug": "disneyf1-wing4r13",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ09X6ASH7/38e8cb74-2c51-41a0-872b-8089774a9a94/11005049_FRONT.jpg",
@@ -254,7 +254,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0A3JASP2",
     "name": "Disney F1® - Slipstream N8",
-    "price": 345,
+    "price": 9385600,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0A3JASP2/disneyf1-slipstreamn8",
     "slug": "disneyf1-slipstreamn8",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A3JASP2/6d7b5ad0-da2d-4cd3-8c26-11ef1d3a94b8/11005060_FRONT.jpg",
@@ -274,7 +274,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0A8PASR2",
     "name": "Disney F1® - Velo MG21",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0A8PASR2/disneyf1-velomg21",
     "slug": "disneyf1-velomg21",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A8PASR2/4fe38955-5cd4-44ce-8ece-15342c865818/11005075_FRONT.jpg",
@@ -293,7 +293,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0A9JASHB",
     "name": "Velo OR4",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0A9JASHB/veloor4",
     "slug": "veloor4",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A9JASHB/71a951a8-360a-4983-b11b-793d4fb26b95/11005076_FRONT.jpg",
@@ -312,7 +312,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0A7YASM7",
     "name": "Disney F1® - Rim R13",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0A7YASM7/disneyf1-rimr13",
     "slug": "disneyf1-rimr13",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A7YASM7/ecbc0787-d286-4f0e-af08-fd4a00b50a70/11005063_FRONT.jpg",
@@ -331,7 +331,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0A72ASKK",
     "name": "Rim MG22",
-    "price": 245,
+    "price": 6665200,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0A72ASKK/rimmg22",
     "slug": "rimmg22",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A72ASKK/d409ac53-0b70-49aa-ba77-5ad82583a789/11005064_FRONT.jpg",
@@ -350,7 +350,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0AAPASR1",
     "name": "Turbo MG21",
-    "price": 265,
+    "price": 7209300,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0AAPASR1/turbomg21",
     "slug": "turbomg21",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0AAPASR1/747fa0c5-f3a0-4172-b3ff-b32f4a9a5ba9/11005067_FRONT.jpg",
@@ -370,7 +370,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0ACAASKE",
     "name": "Pitot M021",
-    "price": 255,
+    "price": 6937200,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0ACAASKE/pitotm021",
     "slug": "pitotm021",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0ACAASKE/0b5a2406-33fb-4f7d-92e8-e9d55202caea/11005068_FRONT.jpg",
@@ -390,7 +390,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0ABEASR3",
     "name": "Volt MGD2",
-    "price": 235,
+    "price": 6393100,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0ABEASR3/voltmgd2",
     "slug": "voltmgd2",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0ABEASR3/c3170e53-b6ed-4eb5-8492-71047315f903/11005056_FRONT.jpg",
@@ -409,7 +409,7 @@ export const sunglasses = [
   {
     "sku": "0PEEZ0A5EASNJ",
     "name": "Disney F1® - Aero G21",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/0PEEZ0A5EASNJ/disneyf1-aerog21",
     "slug": "disneyf1-aerog21",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PEEZ0A5EASNJ/8a7e7cbe-7629-4fec-a990-201ec2a80f9c/11005053_FRONT.jpg",
@@ -428,7 +428,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBCNF0J0",
     "name": "Futura 02(BRG)",
-    "price": 335,
+    "price": 9113600,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBCNF0J0/futura02-brg",
     "slug": "futura02-brg",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBCNF0J0/3a1d864e-a9d5-4a6f-82ed-061f9d717230/11004955_FRONT.jpg",
@@ -451,7 +451,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBBNF0QH",
     "name": "Gamot 02(GR)",
-    "price": 295,
+    "price": 8025400,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBBNF0QH/gamot02-gr",
     "slug": "gamot02-gr",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBBNF0QH/a7270bb4-4fc3-47ab-883f-78f4e197de98/11005026_FRONT.jpg",
@@ -473,7 +473,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBAXF0JB",
     "name": "Musubi 02(BRG)",
-    "price": 295,
+    "price": 8025400,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBAXF0JB/musubi02-brg",
     "slug": "musubi02-brg",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBAXF0JB/10b86dd5-0ca3-4ea2-942b-f420c270a5da/11005028_FRONT.jpg",
@@ -496,7 +496,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JB61F0J3",
     "name": "Ora T9",
-    "price": 305,
+    "price": 8297500,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JB61F0J3/orat9",
     "slug": "orat9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JB61F0J3/b51661d1-7287-43ef-b0e6-3cf5c0837c8b/11005031_FRONT.jpg",
@@ -515,7 +515,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JB81F0KW",
     "name": "Crepe 01",
-    "price": 305,
+    "price": 8297500,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JB81F0KW/crepe01",
     "slug": "crepe01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JB81F0KW/65e4429c-de70-40d0-a4ea-5fd7cd7f8d39/11004961_FRONT.jpg",
@@ -535,7 +535,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JB9NF0HR",
     "name": "Tweed 01",
-    "price": 305,
+    "price": 8297500,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JB9NF0HR/tweed01",
     "slug": "tweed01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JB9NF0HR/b99789fb-97dd-48e7-b00a-9e947f4e958e/11004957_FRONT.jpg",
@@ -556,7 +556,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBRNF0N6",
     "name": "Vanilla 01",
-    "price": 295,
+    "price": 8025400,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBRNF0N6/vanilla01",
     "slug": "vanilla01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBRNF0N6/0dd1f7fd-2265-45db-8c4d-9cb0912bc648/11004981_FRONT.jpg",
@@ -577,7 +577,7 @@ export const sunglasses = [
   {
     "sku": "0Q7WZK9Q2ATGD",
     "name": "Boni G11(BL)",
-    "price": 295,
+    "price": 8025400,
     "url": "https://www.gentlemonster.com/int/en/item/0Q7WZK9Q2ATGD/bonig11-bl",
     "slug": "bonig11-bl",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q7WZK9Q2ATGD/c5acf90c-fe89-47a6-b20c-3569621e1c27/11005135_FRONT.jpg",
@@ -598,7 +598,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBQ1F0Q8",
     "name": "Madlenne T9",
-    "price": 275,
+    "price": 7481300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBQ1F0Q8/madlennet9",
     "slug": "madlennet9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBQ1F0Q8/6f377491-33a8-4c4c-ab90-a44a72f3b10c/11004988_FRONT.jpg",
@@ -618,7 +618,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBN5F0P8",
     "name": "Cinnamon T8",
-    "price": 275,
+    "price": 7481300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBN5F0P8/cinnamont8",
     "slug": "cinnamont8",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBN5F0P8/309d1384-975e-4d92-bfce-4e8cd3d13069/11004978_FRONT.jpg",
@@ -639,7 +639,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBT1F0KE",
     "name": "Cuscus BRC21",
-    "price": 265,
+    "price": 7209300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBT1F0KE/cuscusbrc21",
     "slug": "cuscusbrc21",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBT1F0KE/cb184d41-cf3c-4221-8331-eebcd7a7f78d/11005039_FRONT.jpg",
@@ -659,7 +659,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBQSF0KH",
     "name": "Dust Musk BL9",
-    "price": 275,
+    "price": 7425000,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBQSF0KH/dustmuskbl9",
     "slug": "dustmuskbl9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBQSF0KH/5426756a-81ec-4e18-8e7c-77e60de7994e/11004992_FRONT.jpg",
@@ -678,7 +678,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBV5F0R0",
     "name": "Mimosa 01",
-    "price": 295,
+    "price": 8025400,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBV5F0R0/mimosa01",
     "slug": "mimosa01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBV5F0R0/2bbe6c66-d1ff-4195-a901-7330a4298990/11005043_FRONT.jpg",
@@ -698,7 +698,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBGNF0P6",
     "name": "La Sola 01(G)",
-    "price": 270,
+    "price": 7345300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBGNF0P6/lasola01-g",
     "slug": "lasola01-g",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBGNF0P6/933c70cb-6bbb-4e34-9517-838391d94586/11005016_FRONT.jpg",
@@ -719,7 +719,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBD5F0JC",
     "name": "Gent 01",
-    "price": 265,
+    "price": 7209300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBD5F0JC/gent01",
     "slug": "gent01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBD5F0JC/e5a9056f-ebd8-4aa2-92e2-67e2c76c4ad7/11004969_FRONT.jpg",
@@ -740,7 +740,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBM5F0HF",
     "name": "Noho 01(V)",
-    "price": 255,
+    "price": 6937200,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBM5F0HF/noho01-v",
     "slug": "noho01-v",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBM5F0HF/bc135d3a-85d3-4f38-b6cc-72c7c98bc1d3/11005001_FRONT.jpg",
@@ -760,7 +760,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBHHF0HS",
     "name": "Dodo 01(RM)",
-    "price": 285,
+    "price": 7753400,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBHHF0HS/dodo01-rm",
     "slug": "dodo01-rm",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBHHF0HS/18b9b903-0010-4d12-9c23-af53c21c836e/11004953_FRONT.jpg",
@@ -780,7 +780,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBMHF0J4",
     "name": "Sage T8",
-    "price": 275,
+    "price": 7481300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBMHF0J4/saget8",
     "slug": "saget8",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBMHF0J4/901122cb-e4a8-46a7-b471-a431d48d3218/11004995_FRONT.jpg",
@@ -800,7 +800,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBEXF0R0",
     "name": "Alma 01(BR)",
-    "price": 255,
+    "price": 6937200,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBEXF0R0/alma01-br",
     "slug": "alma01-br",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBEXF0R0/58e07f22-5387-44b9-a95f-005249de7c1b/11004968_FRONT.jpg",
@@ -821,7 +821,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBJ9F0P0",
     "name": "Daze 01(BL)",
-    "price": 255,
+    "price": 6937200,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBJ9F0P0/daze01-bl",
     "slug": "daze01-bl",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBJ9F0P0/780de386-8076-4682-801a-71e661716b89/11004974_FRONT.jpg",
@@ -844,7 +844,7 @@ export const sunglasses = [
   {
     "sku": "0Q7WZK9ZAATFY",
     "name": "Soho 01(LV)",
-    "price": 255,
+    "price": 6937200,
     "url": "https://www.gentlemonster.com/int/en/item/0Q7WZK9ZAATFY/soho01-lv",
     "slug": "soho01-lv",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q7WZK9ZAATFY/6ae83a33-a398-4b20-8961-fd78220bcf49/11005132_FRONT.jpg",
@@ -866,7 +866,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBFDF0HQ",
     "name": "Lo Lou 01(GR)",
-    "price": 265,
+    "price": 7209300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBFDF0HQ/lolou01-gr",
     "slug": "lolou01-gr",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBFDF0HQ/5df2c2ab-54c8-43fc-ac01-efdc94f28b9d/11005010_FRONT.jpg",
@@ -886,7 +886,7 @@ export const sunglasses = [
   {
     "sku": "0P0M4JBTNF0RC",
     "name": "Lamda T9",
-    "price": 275,
+    "price": 7481300,
     "url": "https://www.gentlemonster.com/int/en/item/0P0M4JBTNF0RC/lamdat9",
     "slug": "lamdat9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0P0M4JBTNF0RC/909bce08-b291-496c-8c54-7c2a35fbd3cb/11005003_FRONT.jpg",
@@ -905,7 +905,7 @@ export const sunglasses = [
   {
     "sku": "P9A6DQBAT5F1",
     "name": "Matiny BR3",
-    "price": 295,
+    "price": 7965000,
     "url": "https://www.gentlemonster.com/int/en/item/P9A6DQBAT5F1/matinybr3",
     "slug": "matinybr3",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/P9A6DQBAT5F1/440f8fbb-073c-445b-86d9-789260098b59/11004542_FRONT.jpg",
@@ -924,7 +924,7 @@ export const sunglasses = [
   {
     "sku": "0NXBHQFVKC0FK",
     "name": "Lolang T1(GR)",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/0NXBHQFVKC0FK/lolangt1-gr",
     "slug": "lolangt1-gr",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NXBHQFVKC0FK/43000b4e-1d25-493e-8c87-83a8cfe7a3cb/11005006_FRONT.jpg",
@@ -941,7 +941,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCED71FQ",
     "name": "La Cha T1",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCED71FQ/lachat1",
     "slug": "lachat1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCED71FQ/a63f1e17-aead-4f24-bf47-3ab3a626b4be/11004922_FRONT.jpg",
@@ -962,7 +962,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCCD71BS",
     "name": "Moody 02(BR)",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCCD71BS/moody02-br",
     "slug": "moody02-br",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCCD71BS/763916ce-8c85-4a79-b4dd-e72ffaaa160f/11004943_FRONT.jpg",
@@ -980,7 +980,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCJD71D9",
     "name": "Limes 02(BR)",
-    "price": 270,
+    "price": 7290000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCJD71D9/limes02-br",
     "slug": "limes02-br",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCJD71D9/0e598fdc-dfcb-4a92-a706-f93fa8e09524/11004941_FRONT.jpg",
@@ -1002,7 +1002,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCQH71DS",
     "name": "Rollie 02(BR)",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCQH71DS/rollie02-br",
     "slug": "rollie02-br",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCQH71DS/a04d024f-600a-471c-ba41-e319f1a16b72/11004945_FRONT.jpg",
@@ -1022,7 +1022,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCNH71F7",
     "name": "Heavenly B3",
-    "price": 285,
+    "price": 7695000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCNH71F7/heavenlyb3",
     "slug": "heavenlyb3",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCNH71F7/a0b4250c-8af1-4217-914a-2fd99e817a8e/11004937_FRONT.jpg",
@@ -1041,7 +1041,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCBN719M",
     "name": "Cali 02(BR)",
-    "price": 270,
+    "price": 7290000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCBN719M/cali02-br",
     "slug": "cali02-br",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCBN719M/b688ed83-7cba-42a0-9a6d-a7c9a192177c/11004910_FRONT.jpg",
@@ -1061,7 +1061,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NC6171D7",
     "name": "Monica R11",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NC6171D7/monicar11",
     "slug": "monicar11",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NC6171D7/6c21a207-bb59-4220-91d3-7e580e962aff/11004899_FRONT.jpg",
@@ -1081,7 +1081,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCES71DM",
     "name": "Noid 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCES71DM/noid01",
     "slug": "noid01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCES71DM/2eaf088b-de49-4b8e-91dd-a6b0af678cdd/11004895_FRONT.jpg",
@@ -1099,7 +1099,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCM171GB",
     "name": "Halo T1",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCM171GB/halot1",
     "slug": "halot1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCM171GB/2eec5241-ed3a-4ebe-ac5c-be447dfd0344/11004947_FRONT.jpg",
@@ -1118,7 +1118,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NC8H71FQ",
     "name": "Vety 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NC8H71FQ/vety01",
     "slug": "vety01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NC8H71FQ/86fc412c-b181-4d6a-aeec-70389d3f292f/11004892_FRONT.jpg",
@@ -1136,7 +1136,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCR9719G",
     "name": "Panini R11",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCR9719G/paninir11",
     "slug": "paninir11",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCR9719G/2638d204-cb32-4788-a14b-db5e851dcd1c/11004924_FRONT.jpg",
@@ -1156,7 +1156,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCMS71G0",
     "name": "Lolos 02(BR)",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCMS71G0/lolos02-br",
     "slug": "lolos02-br",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCMS71G0/c6525a75-ec91-4255-aefa-91764a639969/11004942_FRONT.jpg",
@@ -1175,7 +1175,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCV171DZ",
     "name": "Kota 02(GRM)",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCV171DZ/kota02-grm",
     "slug": "kota02-grm",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCV171DZ/e6b85423-75ad-4b0d-9b8e-92a42d8ea450/11004938_FRONT.jpg",
@@ -1195,7 +1195,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCG971BF",
     "name": "Boba BL8",
-    "price": 285,
+    "price": 7695000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCG971BF/bobabl8",
     "slug": "bobabl8",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCG971BF/524bb99a-c9e8-471d-9faf-5011472dd816/11004936_FRONT.jpg",
@@ -1215,7 +1215,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCA571E1",
     "name": "Hills 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCA571E1/hills01",
     "slug": "hills01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCA571E1/34025007-4e41-47e8-ae5e-a83c5c830a8e/11004911_FRONT.jpg",
@@ -1233,7 +1233,7 @@ export const sunglasses = [
   {
     "sku": "0NA26NCP171BY",
     "name": "Groovy 01",
-    "price": 265,
+    "price": 7155000,
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCP171BY/groovy01",
     "slug": "groovy01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NA26NCP171BY/1cd65a93-8358-4646-8b47-5930dcc9602f/11004932_FRONT.jpg",
@@ -1250,7 +1250,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKBVZG25Y",
     "name": "Goxx 02",
-    "price": 425,
+    "price": 11475000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKBVZG25Y/goxx02",
     "slug": "goxx02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/d514d57a-3662-4561-b083-fc5dc00ca267/11004721_FRONT.jpg",
@@ -1271,7 +1271,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKD3QG265",
     "name": "Brutal 02",
-    "price": 345,
+    "price": 9315000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKD3QG265/brutal02",
     "slug": "brutal02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKD3QG265/cd4a2623-e6dd-4167-aff0-965ea655c353/11004651_FRONT.jpg",
@@ -1292,7 +1292,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKCEKG26H",
     "name": "Loco 01(R)",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKCEKG26H/loco01-r",
     "slug": "loco01-r",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKCEKG26H/1a8a4190-e0c9-4e4d-aedb-ac66a2415ab6/11004741_FRONT.jpg",
@@ -1313,7 +1313,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKC5ZG25S",
     "name": "Lix 01",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKC5ZG25S/lix01",
     "slug": "lix01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKC5ZG25S/035ad437-5070-4763-92e1-95a7441e8b1e/11004729_FRONT.jpg",
@@ -1333,7 +1333,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKC93G27G",
     "name": "Eq 01",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKC93G27G/eq01",
     "slug": "eq01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKC93G27G/c31823a3-da00-41b8-92c2-f30d3570bc78/11004726_FRONT.jpg",
@@ -1353,7 +1353,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKCCQG27E",
     "name": "Mowa 01(R)",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKCCQG27E/mowa01-r",
     "slug": "mowa01-r",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKCCQG27E/01896a08-9156-4814-9e08-32fe469eac11/11004735_FRONT.jpg",
@@ -1373,7 +1373,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKCHFG256",
     "name": "Hesse BRC13",
-    "price": 295,
+    "price": 7965000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKCHFG256/hessebrc13",
     "slug": "hessebrc13",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKCHFG256/876278d1-cb91-4895-a532-1223957c656e/11004739_FRONT.jpg",
@@ -1393,7 +1393,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKC5QG26W",
     "name": "Verse R9",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKC5QG26W/verser9",
     "slug": "verser9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKC5QG26W/2abc777e-ac56-4b87-91f5-423f5ca1e92c/11004733_FRONT.jpg",
@@ -1413,7 +1413,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKC8VG24X",
     "name": "Synth BLD1",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKC8VG24X/synthbld1",
     "slug": "synthbld1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0MKYDKC8VG24X/8c443034-ac1e-4588-9b91-742c0a177005/11004677_FRONT.jpg",
@@ -1433,7 +1433,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKC1BG268",
     "name": "Noiz Veil V5",
-    "price": 375,
+    "price": 10125000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKC1BG268/noizveilv5",
     "slug": "noizveilv5",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/592cc8c0-439a-4db3-ba3d-ba6ac7c95b0c/11004750_FRONT.jpg",
@@ -1452,7 +1452,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKC2KG280",
     "name": "Apex V6",
-    "price": 365,
+    "price": 9855000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKC2KG280/apexv6",
     "slug": "apexv6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/5dab4802-49fe-4802-be8d-cbcb1d79a094/11004666_FRONT.jpg",
@@ -1472,7 +1472,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKBXVG26D",
     "name": "Species BL7",
-    "price": 405,
+    "price": 10935000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKBXVG26D/speciesbl7",
     "slug": "speciesbl7",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/75042f28-5b4c-4481-abfd-67773bfa3bc5/11004668_FRONT.jpg",
@@ -1492,7 +1492,7 @@ export const sunglasses = [
   {
     "sku": "0MKYDKBZ3G24R",
     "name": "M87 R6",
-    "price": 345,
+    "price": 9315000,
     "url": "https://www.gentlemonster.com/int/en/item/0MKYDKBZ3G24R/m87r6",
     "slug": "m87r6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/e0f8d3f7-01ff-48f7-a619-3ffb565958ba/11004744_FRONT.jpg",
@@ -1513,7 +1513,7 @@ export const sunglasses = [
   {
     "sku": "0Q7WZKA0TATAQ",
     "name": "Vanta 02(G)",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/0Q7WZKA0TATAQ/vanta02-g",
     "slug": "vanta02-g",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q7WZKA0TATAQ/80a73e39-62e4-4202-bba7-88babd4afd84/11005116_FRONT.jpg",
@@ -1532,7 +1532,7 @@ export const sunglasses = [
   {
     "sku": "BO113T2EMMQK",
     "name": "Tetra 02",
-    "price": 340,
+    "price": 9180000,
     "url": "https://www.gentlemonster.com/int/en/item/BO113T2EMMQK/tetra02",
     "slug": "tetra02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/BO113T2EMMQK/7dc50de4-6e46-4edc-ba0f-24f3ebf21750/11004478_FRONT.jpg",
@@ -1552,7 +1552,7 @@ export const sunglasses = [
   {
     "sku": "9DZ3ZBO17J6Y",
     "name": "Node 02",
-    "price": 340,
+    "price": 9180000,
     "url": "https://www.gentlemonster.com/int/en/item/9DZ3ZBO17J6Y/node02",
     "slug": "node02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/9DZ3ZBO17J6Y/f2c97ab9-45f9-433e-a274-a885adc6b89a/11004488_FRONT.jpg",
@@ -1571,7 +1571,7 @@ export const sunglasses = [
   {
     "sku": "0PYHN4ZFBYFBV",
     "name": "Carat 02",
-    "price": 335,
+    "price": 9045000,
     "url": "https://www.gentlemonster.com/int/en/item/0PYHN4ZFBYFBV/carat02",
     "slug": "carat02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PYHN4ZFBYFBV/e409597b-b688-47a8-a6e5-f68d6663c407/11005080_FRONT.jpg",
@@ -1588,7 +1588,7 @@ export const sunglasses = [
   {
     "sku": "N3SEIXDY3SGW",
     "name": "On Ring 02",
-    "price": 335,
+    "price": 9045000,
     "url": "https://www.gentlemonster.com/int/en/item/N3SEIXDY3SGW/onring02",
     "slug": "onring02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/N3SEIXDY3SGW/750fc7a7-2ac8-40a4-8406-0e9eb6927c36/11003852_FRONT.jpg",
@@ -1610,7 +1610,7 @@ export const sunglasses = [
   {
     "sku": "0PYHN4ZGQYFBT",
     "name": "Orora 02(BRM)",
-    "price": 335,
+    "price": 9045000,
     "url": "https://www.gentlemonster.com/int/en/item/0PYHN4ZGQYFBT/orora02-brm",
     "slug": "orora02-brm",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0PYHN4ZGQYFBT/f00712af-1e11-4232-a98e-00aec93769e5/11005079_FRONT.jpg",
@@ -1627,7 +1627,7 @@ export const sunglasses = [
   {
     "sku": "Z9EN6U6HHHIT",
     "name": "Glitz 02(VYG)",
-    "price": 335,
+    "price": 9045000,
     "url": "https://www.gentlemonster.com/int/en/item/Z9EN6U6HHHIT/glitz02-vyg",
     "slug": "glitz02-vyg",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/Z9EN6U6HHHIT/dbc1bef4-61d9-4cc6-8321-469e4d9466b6/11004342_FRONT.jpg",
@@ -1645,7 +1645,7 @@ export const sunglasses = [
   {
     "sku": "10S4IJHEFGR2A",
     "name": "Duns 01",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/10S4IJHEFGR2A/duns01",
     "slug": "duns01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/10S4IJHEFGR2A/0c6420ef-ab13-427d-a73a-a1dd41c3e3a1/11004249_FRONT.jpg",
@@ -1663,7 +1663,7 @@ export const sunglasses = [
   {
     "sku": "15C8CSG78NSBG",
     "name": "Devon 01",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/15C8CSG78NSBG/devon01",
     "slug": "devon01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/15C8CSG78NSBG/c3043af0-beb6-486d-9e5f-309468cf8913/11004178_FRONT.jpg",
@@ -1681,7 +1681,7 @@ export const sunglasses = [
   {
     "sku": "0NNBKPPCE6N6T",
     "name": "Gisele 01(V)",
-    "price": 275,
+    "price": 7425000,
     "url": "https://www.gentlemonster.com/int/en/item/0NNBKPPCE6N6T/gisele01-v",
     "slug": "gisele01-v",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0NNBKPPCE6N6T/eb96eecb-ba57-4be7-b857-987cba5825f1/11004948_FRONT.jpg",
@@ -1698,7 +1698,7 @@ export const sunglasses = [
   {
     "sku": "VGNN2L22YLQT",
     "name": "Breezebe 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/VGNN2L22YLQT/breezebe01",
     "slug": "breezebe01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/VGNN2L22YLQT/180e9797-f9a5-475e-9e9b-ee8f04830ce1/11004375_FRONT.jpg",
@@ -1716,7 +1716,7 @@ export const sunglasses = [
   {
     "sku": "13TIOJ0UPEPD7",
     "name": "Days Day 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/13TIOJ0UPEPD7/daysday01",
     "slug": "daysday01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/13TIOJ0UPEPD7/3b2d8bee-8004-4270-a09b-e755ce5132af/11004348_FRONT.jpg",
@@ -1734,7 +1734,7 @@ export const sunglasses = [
   {
     "sku": "1325XXX46TUNU",
     "name": "Numer 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/1325XXX46TUNU/numer01",
     "slug": "numer01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1325XXX46TUNU/b8a9e584-3620-4885-b18c-fed935bf3a77/11004379_FRONT.jpg",
@@ -1752,7 +1752,7 @@ export const sunglasses = [
   {
     "sku": "19WBPBDBDFUOO",
     "name": "By Row 01",
-    "price": 265,
+    "price": 7155000,
     "url": "https://www.gentlemonster.com/int/en/item/19WBPBDBDFUOO/byrow01",
     "slug": "byrow01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/19WBPBDBDFUOO/96ad8acb-1ecb-4dfa-a0ae-22be51457cda/11004364_FRONT.jpg",
@@ -1771,7 +1771,7 @@ export const sunglasses = [
   {
     "sku": "PCB2R4AGO9Q7",
     "name": "Lady Lang BRC11",
-    "price": 265,
+    "price": 7155000,
     "url": "https://www.gentlemonster.com/int/en/item/PCB2R4AGO9Q7/ladylangbrc11",
     "slug": "ladylangbrc11",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/PCB2R4AGO9Q7/bc1f6842-b8e9-4799-b1c1-ec62617b70fd/11004363_FRONT.jpg",
@@ -1790,7 +1790,7 @@ export const sunglasses = [
   {
     "sku": "9DXMVQHXG2JO",
     "name": "New Her T1",
-    "price": 265,
+    "price": 7155000,
     "url": "https://www.gentlemonster.com/int/en/item/9DXMVQHXG2JO/newhert1",
     "slug": "newhert1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/9DXMVQHXG2JO/560508ff-6373-4532-adaa-735354a3ece5/11004370_FRONT.jpg",
@@ -1809,7 +1809,7 @@ export const sunglasses = [
   {
     "sku": "19VKFFM9GEW6K",
     "name": "Piana 01(G)",
-    "price": 270,
+    "price": 7290000,
     "url": "https://www.gentlemonster.com/int/en/item/19VKFFM9GEW6K/piana01-g",
     "slug": "piana01-g",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/19VKFFM9GEW6K/7455eaf5-f375-4926-8318-8376ddbae1f0/11004384_FRONT.jpg",
@@ -1827,7 +1827,7 @@ export const sunglasses = [
   {
     "sku": "Q575S4GEGHOX",
     "name": "My Me KC2",
-    "price": 270,
+    "price": 7290000,
     "url": "https://www.gentlemonster.com/int/en/item/Q575S4GEGHOX/mymekc2",
     "slug": "mymekc2",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/Q575S4GEGHOX/5d04cb2e-e1c1-43ce-801a-972008576a20/11004357_FRONT.jpg",
@@ -1845,7 +1845,7 @@ export const sunglasses = [
   {
     "sku": "XQPGNGIOK990",
     "name": "Loloe RC3",
-    "price": 265,
+    "price": 7155000,
     "url": "https://www.gentlemonster.com/int/en/item/XQPGNGIOK990/loloerc3",
     "slug": "loloerc3",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/XQPGNGIOK990/f47156d6-d53a-45f5-bccf-519ef6c44fa4/11004392_FRONT.jpg",
@@ -1863,7 +1863,7 @@ export const sunglasses = [
   {
     "sku": "VGO190SV3KFH",
     "name": "Ash W2",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/VGO190SV3KFH/ashw2",
     "slug": "ashw2",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/VGO190SV3KFH/73c33c1b-ec6b-4a8a-8855-61d552766fcd/11004195_FRONT.jpg",
@@ -1882,7 +1882,7 @@ export const sunglasses = [
   {
     "sku": "QWK70207ICOE",
     "name": "Melrose IV3",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/QWK70207ICOE/melroseiv3",
     "slug": "melroseiv3",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/QWK70207ICOE/7c861b96-a13c-4efd-9f7b-d60d2fbcdb79/11004428_FRONT.jpg",
@@ -1900,7 +1900,7 @@ export const sunglasses = [
   {
     "sku": "9FH2V8UYY82K",
     "name": "Jude 01(GR)",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/9FH2V8UYY82K/jude01-gr",
     "slug": "jude01-gr",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/9FH2V8UYY82K/c079cf83-1d5d-4e0d-9699-13ee48ea0b47/11004388_FRONT.jpg",
@@ -1919,7 +1919,7 @@ export const sunglasses = [
   {
     "sku": "G83E96P1L79J",
     "name": "Dean 01(G)",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/G83E96P1L79J/dean01-g",
     "slug": "dean01-g",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/G83E96P1L79J/8038310a-0fa9-4905-ad12-e11f0ee54491/11004354_FRONT.jpg",
@@ -1938,7 +1938,7 @@ export const sunglasses = [
   {
     "sku": "RN4A2WY9UFZ9",
     "name": "Ruvy Van 01",
-    "price": 355,
+    "price": 9585000,
     "url": "https://www.gentlemonster.com/int/en/item/RN4A2WY9UFZ9/ruvyvan01",
     "slug": "ruvyvan01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/RN4A2WY9UFZ9/dfb06ebf-72a9-432e-9a4c-012affac95d3/11004215_FRONT.jpg",
@@ -1957,7 +1957,7 @@ export const sunglasses = [
   {
     "sku": "11IR28KAW7BT7",
     "name": "Phantom 01",
-    "price": 355,
+    "price": 9585000,
     "url": "https://www.gentlemonster.com/int/en/item/11IR28KAW7BT7/phantom01",
     "slug": "phantom01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/11IR28KAW7BT7/829d0eda-326c-418c-a405-f3d4bdd131d6/11004157_FRONT.jpg",
@@ -1975,7 +1975,7 @@ export const sunglasses = [
   {
     "sku": "RNWCBI4BV708",
     "name": "Demond GR9",
-    "price": 355,
+    "price": 9585000,
     "url": "https://www.gentlemonster.com/int/en/item/RNWCBI4BV708/demondgr9",
     "slug": "demondgr9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/RNWCBI4BV708/b312f122-0675-46e0-b27d-ac1421d68d4f/11004213_FRONT.jpg",
@@ -1994,7 +1994,7 @@ export const sunglasses = [
   {
     "sku": "NV55414B2VZA",
     "name": "Vegax W2",
-    "price": 355,
+    "price": 9585000,
     "url": "https://www.gentlemonster.com/int/en/item/NV55414B2VZA/vegaxw2",
     "slug": "vegaxw2",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/NV55414B2VZA/e8437269-43e6-4520-9cc5-0e2de1277441/11004421_FRONT.jpg",
@@ -2014,7 +2014,7 @@ export const sunglasses = [
   {
     "sku": "1C6DPZGNCWM6G",
     "name": "Kunst 01",
-    "price": 325,
+    "price": 8775000,
     "url": "https://www.gentlemonster.com/int/en/item/1C6DPZGNCWM6G/kunst01",
     "slug": "kunst01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1C6DPZGNCWM6G/5db22513-158b-4ec5-9fa8-8abe11bce7a2/11004222_FRONT.jpg",
@@ -2031,7 +2031,7 @@ export const sunglasses = [
   {
     "sku": "FIAAQT71U491",
     "name": "Nemesis 01",
-    "price": 335,
+    "price": 9045000,
     "url": "https://www.gentlemonster.com/int/en/item/FIAAQT71U491/nemesis01",
     "slug": "nemesis01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/FIAAQT71U491/c128970e-72de-4313-90f7-bbae367b4c78/11004201_FRONT.jpg",
@@ -2048,7 +2048,7 @@ export const sunglasses = [
   {
     "sku": "1AM4WDCR01JP7",
     "name": "Ninishe RC6",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/1AM4WDCR01JP7/ninisherc6",
     "slug": "ninisherc6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1AM4WDCR01JP7/27bd68e1-3eb0-4624-bb94-d347b1baf139/11004435_FRONT.jpg",
@@ -2066,7 +2066,7 @@ export const sunglasses = [
   {
     "sku": "XQPYDI79D4YR",
     "name": "Cocoa BRC11",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/XQPYDI79D4YR/cocoabrc11",
     "slug": "cocoabrc11",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/XQPYDI79D4YR/09d8e6b5-cb79-4145-8cb9-ba8ac918153b/11004431_FRONT.jpg",
@@ -2084,7 +2084,7 @@ export const sunglasses = [
   {
     "sku": "1CXQR7E75KJRY",
     "name": "Miro YC10",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/1CXQR7E75KJRY/miroyc10",
     "slug": "miroyc10",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1CXQR7E75KJRY/2c13b8d0-4e0b-44d0-854b-204fd6eac4a7/11004300_FRONT.jpg",
@@ -2102,7 +2102,7 @@ export const sunglasses = [
   {
     "sku": "1HHULGCZVWK36",
     "name": "Vamp R6",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/1HHULGCZVWK36/vampr6",
     "slug": "vampr6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1HHULGCZVWK36/97f43416-e9de-47c0-9a58-c0acff922a47/11004447_FRONT.jpg",
@@ -2119,7 +2119,7 @@ export const sunglasses = [
   {
     "sku": "TWETGH5HGP7Y",
     "name": "Ion P7",
-    "price": 320,
+    "price": 8640000,
     "url": "https://www.gentlemonster.com/int/en/item/TWETGH5HGP7Y/ionp7",
     "slug": "ionp7",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/TWETGH5HGP7Y/966ab82f-b9b9-4f33-88c5-6f40d91c7350/11004426_FRONT.jpg",
@@ -2136,7 +2136,7 @@ export const sunglasses = [
   {
     "sku": "YGINPFY8BS3Q",
     "name": "Sosomo 01",
-    "price": 320,
+    "price": 8640000,
     "url": "https://www.gentlemonster.com/int/en/item/YGINPFY8BS3Q/sosomo01",
     "slug": "sosomo01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/YGINPFY8BS3Q/80d410a5-636e-473a-8ed1-818097c59efd/11004150_FRONT.jpg",
@@ -2154,7 +2154,7 @@ export const sunglasses = [
   {
     "sku": "DZLEU9CFPMJ4",
     "name": "Monde G17",
-    "price": 320,
+    "price": 8640000,
     "url": "https://www.gentlemonster.com/int/en/item/DZLEU9CFPMJ4/mondeg17",
     "slug": "mondeg17",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/DZLEU9CFPMJ4/41b9aae1-ce32-4172-b65d-2b981ce82220/11004264_FRONT.jpg",
@@ -2171,7 +2171,7 @@ export const sunglasses = [
   {
     "sku": "OMHZ8QSOHXM9",
     "name": "Wire Lip W2",
-    "price": 335,
+    "price": 9045000,
     "url": "https://www.gentlemonster.com/int/en/item/OMHZ8QSOHXM9/wirelipw2",
     "slug": "wirelipw2",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/OMHZ8QSOHXM9/91ca7f60-c9f1-425e-bbc7-d5086f41b394/11004240_FRONT.jpg",
@@ -2190,7 +2190,7 @@ export const sunglasses = [
   {
     "sku": "1299YGIW0GPAY",
     "name": "T2000 R6",
-    "price": 495,
+    "price": 13365000,
     "url": "https://www.gentlemonster.com/int/en/item/1299YGIW0GPAY/t2000r6",
     "slug": "t2000r6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1299YGIW0GPAY/1413fc0b-d283-4b52-947a-ddc4e69f6126/11004465_FRONT.jpg",
@@ -2209,7 +2209,7 @@ export const sunglasses = [
   {
     "sku": "193FPTZ32ZLKC",
     "name": "Ximul 01",
-    "price": 365,
+    "price": 9855000,
     "url": "https://www.gentlemonster.com/int/en/item/193FPTZ32ZLKC/ximul01",
     "slug": "ximul01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/193FPTZ32ZLKC/f645f5ed-ee05-4ec4-bca6-4e6570f910b1/11004491_FRONT.jpg",
@@ -2228,7 +2228,7 @@ export const sunglasses = [
   {
     "sku": "1DNJK2XVUGJ6H",
     "name": "Post Human 01",
-    "price": 365,
+    "price": 9855000,
     "url": "https://www.gentlemonster.com/int/en/item/1DNJK2XVUGJ6H/posthuman01",
     "slug": "posthuman01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/bulk/f9d74d1c-3f96-4376-88e3-67f19563e0cb/11004494_FRONT.jpg",
@@ -2247,7 +2247,7 @@ export const sunglasses = [
   {
     "sku": "OHASDDUYUOX6",
     "name": "Jade 01(B)",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/OHASDDUYUOX6/jade01-b",
     "slug": "jade01-b",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/OHASDDUYUOX6/c56b2e51-b670-4405-9843-43aba26f693f/11003449_FRONT.jpg",
@@ -2266,7 +2266,7 @@ export const sunglasses = [
   {
     "sku": "QRCPHV9E2KN8",
     "name": "New Born BRC9",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/QRCPHV9E2KN8/newbornbrc9",
     "slug": "newbornbrc9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/QRCPHV9E2KN8/6e198c96-591b-4c41-a684-bbb08ff1c5f2/11003481_FRONT.jpg",
@@ -2282,7 +2282,7 @@ export const sunglasses = [
   {
     "sku": "MYLIAE9EOD0I",
     "name": "Dear 01",
-    "price": 265,
+    "price": 7155000,
     "url": "https://www.gentlemonster.com/int/en/item/MYLIAE9EOD0I/dear01",
     "slug": "dear01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/MYLIAE9EOD0I/9e2649f5-597d-4d45-a752-cc90ddd57aae/11003439_FRONT.jpg",
@@ -2299,7 +2299,7 @@ export const sunglasses = [
   {
     "sku": "P8NFEVNQ429L",
     "name": "Pino 01(BR)",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/P8NFEVNQ429L/pino01-br",
     "slug": "pino01-br",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/P8NFEVNQ429L/807f7b51-1cb3-45a1-a9c6-07ff51a1153f/11003496_FRONT.jpg",
@@ -2318,7 +2318,7 @@ export const sunglasses = [
   {
     "sku": "NPY5BW27DC8B",
     "name": "By KC2",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/NPY5BW27DC8B/bykc2",
     "slug": "bykc2",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/NPY5BW27DC8B/9c3ecdcc-f5b4-442e-aca8-0a62bb831940/11003430_FRONT.jpg",
@@ -2334,7 +2334,7 @@ export const sunglasses = [
   {
     "sku": "RIPCJD252IHH",
     "name": "Dada GR8",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/RIPCJD252IHH/dadagr8",
     "slug": "dadagr8",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/RIPCJD252IHH/ae3da825-4785-4b0b-8183-296689802435/11003437_FRONT.jpg",
@@ -2352,7 +2352,7 @@ export const sunglasses = [
   {
     "sku": "SA1ZKUV0OUZJ",
     "name": "Benven GR7",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/SA1ZKUV0OUZJ/benvengr7",
     "slug": "benvengr7",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/SA1ZKUV0OUZJ/dea35d7b-0eeb-428c-8b6f-de09fbaf93b6/11003424_FRONT.jpg",
@@ -2368,7 +2368,7 @@ export const sunglasses = [
   {
     "sku": "SA1ZKUUW8XKV",
     "name": "Void GC10",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/SA1ZKUUW8XKV/voidgc10",
     "slug": "voidgc10",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/SA1ZKUUW8XKV/afc9d7ab-6fa5-4a17-b3bf-183f46d531ff/11003533_FRONT.jpg",
@@ -2386,7 +2386,7 @@ export const sunglasses = [
   {
     "sku": "T1EMMCNSXHPA",
     "name": "Molta BRC9",
-    "price": 295,
+    "price": 7965000,
     "url": "https://www.gentlemonster.com/int/en/item/T1EMMCNSXHPA/moltabrc9",
     "slug": "moltabrc9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/T1EMMCNSXHPA/18af5f92-6f6f-4f22-a661-458b026c7b0c/11003468_FRONT.jpg",
@@ -2402,7 +2402,7 @@ export const sunglasses = [
   {
     "sku": "EPU9GTDFQTD1",
     "name": "Lin GR8",
-    "price": 295,
+    "price": 7965000,
     "url": "https://www.gentlemonster.com/int/en/item/EPU9GTDFQTD1/lingr8",
     "slug": "lingr8",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/EPU9GTDFQTD1/27a75a30-4e37-481f-885a-5ea46dc482d6/11003461_FRONT.jpg",
@@ -2420,7 +2420,7 @@ export const sunglasses = [
   {
     "sku": "TUYTUQ6A3RMU",
     "name": "Monta RC6",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/TUYTUQ6A3RMU/montarc6",
     "slug": "montarc6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/TUYTUQ6A3RMU/76bdc91c-492d-4767-b338-cf8c79147aba/11003475_FRONT.jpg",
@@ -2436,7 +2436,7 @@ export const sunglasses = [
   {
     "sku": "Q002GDGHZ8N7",
     "name": "Tote GC10",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/Q002GDGHZ8N7/totegc10",
     "slug": "totegc10",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/Q002GDGHZ8N7/83333593-4629-43c8-b013-67a0ecfd4f4e/11003515_FRONT.jpg",
@@ -2452,7 +2452,7 @@ export const sunglasses = [
   {
     "sku": "VBGJQU21KX2P",
     "name": "Young Y10",
-    "price": 320,
+    "price": 8640000,
     "url": "https://www.gentlemonster.com/int/en/item/VBGJQU21KX2P/youngy10",
     "slug": "youngy10",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/VBGJQU21KX2P/a3fe38c5-3aec-4d12-9d29-151c2747c5f3/11003537_FRONT.jpg",
@@ -2470,7 +2470,7 @@ export const sunglasses = [
   {
     "sku": "W50QZ7KM6SE2",
     "name": "Atempo G12",
-    "price": 320,
+    "price": 8640000,
     "url": "https://www.gentlemonster.com/int/en/item/W50QZ7KM6SE2/atempog12",
     "slug": "atempog12",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/W50QZ7KM6SE2/7630bdd0-8483-473e-b547-6154ddfe98ff/11003541_FRONT.jpg",
@@ -2486,7 +2486,7 @@ export const sunglasses = [
   {
     "sku": "VBGJQU24ZFYC",
     "name": "Sphere Y5",
-    "price": 320,
+    "price": 8640000,
     "url": "https://www.gentlemonster.com/int/en/item/VBGJQU24ZFYC/spherey5",
     "slug": "spherey5",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/VBGJQU24ZFYC/ccb49a66-0e66-4c18-b931-471221508ff5/11003510_FRONT.jpg",
@@ -2502,7 +2502,7 @@ export const sunglasses = [
   {
     "sku": "GZW6LARR4I04",
     "name": "Ex SG13",
-    "price": 395,
+    "price": 10665000,
     "url": "https://www.gentlemonster.com/int/en/item/GZW6LARR4I04/exsg13",
     "slug": "exsg13",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/GZW6LARR4I04/3d13ab3e-3fb2-4df5-9ce4-763947e3872d/11003549_FRONT.jpg",
@@ -2520,7 +2520,7 @@ export const sunglasses = [
   {
     "sku": "G8JJJSZ059BL",
     "name": "Limitless SY9",
-    "price": 365,
+    "price": 9855000,
     "url": "https://www.gentlemonster.com/int/en/item/G8JJJSZ059BL/limitlesssy9",
     "slug": "limitlesssy9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/G8JJJSZ059BL/820ab822-6663-4878-859e-27d770681aa6/11003554_FRONT.jpg",
@@ -2539,7 +2539,7 @@ export const sunglasses = [
   {
     "sku": "IILGOADAICRE",
     "name": "Tta 02",
-    "price": 355,
+    "price": 9585000,
     "url": "https://www.gentlemonster.com/int/en/item/IILGOADAICRE/tta02",
     "slug": "tta02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/IILGOADAICRE/697daded-23b0-4a77-b3bf-1ad360130138/11003516_FRONT.jpg",
@@ -2557,7 +2557,7 @@ export const sunglasses = [
   {
     "sku": "HR8TMSKLVZ8P",
     "name": "Ttl 02(BRG)",
-    "price": 355,
+    "price": 9585000,
     "url": "https://www.gentlemonster.com/int/en/item/HR8TMSKLVZ8P/ttl02-brg",
     "slug": "ttl02-brg",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/HR8TMSKLVZ8P/cdbbcb04-05f9-454f-9e74-e37d4f69c9d9/11003520_FRONT.jpg",
@@ -2575,7 +2575,7 @@ export const sunglasses = [
   {
     "sku": "HR8TMSKHSHD4",
     "name": "Cuff 01",
-    "price": 325,
+    "price": 8775000,
     "url": "https://www.gentlemonster.com/int/en/item/HR8TMSKHSHD4/cuff01",
     "slug": "cuff01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/HR8TMSKHSHD4/5f9eeb02-984e-458d-b2a1-f62b2afc8017/11003544_FRONT.jpg",
@@ -2593,7 +2593,7 @@ export const sunglasses = [
   {
     "sku": "GZW6LARU8ESB",
     "name": "Fear X GR9",
-    "price": 335,
+    "price": 9045000,
     "url": "https://www.gentlemonster.com/int/en/item/GZW6LARU8ESB/fearxgr9",
     "slug": "fearxgr9",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/GZW6LARU8ESB/2edb584c-f784-4f4b-882f-731051a3f736/11003551_FRONT.jpg",
@@ -2611,7 +2611,7 @@ export const sunglasses = [
   {
     "sku": "W8FCDSN63AM8",
     "name": "Eve BLC6",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/W8FCDSN63AM8/eveblc6",
     "slug": "eveblc6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/W8FCDSN63AM8/185d5413-0c19-4093-b731-f8dcd1cb55dd/11002069_FRONT.jpg",
@@ -2629,7 +2629,7 @@ export const sunglasses = [
   {
     "sku": "VH2PCAUAWACU",
     "name": "Bandoneon.S 01",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/VH2PCAUAWACU/bandoneon.s01",
     "slug": "bandoneon.s01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/VH2PCAUAWACU/aa98ac18-6d39-41c7-8cb0-245a1f42dfc9/11002031_FRONT.jpg",
@@ -2646,7 +2646,7 @@ export const sunglasses = [
   {
     "sku": "WZRZFAFWOI7Q",
     "name": "Monochrome PC5",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/WZRZFAFWOI7Q/monochromepc5",
     "slug": "monochromepc5",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/WZRZFAFWOI7Q/06b71daf-ac80-4923-b950-8fa4ab34bbdf/11002065_FRONT.jpg",
@@ -2664,7 +2664,7 @@ export const sunglasses = [
   {
     "sku": "G8JJJSYY3V46",
     "name": "Silver Clouds BL3",
-    "price": 345,
+    "price": 9315000,
     "url": "https://www.gentlemonster.com/int/en/item/G8JJJSYY3V46/silvercloudsbl3",
     "slug": "silvercloudsbl3",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/G8JJJSYY3V46/546c89da-03a1-494d-be3e-eeb7eec3ac25/11003250_FRONT.jpg",
@@ -2682,7 +2682,7 @@ export const sunglasses = [
   {
     "sku": "XR4MGS8QEWHT",
     "name": "R.E.A.T BLC6",
-    "price": 345,
+    "price": 9315000,
     "url": "https://www.gentlemonster.com/int/en/item/XR4MGS8QEWHT/r.e.a.tblc6",
     "slug": "r.e.a.tblc6",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/XR4MGS8QEWHT/7afb382f-f05e-4dc0-a7ea-3f17eb21b772/11002096_FRONT.jpg",
@@ -2699,7 +2699,7 @@ export const sunglasses = [
   {
     "sku": "13MS261M605GX",
     "name": "Bree G4",
-    "price": 475,
+    "price": 12825000,
     "url": "https://www.gentlemonster.com/int/en/item/13MS261M605GX/breeg4",
     "slug": "breeg4",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/13MS261M605GX/13MS261M605GX_FRONT.jpg",
@@ -2716,7 +2716,7 @@ export const sunglasses = [
   {
     "sku": "UPQ2AT1JQI6C",
     "name": "Antena.C 01",
-    "price": 375,
+    "price": 10125000,
     "url": "https://www.gentlemonster.com/int/en/item/UPQ2AT1JQI6C/antena.c01",
     "slug": "antena.c01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/UPQ2AT1JQI6C/162e4e51-6e61-4a13-939d-20c8dd50568e/11002040_FRONT.jpg",
@@ -2733,7 +2733,7 @@ export const sunglasses = [
   {
     "sku": "Z9TWJRUATGJK",
     "name": "The Bell YVG1",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/Z9TWJRUATGJK/thebellyvg1",
     "slug": "thebellyvg1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/Z9TWJRUATGJK/7bf64ed2-a12a-4cd9-a95e-43a4b30a71ea/11002085_FRONT.jpg",
@@ -2751,7 +2751,7 @@ export const sunglasses = [
   {
     "sku": "YIH9IA1H23DS",
     "name": "Sound Net 01",
-    "price": 315,
+    "price": 8505000,
     "url": "https://www.gentlemonster.com/int/en/item/YIH9IA1H23DS/soundnet01",
     "slug": "soundnet01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/YIH9IA1H23DS/0209958b-a333-4404-abfe-74aada22956b/11002043_FRONT.jpg",
@@ -2768,7 +2768,7 @@ export const sunglasses = [
   {
     "sku": "W8FCDSN3SGZI",
     "name": "Billy KC1",
-    "price": 295,
+    "price": 7965000,
     "url": "https://www.gentlemonster.com/int/en/item/W8FCDSN3SGZI/billykc1",
     "slug": "billykc1",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/W8FCDSN3SGZI/46c89fb6-345d-4750-a4fd-148465381174/11002078_FRONT.jpg",
@@ -2785,7 +2785,7 @@ export const sunglasses = [
   {
     "sku": "XR4MGS8OCZB6",
     "name": "Parabola 01",
-    "price": 345,
+    "price": 9315000,
     "url": "https://www.gentlemonster.com/int/en/item/XR4MGS8OCZB6/parabola01",
     "slug": "parabola01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/XR4MGS8OCZB6/bc55b30b-7015-4dcf-96b1-ab09fe5ba35e/11002039_FRONT.jpg",
@@ -2802,7 +2802,7 @@ export const sunglasses = [
   {
     "sku": "1BZJQXA73TJ6L",
     "name": "Rococo 01",
-    "price": 305,
+    "price": 8235000,
     "url": "https://www.gentlemonster.com/int/en/item/1BZJQXA73TJ6L/rococo01",
     "slug": "rococo01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1BZJQXA73TJ6L/306c1f6d-e20b-476d-8484-6ae2440addaa/11002263_FRONT.jpg",
@@ -2818,7 +2818,7 @@ export const sunglasses = [
   {
     "sku": "13R6HIT3L8K2N",
     "name": "Queen 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/13R6HIT3L8K2N/queen01",
     "slug": "queen01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/13R6HIT3L8K2N/84ceecf2-8a5b-4a6d-a5da-fddceacede63/11002415_FRONT.jpg",
@@ -2834,7 +2834,7 @@ export const sunglasses = [
   {
     "sku": "186SJPT746936",
     "name": "Heizer 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/186SJPT746936/heizer01",
     "slug": "heizer01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/186SJPT746936/0a51eea7-3eda-435b-8b23-637a97f19939/11002418_FRONT.jpg",
@@ -2849,7 +2849,7 @@ export const sunglasses = [
   {
     "sku": "18Y56RAZUCVOH",
     "name": "Palette 01",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/18Y56RAZUCVOH/palette01",
     "slug": "palette01",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/18Y56RAZUCVOH/b46a3eed-a448-4dbf-a200-a44cc0fc90d5/11002417_FRONT.jpg",
@@ -2864,7 +2864,7 @@ export const sunglasses = [
   {
     "sku": "PCS0QV38YTC0",
     "name": "Lilit 01(K)",
-    "price": 245,
+    "price": 6615000,
     "url": "https://www.gentlemonster.com/int/en/item/PCS0QV38YTC0/lilit01-k",
     "slug": "lilit01-k",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/PCS0QV38YTC0/858a6e83-4b73-4de7-8296-688938c58c5a/11001813_FRONT.jpg",
@@ -2879,7 +2879,7 @@ export const sunglasses = [
   {
     "sku": "1FYXMRWDKV8ZA",
     "name": "Her 01 Small",
-    "price": 255,
+    "price": 6885000,
     "url": "https://www.gentlemonster.com/int/en/item/1FYXMRWDKV8ZA/her01small",
     "slug": "her01small",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/1FYXMRWDKV8ZA/2e37373d-ff7b-4abd-b12d-7e2d3a2c3dcd/11000385_FRONT.jpg",

@@ -2,7 +2,7 @@ export const glasses = [
   {
     "sku": "0Q04AJXM07349",
     "name": "Vert 02",
-    "price": 345,
+    "price": 9385600,
     "status": "In stock",
     "collections": [
       "Veggie Collection",
@@ -29,7 +29,7 @@ export const glasses = [
   {
     "sku": "0Q04AJXMC733C",
     "name": "Zest 01",
-    "price": 325,
+    "price": 8841600,
     "status": "In stock",
     "collections": [
       "Veggie Collection",
@@ -47,7 +47,7 @@ export const glasses = [
   {
     "sku": "0Q04AJXKM737S",
     "name": "Tofi 02",
-    "price": 355,
+    "price": 9657700,
     "status": "In stock",
     "collections": [
       "Veggie Collection",
@@ -64,7 +64,7 @@ export const glasses = [
   {
     "sku": "0Q04AJXEM737K",
     "name": "Aden 02(Y)",
-    "price": 345,
+    "price": 9385600,
     "status": "In stock",
     "collections": [
       "Veggie Collection",
@@ -81,7 +81,7 @@ export const glasses = [
   {
     "sku": "0Q04AJXJ07333",
     "name": "Mori 02",
-    "price": 335,
+    "price": 9113600,
     "status": "In stock",
     "collections": [
       "Veggie Collection",
@@ -108,7 +108,7 @@ export const glasses = [
   {
     "sku": "0Q04AJXFR736X",
     "name": "Harv T1(C)",
-    "price": 325,
+    "price": 8841600,
     "status": "In stock",
     "collections": [
       "Veggie Collection",
@@ -134,7 +134,7 @@ export const glasses = [
   {
     "sku": "0Q04AJXJR7372",
     "name": "Oatt 02(C)",
-    "price": 315,
+    "price": 8569500,
     "status": "In stock",
     "collections": [
       "Veggie Collection"
@@ -157,8 +157,8 @@ export const glasses = [
   },
   {
     "sku": "0PEEZ09X6ASH7",
-    "name": "Disney F1\u00ae - Wing 4 R13",
-    "price": 395,
+    "name": "Disney F1® - Wing 4 R13",
+    "price": 10745900,
     "status": "In stock",
     "collections": [
       "2026 Collection"
@@ -174,7 +174,7 @@ export const glasses = [
   {
     "sku": "0P0M4JBANF0NZ",
     "name": "Musubi 02",
-    "price": 295,
+    "price": 8025400,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -195,7 +195,7 @@ export const glasses = [
   {
     "sku": "0P0M4JBH5F0NN",
     "name": "Dodo 01",
-    "price": 285,
+    "price": 7753400,
     "status": "In stock",
     "collections": [
       "2026 Collection"
@@ -211,7 +211,7 @@ export const glasses = [
   {
     "sku": "0P0M4JBC5F0NK",
     "name": "Origami 031",
-    "price": 295,
+    "price": 8025400,
     "status": "In stock",
     "collections": [
       "2026 Collection"
@@ -231,7 +231,7 @@ export const glasses = [
   {
     "sku": "0NA26NCDD71DK",
     "name": "La Cha 01(C)",
-    "price": 245,
+    "price": 6615000,
     "status": "Out of stock",
     "collections": [
       "Bestsellers",
@@ -251,7 +251,7 @@ export const glasses = [
   {
     "sku": "0NA26NCC171BS",
     "name": "Moody 02",
-    "price": 255,
+    "price": 6885000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -270,7 +270,7 @@ export const glasses = [
   {
     "sku": "0NA26NCGS71A3",
     "name": "Limes 02",
-    "price": 270,
+    "price": 7290000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -289,7 +289,7 @@ export const glasses = [
   {
     "sku": "0NA26NCG171F8",
     "name": "Boba 02",
-    "price": 285,
+    "price": 7695000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -309,7 +309,7 @@ export const glasses = [
   {
     "sku": "0NA26NCMD71A0",
     "name": "Lolos 02",
-    "price": 245,
+    "price": 6615000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -329,7 +329,7 @@ export const glasses = [
   {
     "sku": "0NA26NCS571E6",
     "name": "Kota 02",
-    "price": 245,
+    "price": 6615000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/0NA26NCS571E6/lolos02",
@@ -347,7 +347,7 @@ export const glasses = [
   {
     "sku": "0NA26NCQ971D9",
     "name": "Rollie 02",
-    "price": 255,
+    "price": 6885000,
     "status": "In stock",
     "collections": [
       "Gifts",
@@ -368,7 +368,7 @@ export const glasses = [
   {
     "sku": "0NA26NCN171DF",
     "name": "Heavenly 02",
-    "price": 285,
+    "price": 7695000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -390,7 +390,7 @@ export const glasses = [
   {
     "sku": "0NA26NCQX71FY",
     "name": "Panini 01",
-    "price": 245,
+    "price": 6615000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -410,7 +410,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCMFG24F",
     "name": "Kant 01(BR)",
-    "price": 340,
+    "price": 9180000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -430,7 +430,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCQZG27W",
     "name": "Kafka BRD1",
-    "price": 340,
+    "price": 9180000,
     "status": "In stock",
     "collections": [
       "Tinted Lenses"
@@ -449,7 +449,7 @@ export const glasses = [
   {
     "sku": "0MKYDKDC3G25Z",
     "name": "Manifesto 031",
-    "price": 360,
+    "price": 9720000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -468,7 +468,7 @@ export const glasses = [
   {
     "sku": "0P0M4JB3XF0QM",
     "name": "Bouquet 02",
-    "price": 375,
+    "price": 10201800,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -489,7 +489,7 @@ export const glasses = [
   {
     "sku": "0MKYDKD7BG25V",
     "name": "Fuse MSV1",
-    "price": 345,
+    "price": 9315000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -509,7 +509,7 @@ export const glasses = [
   {
     "sku": "0MKYDKDABG272",
     "name": "Saga 02(V)",
-    "price": 315,
+    "price": 8505000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -531,7 +531,7 @@ export const glasses = [
   {
     "sku": "0MKYDKD9ZG26K",
     "name": "Saga 02",
-    "price": 315,
+    "price": 8505000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -553,7 +553,7 @@ export const glasses = [
   {
     "sku": "0MKYDKDEZG25Z",
     "name": "Paranoyd 02(GM)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -573,7 +573,7 @@ export const glasses = [
   {
     "sku": "0MKYDKD7VG276",
     "name": "Faust 02",
-    "price": 315,
+    "price": 8505000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -592,7 +592,7 @@ export const glasses = [
   {
     "sku": "0MKYDKDFKG25Y",
     "name": "Furi 02(VYG)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -612,7 +612,7 @@ export const glasses = [
   {
     "sku": "0MKYDKD57G24P",
     "name": "Riff 02(MSV)",
-    "price": 315,
+    "price": 8505000,
     "status": "In stock",
     "collections": [
       "Tinted Lenses"
@@ -631,7 +631,7 @@ export const glasses = [
   {
     "sku": "0MKYDKD8ZG25W",
     "name": "Eden 02(BR)",
-    "price": 305,
+    "price": 8235000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -652,7 +652,7 @@ export const glasses = [
   {
     "sku": "0MKYDKD3FG26C",
     "name": "Hypnosis A02",
-    "price": 365,
+    "price": 9855000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -674,7 +674,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCZQG27T",
     "name": "Fata 01",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -695,7 +695,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCVFG26N",
     "name": "Odd 01(R)",
-    "price": 305,
+    "price": 8235000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -715,7 +715,7 @@ export const glasses = [
   {
     "sku": "0MKYDKD1QG265",
     "name": "Fata 01(BL)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -736,7 +736,7 @@ export const glasses = [
   {
     "sku": "0MKYDKDAVG27C",
     "name": "Vanta 02",
-    "price": 305,
+    "price": 8235000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -758,7 +758,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCWQG25C",
     "name": "Joze 01",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -778,7 +778,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCZFG25S",
     "name": "Joze BRC17",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -797,7 +797,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCK3G27R",
     "name": "Rage MCF1",
-    "price": 340,
+    "price": 9180000,
     "status": "In stock",
     "collections": [
       "Tinted Lenses"
@@ -816,7 +816,7 @@ export const glasses = [
   {
     "sku": "0MKYDKCJQG24S",
     "name": "Rage 01",
-    "price": 340,
+    "price": 9180000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -836,7 +836,7 @@ export const glasses = [
   {
     "sku": "KP6C4RIK7XGX",
     "name": "Takion R8",
-    "price": 315,
+    "price": 8505000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -860,7 +860,7 @@ export const glasses = [
   {
     "sku": "KP6C4RIK7XGX",
     "name": "Orbit BE1",
-    "price": 315,
+    "price": 8505000,
     "status": "Out of stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/KP6C4RIK7XGX/takionr8",
@@ -881,7 +881,7 @@ export const glasses = [
   {
     "sku": "A29DJUBH5IB4",
     "name": "Pico 02(SM)",
-    "price": 345,
+    "price": 9315000,
     "status": "Out of stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/A29DJUBH5IB4/orbitn6",
@@ -902,7 +902,7 @@ export const glasses = [
   {
     "sku": "157NM943UZW9Q",
     "name": "Sasaki G16",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/157NM943UZW9Q/pico02-br",
@@ -922,7 +922,7 @@ export const glasses = [
   {
     "sku": "MCGGAP558XJQ",
     "name": "Be Slo L1",
-    "price": 275,
+    "price": 7425000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/MCGGAP558XJQ/sasakirc7",
@@ -939,7 +939,7 @@ export const glasses = [
   {
     "sku": "TXYUPN4ZOX8Z",
     "name": "Lad R7",
-    "price": 275,
+    "price": 7425000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/TXYUPN4ZOX8Z/beslorc7",
@@ -956,7 +956,7 @@ export const glasses = [
   {
     "sku": "QWKAJNXS7LKH",
     "name": "Corori N6",
-    "price": 275,
+    "price": 7425000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/QWKAJNXS7LKH/lad01-light-adaptive",
@@ -973,7 +973,7 @@ export const glasses = [
   {
     "sku": "IJP93851VIOA",
     "name": "Slyk RC7",
-    "price": 275,
+    "price": 7425000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/IJP93851VIOA/cororin6",
@@ -990,7 +990,7 @@ export const glasses = [
   {
     "sku": "UPBHR4XT3LJM",
     "name": "Era 01",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [
       "Gifts",
@@ -1010,7 +1010,7 @@ export const glasses = [
   {
     "sku": "163L3DJXNC7S2",
     "name": "Epic 03(BL)",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/163L3DJXNC7S2/erat7",
@@ -1027,7 +1027,7 @@ export const glasses = [
   {
     "sku": "FGPRU40WBRJ6",
     "name": "Atomic 02(B)",
-    "price": 335,
+    "price": 9045000,
     "status": "In stock",
     "collections": [
       "Bestsellers"
@@ -1044,7 +1044,7 @@ export const glasses = [
   {
     "sku": "W676ZS9S1TMF",
     "name": "Rob KC1",
-    "price": 265,
+    "price": 7155000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -1062,7 +1062,7 @@ export const glasses = [
   {
     "sku": "FH6WIB684CUM",
     "name": "Ego 01(B)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -1081,7 +1081,7 @@ export const glasses = [
   {
     "sku": "10QB18R2GN5G6",
     "name": "Zin BRC9",
-    "price": 265,
+    "price": 7155000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -1099,7 +1099,7 @@ export const glasses = [
   {
     "sku": "PC1FMC2O5P26",
     "name": "Ep 02",
-    "price": 305,
+    "price": 8235000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -1120,7 +1120,7 @@ export const glasses = [
   {
     "sku": "T4SMTT2O2VSH",
     "name": "Vonzo GC9",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -1138,7 +1138,7 @@ export const glasses = [
   {
     "sku": "T4SMTT2K4D5M",
     "name": "Ojo GC9",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -1156,7 +1156,7 @@ export const glasses = [
   {
     "sku": "Q3E2NTVG6JOD",
     "name": "Gauss GC9",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1173,7 +1173,7 @@ export const glasses = [
   {
     "sku": "QUQPPBO8ZGSG",
     "name": "Ron 01",
-    "price": 295,
+    "price": 7965000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -1191,7 +1191,7 @@ export const glasses = [
   {
     "sku": "Z7LR5RGXUQ2H",
     "name": "Evan GC7",
-    "price": 245,
+    "price": 6615000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -1209,7 +1209,7 @@ export const glasses = [
   {
     "sku": "10QB18R2JYMLW",
     "name": "Karl BRC9",
-    "price": 245,
+    "price": 6615000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -1226,7 +1226,7 @@ export const glasses = [
   {
     "sku": "UNHWWSO6LTI1",
     "name": "Rna 01(GR)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -1244,7 +1244,7 @@ export const glasses = [
   {
     "sku": "TW59VAVFUKJP",
     "name": "Noizer N5",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -1263,7 +1263,7 @@ export const glasses = [
   {
     "sku": "W676ZS9PVRLB",
     "name": "Awave 01",
-    "price": 355,
+    "price": 9585000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1280,7 +1280,7 @@ export const glasses = [
   {
     "sku": "VEUJYAGW628D",
     "name": "Paradoxx 01",
-    "price": 355,
+    "price": 9585000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1297,7 +1297,7 @@ export const glasses = [
   {
     "sku": "VEUJYAH0QYNI",
     "name": "Third Kind C1",
-    "price": 375,
+    "price": 10125000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1314,7 +1314,7 @@ export const glasses = [
   {
     "sku": "W701LB8BQKLX",
     "name": "Ytt 02",
-    "price": 355,
+    "price": 9585000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1331,7 +1331,7 @@ export const glasses = [
   {
     "sku": "T4SMTT2LA1P6",
     "name": "Kro 02",
-    "price": 355,
+    "price": 9585000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1348,7 +1348,7 @@ export const glasses = [
   {
     "sku": "G82EVLTLXVGS",
     "name": "Aba 02(BR)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/G82EVLTLXVGS/kro02",
@@ -1363,7 +1363,7 @@ export const glasses = [
   {
     "sku": "WYCOMT13HEFE",
     "name": "Met 02(V)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1380,7 +1380,7 @@ export const glasses = [
   {
     "sku": "SDFZSB9RK8BQ",
     "name": "Academya 02(BR)",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection",
@@ -1399,7 +1399,7 @@ export const glasses = [
   {
     "sku": "YG9449O76IX2",
     "name": "Anna 01",
-    "price": 245,
+    "price": 6615000,
     "status": "Out of stock",
     "collections": [
       "Blue Light Lenses"
@@ -1416,7 +1416,7 @@ export const glasses = [
   {
     "sku": "XOWH2RVCAUZH",
     "name": "Vene 01(RG)",
-    "price": 265,
+    "price": 7155000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/XOWH2RVCAUZH/annat3",
@@ -1431,7 +1431,7 @@ export const glasses = [
   {
     "sku": "WXJU1A2LQQFP",
     "name": "Mua KC1",
-    "price": 245,
+    "price": 6615000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/WXJU1A2LQQFP/venepc8",
@@ -1446,7 +1446,7 @@ export const glasses = [
   {
     "sku": "YG9449O2Z4GE",
     "name": "Beca T4",
-    "price": 275,
+    "price": 7425000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/YG9449O2Z4GE/mua01",
@@ -1461,7 +1461,7 @@ export const glasses = [
   {
     "sku": "ZYYE799PAMIX",
     "name": "Oaa BRC9",
-    "price": 255,
+    "price": 6885000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/ZYYE799PAMIX/beca01",
@@ -1476,7 +1476,7 @@ export const glasses = [
   {
     "sku": "XPPBOATV8JNW",
     "name": "Zodiac 031",
-    "price": 325,
+    "price": 8775000,
     "status": "In stock",
     "collections": [
       "2025 BOLD Collection"
@@ -1493,7 +1493,7 @@ export const glasses = [
   {
     "sku": "D8137AIYE2K2",
     "name": "Don 02",
-    "price": 355,
+    "price": 9585000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -1510,7 +1510,7 @@ export const glasses = [
   {
     "sku": "J9Y3PS62AGY4",
     "name": "Gatta 01(C)",
-    "price": 350,
+    "price": 9450000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
@@ -1528,7 +1528,7 @@ export const glasses = [
   {
     "sku": "DZDQ8SBN9Q3K",
     "name": "S.O.A M01",
-    "price": 335,
+    "price": 9045000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/DZDQ8SBN9Q3K/gattac1-c",
@@ -1543,7 +1543,7 @@ export const glasses = [
   {
     "sku": "FI30BRX6V9PE",
     "name": "Eddy A 01",
-    "price": 225,
+    "price": 6075000,
     "status": "In stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/FI30BRX6V9PE/s.o.am01",
@@ -1558,7 +1558,7 @@ export const glasses = [
   {
     "sku": "CGOG5SQ5HBXX",
     "name": "Kubo 01",
-    "price": 225,
+    "price": 6075000,
     "status": "Out of stock",
     "collections": [
       "Blue Light Lenses"
@@ -1575,7 +1575,7 @@ export const glasses = [
   {
     "sku": "G9FND9PZMRL2",
     "name": "Una.C N 01",
-    "price": 225,
+    "price": 6075000,
     "status": "In stock",
     "collections": [
       "Bestsellers",
@@ -1593,7 +1593,7 @@ export const glasses = [
   {
     "sku": "DZDQ8SBQW6UX",
     "name": "Tap Tap C1",
-    "price": 295,
+    "price": 7965000,
     "status": "Out of stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/DZDQ8SBQW6UX/una.cnkc1",
@@ -1608,7 +1608,7 @@ export const glasses = [
   {
     "sku": "DZDQ8SBQ2CEG",
     "name": "Otas M01",
-    "price": 310,
+    "price": 8370000,
     "status": "Out of stock",
     "collections": [],
     "url": "https://www.gentlemonster.com/int/en/item/DZDQ8SBQ2CEG/taptapkc3-gr",
@@ -1623,7 +1623,7 @@ export const glasses = [
   {
     "sku": "8NX8YBQ7JSZW",
     "name": "Alio X 01",
-    "price": 285,
+    "price": 7695000,
     "status": "In stock",
     "collections": [
       "Blue Light Lenses"
