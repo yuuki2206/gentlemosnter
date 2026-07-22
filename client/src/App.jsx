@@ -2,22 +2,12 @@
  * App Component - Quản lý Định tuyến (Routing) của website.
  * - Router: Giúp chuyển trang mượt mà không tải lại trình duyệt.
  * - Route: Ánh xạ từng đường dẫn URL đến trang giao diện tương ứng.
- * - Navigate: Tự động chuyển hướng các link lỗi (*) về trang chủ.
+ * - React.lazy & Suspense: Code splitting giúp tải trang ban đầu siêu nhanh.
  */
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, Link } from "react-router-dom";
 import { SlidersHorizontal, Eye } from "lucide-react";
-import Home from "./pages/Home";
-import Sunglasses from "./pages/Sunglasses";
-import Glasses from "./pages/Glasses";
-import IntelligentEyewear from "./pages/IntelligentEyewear";
-import Services from "./pages/Services";
-import Stories from "./pages/Stories";
-import StoryDetail from "./pages/StoryDetail";
-import Signup from "./pages/Signup";
-import Account from "./pages/Account";
-import AdminDashboard from "./pages/AdminDashboard";
-import ProductDetail from "./pages/ProductDetail";
+
 import { CartProvider, CartContext } from "./context/CartContext";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { PrivyProvider } from "@privy-io/react-auth";
@@ -26,13 +16,25 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import Preloader from "./components/Preloader";
 import ToastNotification from "./components/ToastNotification";
 
+// Lazy load dynamic imports for routes
+const Home = lazy(() => import("./pages/Home"));
+const Sunglasses = lazy(() => import("./pages/Sunglasses"));
+const Glasses = lazy(() => import("./pages/Glasses"));
+const IntelligentEyewear = lazy(() => import("./pages/IntelligentEyewear"));
+const Services = lazy(() => import("./pages/Services"));
+const Stories = lazy(() => import("./pages/Stories"));
+const StoryDetail = lazy(() => import("./pages/StoryDetail"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Account = lazy(() => import("./pages/Account"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+
 /**
  * AppContent - Component phụ trợ chạy bên trong AuthProvider để lấy được Context thông tin User đăng nhập
  */
 function AppContent() {
   const { user, loading: authLoading } = useContext(AuthContext);
   const location = useLocation();
-
 
   const [showPreloader, setShowPreloader] = useState(() => {
     // Chỉ hiển thị preloader 1 lần duy nhất trong mỗi phiên duyệt web (Session)
@@ -51,36 +53,39 @@ function AppContent() {
     <>
       {showPreloader && <Preloader ready={!authLoading} onComplete={handlePreloaderComplete} />}
       <ToastNotification />
-      <Routes>
-        {/* Trang chủ */}
-        <Route path="/" element={<Home />} />
+      
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+        <Routes>
+          {/* Trang chủ */}
+          <Route path="/" element={<Home />} />
 
-        {/* Trang đăng ký và quản lý tài khoản */}
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/shop/:sku" element={<ProductDetail />} />
-        <Route path="/profile" element={<Account />} />
+          {/* Trang đăng ký và quản lý tài khoản */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/shop/:sku" element={<ProductDetail />} />
+          <Route path="/profile" element={<Account />} />
 
-        {/* Trang danh mục sản phẩm (đường dẫn ngắn) */}
-        <Route path="/sunglasses" element={<Sunglasses />} />
-        <Route path="/glasses" element={<Glasses />} />
-        <Route path="/intelligent-eyewear" element={<IntelligentEyewear />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/stories" element={<Stories />} />
-        <Route path="/stories/:id" element={<StoryDetail />} />
+          {/* Trang danh mục sản phẩm (đường dẫn ngắn) */}
+          <Route path="/sunglasses" element={<Sunglasses />} />
+          <Route path="/glasses" element={<Glasses />} />
+          <Route path="/intelligent-eyewear" element={<IntelligentEyewear />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/stories" element={<Stories />} />
+          <Route path="/stories/:id" element={<StoryDetail />} />
 
-        {/* Trang danh mục sản phẩm (đường dẫn dài theo cấu trúc website gốc Gentle Monster) */}
-        <Route path="/int/en/category/sunglasses/*" element={<Sunglasses />} />
-        <Route path="/int/en/category/glasses/*" element={<Glasses />} />
-        <Route path="/int/en/intelligent-eyewear" element={<IntelligentEyewear />} />
-        <Route path="/int/en/services" element={<Services />} />
-        <Route path="/int/en/stories" element={<Stories />} />
-        <Route path="/int/en/stories/:id" element={<StoryDetail />} />
+          {/* Trang danh mục sản phẩm (đường dẫn dài theo cấu trúc website gốc Gentle Monster) */}
+          <Route path="/int/en/category/sunglasses/*" element={<Sunglasses />} />
+          <Route path="/int/en/category/glasses/*" element={<Glasses />} />
+          <Route path="/int/en/intelligent-eyewear" element={<IntelligentEyewear />} />
+          <Route path="/int/en/services" element={<Services />} />
+          <Route path="/int/en/stories" element={<Stories />} />
+          <Route path="/int/en/stories/:id" element={<StoryDetail />} />
 
-        {/* Wildcard: Mọi URL không khớp sẽ được chuyển hướng về trang chủ */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          {/* Wildcard: Mọi URL không khớp sẽ được chuyển hướng về trang chủ */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
 
       {/* Floating Action Button (Nút nổi chuyển đổi nhanh chế độ xem của Admin) */}
       {isAdmin && (
