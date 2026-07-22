@@ -57,8 +57,6 @@ const Hero = () => {
       {/* KHUNG TRƯỢT BANNER SWIPER */}
       <Swiper
         className="w-full h-full"
-        slidesPerView={1}
-        spaceBetween={0}
         data-cursor="drag"
         loop={true}
         grabCursor={false} 
@@ -84,17 +82,17 @@ const Hero = () => {
         }}
       >
         {collections.map((item, index) => (
-          <SwiperSlide key={item.id} className="w-full h-full !w-full">
-            <div className="relative w-full h-full bg-black overflow-hidden">
+          <SwiperSlide key={item.id}>
+            <div className="relative w-full h-full bg-black">
               
-              {/* Thẻ Video HTML5 toàn màn hình sắc nét với poster xem trước */}
+              {/* Thẻ Video HTML5 với thuộc tính poster xem trước và nạp video thông minh (Tránh nạp ngầm 31.5MB video ẩn khi vừa mở trang) */}
               <video
                 autoPlay
                 muted
                 playsInline
                 poster={item.poster}
-                preload={index === 0 ? "metadata" : "none"}
-                src={item.video}
+                preload={index === 0 ? "auto" : "none"}
+                src={index === 0 || index === activeIndex ? item.video : undefined}
                 onTimeUpdate={(e) => {
                   if (e.target.duration) {
                     setVideoProgress((e.target.currentTime / e.target.duration) * 100);
