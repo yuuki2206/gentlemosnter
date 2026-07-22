@@ -57,7 +57,8 @@ export const glasses = [
     "slug": "tofi02",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKM737S/18c681e9-9a19-4cd3-94a5-7760f76f9467/11005119_FRONT.jpg",
     "gallery": [
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKM737S/18c681e9-9a19-4cd3-94a5-7760f76f9467/11005119_FRONT.jpg"
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKM737S/18c681e9-9a19-4cd3-94a5-7760f76f9467/11005119_FRONT.jpg",
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKM737S/c4476771-c1d0-4a03-bd95-59e7a5a7e0e9/11005119_LOOK_BOOK_FIRST.jpg"
     ]
   },
   {

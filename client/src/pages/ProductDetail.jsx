@@ -144,15 +144,10 @@ const ProductDetail = () => {
 
   const isWishlisted = wishlist.some((item) => item.sku === product.sku);
 
-  // Mảng tất cả ảnh/video phụ, lọc bỏ link hỏng và ưu tiên ảnh FRONT.jpg lên vị trí đầu tiên
-  const rawMedia = [product.thumbnail, ...(product.gallery || [])].filter(
-    (url, index, self) => self.indexOf(url) === index && url && !url.includes("11005119_LOOK_BOOK_FIRST")
+  // Mảng tất cả ảnh phụ
+  const mediaList = [product.thumbnail, ...(product.gallery || [])].filter(
+    (url, index, self) => self.indexOf(url) === index && url !== ""
   );
-
-  const frontImg = rawMedia.find(g => g.includes("FRONT") && !g.includes("POSTER") && !g.toLowerCase().endsWith(".mp4"));
-  const mediaList = frontImg 
-    ? [frontImg, ...rawMedia.filter(u => u !== frontImg)]
-    : rawMedia;
 
   const isVideoMedia = (url) => url?.toLowerCase().endsWith(".mp4");
 
@@ -527,37 +522,26 @@ const ProductDetail = () => {
               SIMILAR FRAMES
             </h3>
             <div className="flex sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 overflow-x-auto sm:overflow-x-visible gap-4 lg:gap-6 pb-4 sm:pb-0 scrollbar-none">
-              {product.similarFrames.slice(0, 6).map((similarItem) => {
-                const itemImage = similarItem.gallery?.find(g => g.includes("FRONT") && !g.includes("POSTER") && !g.toLowerCase().endsWith(".mp4")) ||
-                  (similarItem.thumbnail && !similarItem.thumbnail.toLowerCase().endsWith(".mp4") ? similarItem.thumbnail : similarItem.gallery?.find(g => !g.toLowerCase().endsWith(".mp4"))) ||
-                  similarItem.thumbnail;
-                const isVideo = itemImage?.toLowerCase().endsWith(".mp4");
-
-                return (
-                  <Link
-                    to={`/shop/${similarItem.sku}`}
-                    key={similarItem.sku}
-                    className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 w-[140px] sm:w-auto flex-shrink-0 sm:flex-shrink"
-                  >
-                    <div className="aspect-[4/3] w-full bg-[#f4f4f4] flex justify-center items-center overflow-hidden mb-3 rounded-xs">
-                      {isVideo ? (
-                        <video src={itemImage} autoPlay loop muted playsInline preload="metadata" className="w-[90%] h-auto object-contain" />
-                      ) : (
-                        <img
-                          src={itemImage}
-                          alt={similarItem.name}
-                          className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[0.95] sm:scale-100 lg:scale-[1.2] group-hover:scale-[1.05] lg:group-hover:scale-[1.35]"
-                          onError={handleImageError}
-                        />
-                      )}
-                    </div>
-                    <div className="flex flex-col text-left mt-2">
-                      <span className="text-[9px] tracking-wider uppercase font-semibold text-black leading-tight">{similarItem.name}</span>
-                      <span className="text-[9px] text-[#666] font-medium mt-0.5">₫{Number(similarItem.price < 1000 ? Math.round(similarItem.price * 27215.36) : similarItem.price).toLocaleString("en-US")}</span>
-                    </div>
-                  </Link>
-                );
-              })}
+              {product.similarFrames.slice(0, 6).map((similarItem) => (
+                <Link
+                  to={`/shop/${similarItem.sku}`}
+                  key={similarItem.sku}
+                  className="group flex flex-col bg-transparent transition-opacity hover:opacity-85 w-[140px] sm:w-auto flex-shrink-0 sm:flex-shrink"
+                >
+                  <div className="aspect-[4/3] w-full bg-transparent flex justify-center items-center overflow-hidden mb-3">
+                    <img
+                      src={similarItem.thumbnail}
+                      alt={similarItem.name}
+                      className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[0.95] sm:scale-100 lg:scale-[1.2] group-hover:scale-[1.05] lg:group-hover:scale-[1.35]"
+                      onError={handleImageError}
+                    />
+                  </div>
+                  <div className="flex flex-col text-left mt-2">
+                    <span className="text-[9px] tracking-wider uppercase font-semibold text-black leading-tight">{similarItem.name}</span>
+                    <span className="text-[9px] text-[#666] font-medium mt-0.5">₫{Number(similarItem.price < 1000 ? Math.round(similarItem.price * 27215.36) : similarItem.price).toLocaleString("en-US")}</span>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         )}

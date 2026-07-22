@@ -12,6 +12,7 @@ export const products = [
     "slug": "tofi02-cm",
     "thumbnail": "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKR7376/6f62ea97-9e3e-405a-bf32-827586503b86/11005120_AFTER_FRONT_1.mp4",
     "gallery": [
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKM737S/c4476771-c1d0-4a03-bd95-59e7a5a7e0e9/11005119_LOOK_BOOK_FIRST.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500904/cd57487c-bf89-402b-9a54-e91b0012d59c/11500904_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKR7376/aaf618e3-4673-4f99-a92f-39973e98a784/11005120_POSTER_AFTER_FRONT_1.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXKR7376/3e369b04-165f-49ac-99fa-bce44fe2db76/11005120_FRONT.jpg?width=1400",
@@ -78,7 +79,7 @@ export const products = [
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/fcd58405-b0e0-4dec-aca7-e337f27395bf/11005140_FRONT.jpg",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/S11500904/cd57487c-bf89-402b-9a54-e91b0012d59c/11500904_FRONT.jpg?width=1400",
       "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/f6ec7b4c-8d16-4b41-8993-9402099297a2/11005140_D_45.jpg?width=1400",
-      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/87b64459-72f1-4f25-a311-83904d5a3ec3/11005140_LOOK_BOOK_FIRST.jpg?width=1400"
+      "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/87b64459-72f1-4f25-a311-83904d5a3ec3/11005140_LOOK_BOOK_FIRST.jpg?width=1400"  
     ]
   },
   {
@@ -1011,3 +1012,5 @@ export const products = [
     ]
   }
 ];
+
+export const productsData = products;
