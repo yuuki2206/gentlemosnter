@@ -103,6 +103,7 @@ const CampaignSlider = ({ products = [] }) => {
                       loop
                       muted
                       playsInline
+                      preload="none"
                       className={`w-full h-full object-cover object-center ${viewMode === "product" ? "p-12 object-contain" : ""}`}
                     >
                       <source src={mediaUrl} type="video/mp4" />
@@ -111,6 +112,7 @@ const CampaignSlider = ({ products = [] }) => {
                     <img 
                       src={mediaUrl} 
                       alt={item.name} 
+                      loading="lazy"
                       className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${viewMode === "product" ? "object-contain p-12" : "object-cover"}`}
                     />
                   )}
