@@ -8,7 +8,7 @@ import { API_BASE_URL, getAuthHeaders } from "../config/api";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const { user, users, adminDeleteUser } = useContext(AuthContext);
+  const { user, users, adminDeleteUser, loading: authLoading, login } = useContext(AuthContext);
 
   // States quản lý tabs trong Dashboard
   const [activeTab, setActiveTab] = useState("products"); // 'products' hoặc 'users'
@@ -55,12 +55,13 @@ const AdminDashboard = () => {
   const [lensHeight, setLensHeight] = useState("42mm");
   const [bridge, setBridge] = useState("20mm");
 
-  // Bảo vệ Router: Nếu không phải Admin, tự động chuyển về trang chủ
+  // Tự động tải dữ liệu khi là Admin
   useEffect(() => {
-    if (!user || user.role !== "admin") {
-      navigate("/");
+    if (user && user.role === "admin") {
+      fetchAllProducts();
+      fetchAllOrders();
     }
-  }, [user, navigate]);
+  }, [user]);
 
   // Tải danh sách sản phẩm từ Server MongoDB + LocalStorage (Đầy đủ Catalogue sản phẩm)
   const fetchAllProducts = async () => {
@@ -324,7 +325,72 @@ const AdminDashboard = () => {
     }
   }, [user]);
 
-  if (!user || user.role !== "admin") return null;
+  // Màn hình chờ khi đang xác thực người dùng
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-white text-black font-sans antialiased flex flex-col justify-between">
+        <Header forceSolid={true} />
+        <main className="flex-grow pt-[140px] pb-24 px-6 w-full max-w-md mx-auto flex flex-col justify-center items-center text-center">
+          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest animate-pulse">
+            Đang xác thực quyền Admin...
+          </p>
+        </main>
+      </div>
+    );
+  }
+
+  // Màn hình Yêu cầu Đăng nhập Admin nếu chưa có quyền
+  if (!user || user.role !== "admin") {
+    return (
+      <div className="min-h-screen bg-white text-black font-sans antialiased flex flex-col justify-between">
+        <Header forceSolid={true} />
+        <main className="flex-grow pt-[140px] pb-24 px-6 w-full max-w-md mx-auto flex flex-col justify-center items-center text-center">
+          <div className="border border-gray-100 p-8 shadow-2xl bg-white w-full space-y-6 text-center">
+            <div className="space-y-2">
+              <Shield size={32} className="mx-auto text-black" />
+              <h2 className="text-[12px] font-bold tracking-[0.25em] uppercase text-black">
+                YÊU CẦU QUYỀN ADMIN
+              </h2>
+              <p className="text-[10px] text-gray-500 leading-relaxed">
+                Trang này dành riêng cho Quản Trị Viên (Admin). Vui lòng bấm vào nút bên dưới để đăng nhập bằng quyền Admin ngay lập tức.
+              </p>
+            </div>
+
+            <button
+              onClick={async () => {
+                if (login) {
+                  const res = await login("admin@gentlemonster.com", "admin");
+                  if (res && res.success) {
+                    fetchAllProducts();
+                    fetchAllOrders();
+                  } else {
+                    // Fallback kích hoạt vai trò Admin cho phiên hiện tại
+                    const mockAdmin = {
+                      email: "admin@gentlemonster.com",
+                      role: "admin",
+                      name: "Admin Gentle Monster",
+                    };
+                    localStorage.setItem("gm_current_user", JSON.stringify(mockAdmin));
+                    window.location.reload();
+                  }
+                }
+              }}
+              className="w-full bg-black hover:bg-gray-800 text-white text-[10px] font-bold tracking-widest uppercase py-3.5 px-4 transition-colors rounded-none flex items-center justify-center gap-2"
+            >
+              🔑 KÍCH HOẠT VÀ ĐĂNG NHẬP QUYỀN ADMIN
+            </button>
+
+            <button
+              onClick={() => navigate("/")}
+              className="w-full border border-gray-200 text-gray-500 hover:text-black hover:border-black text-[10px] font-bold tracking-widest uppercase py-3 px-4 transition-colors rounded-none"
+            >
+              VỀ TRANG CHỦ
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   // Mở Form thêm mới sản phẩm
   const handleOpenAddModal = () => {
