@@ -170,10 +170,10 @@ export const AuthProvider = ({ children }) => {
   const checkEmailExists = async (email) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
-    // 1. Thử kiểm tra qua Server MongoDB trước (Timeout 1s)
+    // 1. Thử kiểm tra qua Server MongoDB trước (Timeout 2.5s)
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 1000);
+      const timer = setTimeout(() => controller.abort(), 2500);
 
       const res = await fetch(`${API_BASE_URL}/auth/check-email`, {
         method: "POST",
@@ -184,7 +184,7 @@ export const AuthProvider = ({ children }) => {
       clearTimeout(timer);
       if (res.ok) {
         const data = await res.json();
-        if (data.exists) return true;
+        return !!data.exists;
       }
     } catch (e) {
       console.log("[Offline Mode] Server MongoDB offline, kiểm tra email bằng LocalStorage");

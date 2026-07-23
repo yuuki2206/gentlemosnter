@@ -31,7 +31,8 @@ export const protect = async (req, res, next) => {
 router.post("/check-email", async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await User.findOne({ email });
+    const cleanEmail = (email || "").trim().toLowerCase();
+    const user = await User.findOne({ email: cleanEmail });
     res.json({ exists: !!user });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -45,8 +46,9 @@ router.post("/check-email", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const { firstName, lastName, email, password, country, phone, walletAddress, adminKey } = req.body;
+    const cleanEmail = (email || "").trim().toLowerCase();
 
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ email: cleanEmail });
     if (userExists) {
       return res.status(400).json({ message: "Email này đã được đăng ký tài khoản." });
     }
@@ -62,7 +64,7 @@ router.post("/register", async (req, res) => {
     const user = await User.create({
       firstName,
       lastName,
-      email,
+      email: cleanEmail,
       password,
       country,
       phone,
@@ -102,8 +104,9 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    const cleanEmail = (email || "").trim().toLowerCase();
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: cleanEmail });
     if (user && (await user.matchPassword(password))) {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "gentle_monster_secret_key_2026", {
         expiresIn: "30d",
