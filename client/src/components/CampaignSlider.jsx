@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs, FreeMode } from "swiper/modules";
 import "swiper/css";
@@ -93,7 +94,7 @@ const CampaignSlider = ({ products = [] }) => {
 
           return (
             <SwiperSlide key={item.sku || idx}>
-              <a href={item.url || '#'} aria-label={`View ${item.name} details`} className={`relative group w-full aspect-[3/4] flex flex-col justify-end block ${viewMode === "product" ? "bg-[#f4f4f4]" : "bg-transparent"}`}>
+              <Link to={`/shop/${item.sku}`} aria-label={`View ${item.name} details`} className={`relative group w-full aspect-[3/4] flex flex-col justify-end block ${viewMode === "product" ? "bg-[#f4f4f4]" : "bg-transparent"}`}>
                 
                 {/* Media Renderer */}
                 <div className="absolute inset-0 w-full h-full">
@@ -121,13 +122,13 @@ const CampaignSlider = ({ products = [] }) => {
                 {/* THÔNG TIN SẢN PHẨM (Nằm ở góc dưới cùng bên trái) */}
                 <div className="relative z-10 p-6 text-[9px] md:text-[10px] tracking-wider uppercase text-left">
                   <p className="font-medium text-black">{item.name}</p>
-                  <p className="mt-[2px] text-gray-800">£ {item.price}</p>
+                  <p className="mt-[2px] text-gray-800">₫ {Number(item.price).toLocaleString("en-US")}</p>
                   <span className="mt-3 inline-block border-b border-black pb-[1px] hover:opacity-60 transition-opacity font-medium">
                     ADD TO WISHLIST
                   </span>
                 </div>
 
-              </a>
+              </Link>
             </SwiperSlide>
           );
         })}
