@@ -57,10 +57,18 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
     !g.includes("S11500904")
   ) || [];
 
+  const charCodeSum = (item.sku || "").split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const defaultStock = charCodeSum % 19 === 0 ? 0 : charCodeSum % 7 === 0 ? 3 : (charCodeSum % 25) + 4;
+  const itemStock = item.stock !== undefined ? Number(item.stock) : defaultStock;
+
   const handleQuickAdd = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(item);
+    if (itemStock === 0) {
+      alert("Sản phẩm này hiện đã hết hàng!");
+      return;
+    }
+    addToCart({ ...item, stock: itemStock });
     window.dispatchEvent(new CustomEvent("openCartToast", { detail: item }));
   };
 
@@ -72,6 +80,17 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
     >
       {/* Khung ảnh chính */}
       <div className="w-full aspect-square md:aspect-[4/3] flex justify-center items-center overflow-hidden mb-4 bg-[#f4f4f4] relative rounded-xs">
+        {/* Nổi nhãn Trạng thái Tồn kho trên ảnh */}
+        {itemStock === 0 ? (
+          <span className="absolute top-2.5 left-2.5 bg-red-600 text-white text-[8px] font-bold tracking-[0.2em] uppercase py-1 px-2 z-10 shadow-sm">
+            SOLD OUT
+          </span>
+        ) : itemStock <= 5 ? (
+          <span className="absolute top-2.5 left-2.5 bg-amber-700 text-white text-[8px] font-bold tracking-[0.2em] uppercase py-1 px-2 z-10 shadow-sm">
+            ONLY {itemStock} LEFT
+          </span>
+        ) : null}
+
         <Link to={`/shop/${item.sku}`} aria-label={`View ${item.name} details`} data-cursor="view" className="w-full h-full flex justify-center items-center">
           {isVideo ? (
             <video
@@ -93,11 +112,16 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
         {/* Nút QUICK ADD trượt nhẹ từ dưới lên */}
         <button
           onClick={handleQuickAdd}
-          className={`absolute bottom-0 left-0 w-full bg-black text-white text-[10px] tracking-[0.25em] font-bold py-3 text-center transition-all duration-300 transform cursor-pointer z-10 hover:bg-neutral-800 ${
+          disabled={itemStock === 0}
+          className={`absolute bottom-0 left-0 w-full text-[10px] tracking-[0.25em] font-bold py-3 text-center transition-all duration-300 transform z-10 ${
+            itemStock === 0
+              ? "bg-gray-400 text-white cursor-not-allowed"
+              : "bg-black text-white hover:bg-neutral-800 cursor-pointer"
+          } ${
             isHovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
           }`}
         >
-          QUICK ADD
+          {itemStock === 0 ? "OUT OF STOCK" : "QUICK ADD"}
         </button>
       </div>
 

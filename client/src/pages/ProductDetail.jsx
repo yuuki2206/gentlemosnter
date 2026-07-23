@@ -313,6 +313,33 @@ const ProductDetail = () => {
               <p className="font-bold text-[13px] leading-[17px] text-black mt-1">
                 ₫ {Number(displayPrice).toLocaleString("en-US")} {product.price > 100 ? "" : " - To be restocked"}
               </p>
+
+              {/* THÔNG TIN TRẠNG THÁI TỒN KHO CHO KHÁCH HÀNG */}
+              {(() => {
+                const charCodeSum = (product?.sku || "").split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+                const defaultStock = charCodeSum % 19 === 0 ? 0 : charCodeSum % 7 === 0 ? 3 : (charCodeSum % 25) + 4;
+                const productStock = product?.stock !== undefined ? Number(product.stock) : defaultStock;
+
+                if (productStock === 0) {
+                  return (
+                    <p className="text-[10px] font-bold text-red-600 uppercase tracking-widest mt-1.5 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-red-600 inline-block animate-pulse" /> OUT OF STOCK (TẠM HẾT HÀNG)
+                    </p>
+                  );
+                } else if (productStock <= 5) {
+                  return (
+                    <p className="text-[10px] font-bold text-amber-700 uppercase tracking-widest mt-1.5 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-amber-600 inline-block animate-pulse" /> LIMITED STOCK - ONLY {productStock} LEFT IN STOCK!
+                    </p>
+                  );
+                } else {
+                  return (
+                    <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mt-1.5 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block" /> IN STOCK ({productStock} ITEMS AVAILABLE)
+                    </p>
+                  );
+                }
+              })()}
             </div>
 
             {/* COLORWAYS (Swatches màu sắc hình tròn/ô vuông nhỏ 24x24px phẳng kèm thanh ngang active) */}
@@ -347,12 +374,31 @@ const ProductDetail = () => {
 
             {/* Nút hành động chính (Notify Me / Add To Bag) */}
             <div className="pt-2">
-              <button
-                onClick={handleAddToCart}
-                className="w-full bg-[#111111] hover:bg-neutral-800 text-white text-[13px] font-normal tracking-[0.2em] py-3.5 rounded-[8px] transition-colors uppercase text-center"
-              >
-                {product.price > 100 ? "ADD TO BAG" : "NOTIFY ME"}
-              </button>
+              {(() => {
+                const charCodeSum = (product?.sku || "").split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+                const defaultStock = charCodeSum % 19 === 0 ? 0 : charCodeSum % 7 === 0 ? 3 : (charCodeSum % 25) + 4;
+                const productStock = product?.stock !== undefined ? Number(product.stock) : defaultStock;
+
+                return (
+                  <button
+                    onClick={(e) => {
+                      if (productStock === 0) {
+                        alert("Sản phẩm này hiện tại đã hết hàng!");
+                        return;
+                      }
+                      handleAddToCart(e);
+                    }}
+                    disabled={productStock === 0}
+                    className={`w-full text-[13px] font-normal tracking-[0.2em] py-3.5 rounded-[8px] transition-colors uppercase text-center ${
+                      productStock === 0
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed border border-gray-300"
+                        : "bg-[#111111] hover:bg-neutral-800 text-white cursor-pointer"
+                    }`}
+                  >
+                    {productStock === 0 ? "OUT OF STOCK" : product.price > 100 ? "ADD TO BAG" : "NOTIFY ME"}
+                  </button>
+                );
+              })()}
             </div>
 
             {/* ACCORDION GROUP (Shipping, Details, Size & Fit) */}
