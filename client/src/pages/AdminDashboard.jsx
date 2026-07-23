@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { productsData } from "../data/products";
-import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History } from "lucide-react";
+import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History, TrendingUp, AlertTriangle } from "lucide-react";
 import Header from "../components/Header";
 import { API_BASE_URL, getAuthHeaders } from "../config/api";
 
