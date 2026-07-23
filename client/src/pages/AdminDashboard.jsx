@@ -103,8 +103,31 @@ const AdminDashboard = () => {
 
       combined.forEach((p) => {
         const key = p.sku || p.id || p._id || p.name;
-        if (key && !uniqueMap.has(key)) {
-          uniqueMap.set(key, p);
+        if (!key) return;
+
+        // Chuẩn hóa giá: Nếu giá < 1000 (USD), lấy giá VND tương ứng từ localData (productsData)
+        let finalPrice = Number(p.price) || 0;
+        if (finalPrice < 1000) {
+          const matchInLocal = localData.find((lp) => lp.sku === p.sku || lp.name === p.name);
+          if (matchInLocal && Number(matchInLocal.price) > 1000) {
+            finalPrice = Number(matchInLocal.price);
+          } else {
+            finalPrice = Math.round(finalPrice * 27200);
+          }
+        }
+
+        const normalizedProduct = {
+          ...p,
+          price: finalPrice,
+        };
+
+        if (!uniqueMap.has(key)) {
+          uniqueMap.set(key, normalizedProduct);
+        } else {
+          const existing = uniqueMap.get(key);
+          if (existing.price < 1000 && normalizedProduct.price >= 1000) {
+            uniqueMap.set(key, normalizedProduct);
+          }
         }
       });
 

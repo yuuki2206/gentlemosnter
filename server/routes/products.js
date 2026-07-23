@@ -30,7 +30,14 @@ router.get("/", async (req, res) => {
 
     // Tải toàn bộ sản phẩm lên cache nếu chưa có (chỉ lấy các trường cần cho Grid và Swiper để giảm payload)
     if (!productsCache) {
-      productsCache = await Product.find({}).select("sku name price thumbnail collection collections gallery");
+      const rawProducts = await Product.find({}).select("sku name price thumbnail collection collections gallery");
+      productsCache = rawProducts.map((p) => {
+        const pObj = p.toObject();
+        if (pObj.price < 1000) {
+          pObj.price = Math.round(pObj.price * 27200);
+        }
+        return pObj;
+      });
     }
 
     let result = [...productsCache];
