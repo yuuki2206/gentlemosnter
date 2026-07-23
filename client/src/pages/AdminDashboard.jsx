@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { productsData } from "../data/products";
 import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History, TrendingUp, AlertTriangle } from "lucide-react";
-import { handleImageError } from "../config/media";
+import Header from "../components/Header";
 import { API_BASE_URL, getAuthHeaders } from "../config/api";
 
 const AdminDashboard = () => {
@@ -648,7 +648,7 @@ const AdminDashboard = () => {
                         <span className="absolute top-2 left-2 text-[9px] font-bold bg-black text-white w-4 h-4 rounded-full flex items-center justify-center">
                           #{idx + 1}
                         </span>
-                        <img src={item.thumbnail} alt={item.name} onError={handleImageError} className="w-16 h-12 object-contain mb-2 bg-[#f9f9f9]" />
+                        <img src={item.thumbnail} alt={item.name} className="w-16 h-12 object-contain mb-2 bg-[#f9f9f9]" />
                         <p className="text-[10px] font-bold text-black truncate w-full">{item.name}</p>
                         <p className="text-[9px] font-bold text-blue-700 mt-0.5">{item.totalSold} Đã Bán</p>
                         <p className="text-[8px] text-gray-400 font-medium mt-0.5">₫ {Number(item.totalRevenue).toLocaleString("en-US")}</p>
@@ -706,7 +706,7 @@ const AdminDashboard = () => {
                           {currentProducts.map((item) => (
                             <tr key={item.sku} className="hover:bg-gray-50/50 transition-colors">
                               <td className="px-6 py-3 text-center">
-                                <img src={item.thumbnail} alt={item.name} onError={handleImageError} className="w-12 h-9 object-contain bg-[#f9f9f9] mx-auto border border-gray-100" />
+                                <img src={item.thumbnail} alt={item.name} className="w-12 h-9 object-contain bg-[#f9f9f9] mx-auto border border-gray-100" />
                               </td>
                               <td className="px-6 py-4 font-mono font-semibold text-gray-500">{item.sku}</td>
                               <td className="px-6 py-4 font-semibold text-black">{item.name}</td>

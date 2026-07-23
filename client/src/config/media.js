@@ -47,32 +47,16 @@ export const getMediaUrl = (path) => {
 };
 
 /**
-  * Ảnh dự phòng mặc định (Unsplash Luxury Glasses HD)
-  * Khi CDN Gentle Monster gốc bị chặn DNS hoặc lỗi 403 tại Việt Nam,
-  * hệ thống tự động đổi sang ảnh sản phẩm kính mắt HD sắc nét từ Unsplash CDN.
-  */
- export const FALLBACK_IMAGES = [
-   "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
-   "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
-   "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=800&q=80",
-   "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80",
- ];
+ * Ảnh dự phòng mặc định (Unsplash Premium Sunglasses)
+ * Được hiển thị khi link ảnh gốc từ database hoặc Cloudinary bị lỗi 404 hoặc không load được.
+ */
+export const FALLBACK_IMAGE_URL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%"><rect width="100%" height="100%" fill="%23f3f3f3"/><g fill="none" stroke="%23cccccc" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(2, 8)"><path d="M0 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3H3c-1.66 0-3-1.34-3-3z"/><path d="M12 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3h-2c-1.66 0-3-1.34-3-3z"/><path d="M8 3h4"/><path d="M0 3c0-1 .5-2 1.5-2.5M20 3c0-1-.5-2-1.5-2.5"/></g></svg>`;
 
- export const FALLBACK_IMAGE_URL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%"><rect width="100%" height="100%" fill="%23f3f3f3"/><g fill="none" stroke="%23cccccc" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(2, 8)"><path d="M0 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3H3c-1.66 0-3-1.34-3-3z"/><path d="M12 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3h-2c-1.66 0-3-1.34-3-3z"/><path d="M8 3h4"/><path d="M0 3c0-1 .5-2 1.5-2.5M20 3c0-1-.5-2-1.5-2.5"/></g></svg>`;
-
- /**
-  * Bộ bắt lỗi hình ảnh (Image Error Handler)
-  * Tự động thay thế bằng ảnh kính mắt HD từ Unsplash CDN khi CDN Hàn Quốc bị lỗi.
-  */
- export const handleImageError = (e) => {
-   if (e.target.dataset.hasFailed) {
-     e.target.onerror = null;
-     e.target.src = FALLBACK_IMAGE_URL;
-     return;
-   }
-   e.target.dataset.hasFailed = "true";
-   const str = e.target.alt || e.target.src || "";
-   const sum = Math.abs(str.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0));
-   const fallbackIndex = sum % FALLBACK_IMAGES.length;
-   e.target.src = FALLBACK_IMAGES[fallbackIndex];
- };
+/**
+ * Bộ bắt lỗi hình ảnh (Image Error Handler)
+ * Tự động gán nguồn ảnh dự phòng khi ảnh gốc gặp sự cố tải, ngăn hiển thị icon ảnh vỡ mất thẩm mỹ.
+ */
+export const handleImageError = (e) => {
+  e.target.onerror = null; // Tránh lặp vô hạn nếu ảnh dự phòng cũng lỗi
+  e.target.src = FALLBACK_IMAGE_URL;
+};
