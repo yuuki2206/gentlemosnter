@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { productsData } from "../data/products";
-import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History } from "lucide-react";
+import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History, Settings, TrendingUp, AlertTriangle } from "lucide-react";
 import Header from "../components/Header";
 import { API_BASE_URL, getAuthHeaders } from "../config/api";
 
@@ -23,7 +23,12 @@ const AdminDashboard = () => {
   const [productPage, setProductPage] = useState(1);
   const itemsPerPage = 15;
 
-  // States quản lý đơn hàng/giao dịch
+  // States cho Cấu hình Hệ thống & Web3
+  const [storeName, setStoreName] = useState(localStorage.getItem("gm_store_name") || "GENTLE MONSTER Flagship Store");
+  const [merchantWallet, setMerchantWallet] = useState(localStorage.getItem("gm_merchant_wallet") || "0x04CA92436fBD44cF4D8a53514bbF4AcB9c972AF7");
+  const [ethRate, setEthRate] = useState(localStorage.getItem("gm_eth_rate") || "85000000");
+  const [supportEmail, setSupportEmail] = useState(localStorage.getItem("gm_support_email") || "support@gentlemonster.vn");
+  const [configSuccess, setConfigSuccess] = useState("");
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
 
@@ -462,6 +467,15 @@ const AdminDashboard = () => {
               <History size={14} />
               Giao Dịch ({orders.length})
             </button>
+            <button
+              onClick={() => setActiveTab("settings")}
+              className={`w-full text-left text-[11px] font-semibold tracking-wider uppercase py-3 px-4 transition-colors rounded-none flex items-center gap-3 ${
+                activeTab === "settings" ? "bg-black text-white" : "text-gray-400 hover:text-black hover:bg-gray-50"
+              }`}
+            >
+              <Settings size={14} />
+              Cấu Hình & Web3
+            </button>
           </div>
 
           <div className="mt-8 pt-8 border-t border-gray-100 hidden md:block">
@@ -824,6 +838,105 @@ const AdminDashboard = () => {
                   </table>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* TAB 4: CẤU HÌNH HỆ THỐNG & WEB3 DAPP */}
+          {activeTab === "settings" && (
+            <div className="space-y-6 text-left max-w-3xl">
+              <div className="border-b border-gray-100 pb-3">
+                <h2 className="text-[11px] font-bold tracking-widest uppercase text-black">
+                  CẤU HÌNH CỬA HÀNG & THÔNG SỐ WEB3 DAPP
+                </h2>
+                <p className="text-[9px] text-gray-400 mt-0.5">
+                  Tùy chỉnh thông số địa chỉ ví nhận thanh toán ETH, Tỷ giá quy đổi và thông tin liên hệ.
+                </p>
+              </div>
+
+              {configSuccess && (
+                <p className="text-[10px] text-green-700 font-medium tracking-wide bg-green-50 py-2.5 px-4 text-left border-l-2 border-green-600">
+                  {configSuccess}
+                </p>
+              )}
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  localStorage.setItem("gm_store_name", storeName);
+                  localStorage.setItem("gm_merchant_wallet", merchantWallet);
+                  localStorage.setItem("gm_eth_rate", ethRate);
+                  localStorage.setItem("gm_support_email", supportEmail);
+                  setConfigSuccess("Đã lưu cấu hình hệ thống & thông số Web3 thành công!");
+                  setTimeout(() => setConfigSuccess(""), 3000);
+                }}
+                className="space-y-5"
+              >
+                <div>
+                  <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">
+                    Tên Cửa Hàng / Thương Hiệu
+                  </label>
+                  <input
+                    type="text"
+                    value={storeName}
+                    onChange={(e) => setStoreName(e.target.value)}
+                    className="w-full border border-gray-200 bg-white px-4 py-3 text-[11px] font-semibold text-black focus:outline-none focus:border-black transition-colors"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">
+                    Địa Chỉ Ví Cửa Hàng Nhận ETH (Merchant Wallet Address - Ganache / Sepolia)
+                  </label>
+                  <input
+                    type="text"
+                    value={merchantWallet}
+                    onChange={(e) => setMerchantWallet(e.target.value)}
+                    className="w-full border border-gray-200 bg-white px-4 py-3 text-[11px] font-mono text-blue-700 font-bold focus:outline-none focus:border-black transition-colors"
+                    required
+                  />
+                  <span className="text-[8px] text-gray-400 mt-1 block">
+                    Mọi giao dịch Web3 MetaMask thành công sẽ tự động chuyển ETH về địa chỉ ví này.
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">
+                      Tỷ Giá Quy Đổi (1 ETH = ? VND)
+                    </label>
+                    <input
+                      type="number"
+                      value={ethRate}
+                      onChange={(e) => setEthRate(e.target.value)}
+                      className="w-full border border-gray-200 bg-white px-4 py-3 text-[11px] font-semibold text-black focus:outline-none focus:border-black transition-colors"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">
+                      Email Hỗ Trợ Khách Hàng (Support Email)
+                    </label>
+                    <input
+                      type="email"
+                      value={supportEmail}
+                      onChange={(e) => setSupportEmail(e.target.value)}
+                      className="w-full border border-gray-200 bg-white px-4 py-3 text-[11px] font-semibold text-black focus:outline-none focus:border-black transition-colors"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="bg-black hover:bg-gray-800 text-white text-[10px] font-bold tracking-widest uppercase py-3.5 px-6 transition-colors rounded-none"
+                  >
+                    LƯU CẤU HÌNH HỆ THỐNG
+                  </button>
+                </div>
+              </form>
             </div>
           )}
 
