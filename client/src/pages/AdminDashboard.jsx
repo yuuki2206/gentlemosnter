@@ -17,6 +17,12 @@ const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
 
+  // States tìm kiếm, lọc & phân trang
+  const [productSearch, setProductSearch] = useState("");
+  const [productCategoryFilter, setProductCategoryFilter] = useState("All");
+  const [productPage, setProductPage] = useState(1);
+  const itemsPerPage = 15;
+
   // States quản lý đơn hàng/giao dịch
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
@@ -76,6 +82,16 @@ const AdminDashboard = () => {
     // 2. Gom kết hợp bộ dữ liệu mẫu 47 mẫu kính cao cấp Gentle Monster
     try {
       let storedProducts = localStorage.getItem("gm_products_db_v3");
+      if (storedProducts) {
+        try {
+          const parsed = JSON.parse(storedProducts);
+          // Tự động xóa bộ nhớ đệm Localhost cũ nếu chứa giá USD cũ (< 1000)
+          if (parsed.length > 0 && (parsed.some((p) => p.price < 1000) || (parsed[0].url && !parsed[0].url.startsWith("http")))) {
+            localStorage.removeItem("gm_products_db_v3");
+            storedProducts = null;
+          }
+        } catch (e) {}
+      }
       if (!storedProducts) {
         localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
         storedProducts = JSON.stringify(productsData);
@@ -386,75 +402,154 @@ const AdminDashboard = () => {
         <div className="flex-grow">
           
           {/* TAB 1: QUẢN LÝ SẢN PHẨM */}
-          {activeTab === "products" && (
-            <div className="space-y-6 text-left">
-              <div className="flex justify-between items-center border-b border-gray-100 pb-3">
-                <h2 className="text-[11px] font-bold tracking-widest uppercase text-black">
-                  DANH SÁCH SẢN PHẨM KÍNH
-                </h2>
-                <button
-                  onClick={handleOpenAddModal}
-                  className="bg-black hover:bg-gray-800 text-white text-[10px] font-bold tracking-widest uppercase py-2.5 px-4 transition-colors rounded-none flex items-center gap-2"
-                >
-                  <Plus size={14} /> Thêm Kính Mới
-                </button>
-              </div>
+          {activeTab === "products" && (() => {
+            const filteredProducts = products.filter((p) => {
+              const q = productSearch.trim().toLowerCase();
+              const matchesSearch =
+                !q ||
+                (p.name || "").toLowerCase().includes(q) ||
+                (p.sku || "").toLowerCase().includes(q);
+              const matchesCategory =
+                productCategoryFilter === "All" ||
+                p.collection === productCategoryFilter ||
+                p.type === productCategoryFilter;
+              return matchesSearch && matchesCategory;
+            });
 
-              {loadingProducts ? (
-                <p className="text-[11px] text-gray-400 italic">Đang tải danh sách từ cơ sở dữ liệu cloud...</p>
-              ) : products.length === 0 ? (
-                <p className="text-[11px] text-gray-400">Không có sản phẩm nào trong database.</p>
-              ) : (
-                <div className="overflow-x-auto border border-gray-100">
-                  <table className="w-full border-collapse text-[11px]">
-                    <thead>
-                      <tr className="bg-gray-50 border-b border-gray-100 text-gray-400 font-bold uppercase tracking-wider text-[9px]">
-                        <th className="px-6 py-4 text-center">Ảnh</th>
-                        <th className="px-6 py-4">Mã SKU</th>
-                        <th className="px-6 py-4">Tên Sản Phẩm</th>
-                        <th className="px-6 py-4">Giá thành</th>
-                        <th className="px-6 py-4">Loại Kính</th>
-                        <th className="px-6 py-4 text-center">Hành động</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100 bg-[#fefefe]">
-                      {products.map((item) => (
-                        <tr key={item.sku} className="hover:bg-gray-50/50 transition-colors">
-                          <td className="px-6 py-3 text-center">
-                            <img src={item.thumbnail} alt={item.name} className="w-12 h-9 object-contain bg-[#f9f9f9] mx-auto border border-gray-100" />
-                          </td>
-                          <td className="px-6 py-4 font-mono font-semibold text-gray-500">{item.sku}</td>
-                          <td className="px-6 py-4 font-semibold text-black">{item.name}</td>
-                          <td className="px-6 py-4 font-semibold text-black">
-                            ₫ {Number(item.price).toLocaleString("en-US")}
-                          </td>
-                          <td className="px-6 py-4 text-gray-500 font-medium">{item.collection}</td>
-                          <td className="px-6 py-4 text-center">
-                            <div className="flex justify-center gap-3">
-                              <button
-                                onClick={() => handleOpenEditModal(item)}
-                                className="text-gray-400 hover:text-black transition-colors"
-                                title="Sửa thông tin"
-                              >
-                                <Edit2 size={14} />
-                              </button>
-                              <button
-                                onClick={() => handleDeleteProduct(item.sku)}
-                                className="text-gray-400 hover:text-red-600 transition-colors"
-                                title="Xóa sản phẩm"
-                              >
-                                <Trash2 size={14} />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
+            const currentProducts = filteredProducts.slice(
+              (productPage - 1) * itemsPerPage,
+              productPage * itemsPerPage
+            );
+
+            return (
+              <div className="space-y-6 text-left">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-gray-100 pb-3 gap-4">
+                  <div>
+                    <h2 className="text-[11px] font-bold tracking-widest uppercase text-black">
+                      DANH SÁCH SẢN PHẨM KÍNH
+                    </h2>
+                    <p className="text-[9px] text-gray-400 mt-0.5">
+                      Hiển thị {filteredProducts.length} trên tổng số {products.length} kính
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleOpenAddModal}
+                    className="bg-black hover:bg-gray-800 text-white text-[10px] font-bold tracking-widest uppercase py-2.5 px-4 transition-colors rounded-none flex items-center gap-2 self-start sm:self-auto"
+                  >
+                    <Plus size={14} /> Thêm Kính Mới
+                  </button>
                 </div>
-              )}
-            </div>
-          )}
+
+                {/* THANH TÌM KIẾM VÀ BỘ LỌC DANH MỤC */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="text"
+                    value={productSearch}
+                    onChange={(e) => {
+                      setProductSearch(e.target.value);
+                      setProductPage(1);
+                    }}
+                    placeholder="Tìm kiếm theo Tên kính hoặc Mã SKU..."
+                    className="flex-grow border border-gray-200 bg-white px-3.5 py-2 text-[11px] focus:outline-none focus:border-black transition-colors placeholder-gray-400"
+                  />
+                  <select
+                    value={productCategoryFilter}
+                    onChange={(e) => {
+                      setProductCategoryFilter(e.target.value);
+                      setProductPage(1);
+                    }}
+                    className="border border-gray-200 bg-white px-3 py-2 text-[11px] focus:outline-none focus:border-black transition-colors"
+                  >
+                    <option value="All">Tất cả loại kính</option>
+                    <option value="Sunglasses">Sunglasses (Kính râm)</option>
+                    <option value="Glasses">Glasses (Kính thường)</option>
+                  </select>
+                </div>
+
+                {loadingProducts ? (
+                  <p className="text-[11px] text-gray-400 italic">Đang tải danh sách từ cơ sở dữ liệu cloud...</p>
+                ) : filteredProducts.length === 0 ? (
+                  <p className="text-[11px] text-gray-400">Không tìm thấy sản phẩm phù hợp.</p>
+                ) : (
+                  <>
+                    <div className="overflow-x-auto border border-gray-100">
+                      <table className="w-full border-collapse text-[11px]">
+                        <thead>
+                          <tr className="bg-gray-50 border-b border-gray-100 text-gray-400 font-bold uppercase tracking-wider text-[9px]">
+                            <th className="px-6 py-4 text-center">Ảnh</th>
+                            <th className="px-6 py-4">Mã SKU</th>
+                            <th className="px-6 py-4">Tên Sản Phẩm</th>
+                            <th className="px-6 py-4">Giá thành</th>
+                            <th className="px-6 py-4">Loại Kính</th>
+                            <th className="px-6 py-4 text-center">Hành động</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100 bg-[#fefefe]">
+                          {currentProducts.map((item) => (
+                            <tr key={item.sku} className="hover:bg-gray-50/50 transition-colors">
+                              <td className="px-6 py-3 text-center">
+                                <img src={item.thumbnail} alt={item.name} className="w-12 h-9 object-contain bg-[#f9f9f9] mx-auto border border-gray-100" />
+                              </td>
+                              <td className="px-6 py-4 font-mono font-semibold text-gray-500">{item.sku}</td>
+                              <td className="px-6 py-4 font-semibold text-black">{item.name}</td>
+                              <td className="px-6 py-4 font-semibold text-black">
+                                ₫ {Number(item.price).toLocaleString("en-US")}
+                              </td>
+                              <td className="px-6 py-4 text-gray-500 font-medium">{item.collection}</td>
+                              <td className="px-6 py-4 text-center">
+                                <div className="flex justify-center gap-3">
+                                  <button
+                                    onClick={() => handleOpenEditModal(item)}
+                                    className="text-gray-400 hover:text-black transition-colors"
+                                    title="Sửa thông tin"
+                                  >
+                                    <Edit2 size={14} />
+                                  </button>
+                                  <button
+                                    onClick={() => handleDeleteProduct(item.sku)}
+                                    className="text-gray-400 hover:text-red-600 transition-colors"
+                                    title="Xóa sản phẩm"
+                                  >
+                                    <Trash2 size={14} />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* THANH PHÂN TRANG (PAGINATION) */}
+                    {totalPages > 1 && (
+                      <div className="flex items-center justify-between pt-2">
+                        <span className="text-[10px] text-gray-400 font-medium">
+                          Trang {productPage} / {totalPages}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => setProductPage((p) => Math.max(p - 1, 1))}
+                            disabled={productPage === 1}
+                            className="px-3 py-1.5 border border-gray-200 text-[10px] font-bold uppercase tracking-wider disabled:opacity-30 hover:bg-black hover:text-white transition-colors"
+                          >
+                            Trước
+                          </button>
+                          <button
+                            onClick={() => setProductPage((p) => Math.min(p + 1, totalPages))}
+                            disabled={productPage === totalPages}
+                            className="px-3 py-1.5 border border-gray-200 text-[10px] font-bold uppercase tracking-wider disabled:opacity-30 hover:bg-black hover:text-white transition-colors"
+                          >
+                            Sau
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            );
+          })()}
 
           {/* TAB 2: QUẢN LÝ NGƯỜI DÙNG & IP */}
           {activeTab === "users" && (
