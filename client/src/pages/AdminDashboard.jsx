@@ -443,7 +443,7 @@ const AdminDashboard = () => {
   };
 
   // Xử lý gửi Form (Thêm hoặc Sửa)
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -483,6 +483,20 @@ const AdminDashboard = () => {
     };
 
     try {
+      // 1. Đồng bộ lên MongoDB Server Cloud (nếu backend đang chạy)
+      try {
+        const endpoint = isEditing ? `${API_BASE_URL}/products/${sku}` : `${API_BASE_URL}/products`;
+        const method = isEditing ? "PUT" : "POST";
+        await fetch(endpoint, {
+          method,
+          headers: getAuthHeaders(),
+          body: JSON.stringify(productPayload),
+        });
+      } catch (apiErr) {
+        console.log("[Offline Mode] Server API offline, fallback lưu vào bộ đệm LocalStorage");
+      }
+
+      // 2. Lưu vào LocalStorage làm bộ đệm siêu nhanh
       let storedProducts = localStorage.getItem("gm_products_db_v3");
       if (!storedProducts) {
         localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
@@ -513,6 +527,8 @@ const AdminDashboard = () => {
         localStorage.setItem("gm_products_db_v3", JSON.stringify(allProducts));
         setSuccess("Đã thêm kính mới thành công!");
         setShowFormModal(false);
+        setProductPage(1);
+        setProductSearch("");
         fetchAllProducts();
       }
     } catch (err) {
@@ -520,12 +536,19 @@ const AdminDashboard = () => {
     }
   };
 
-  // Xóa sản phẩm khỏi database giả lập
-  const handleDeleteProduct = (productSku) => {
+  // Xóa sản phẩm khỏi database giả lập + MongoDB Cloud
+  const handleDeleteProduct = async (productSku) => {
     const confirm = window.confirm(`Bạn có chắc chắn muốn xóa kính có mã SKU: ${productSku} khỏi Database?`);
     if (!confirm) return;
 
     try {
+      try {
+        await fetch(`${API_BASE_URL}/products/${productSku}`, {
+          method: "DELETE",
+          headers: getAuthHeaders(),
+        });
+      } catch (apiErr) {}
+
       let storedProducts = localStorage.getItem("gm_products_db_v3");
       if (storedProducts) {
         let allProducts = JSON.parse(storedProducts);
@@ -1185,14 +1208,21 @@ const AdminDashboard = () => {
                 <label className="block text-[9px] text-gray-400 uppercase tracking-widest mb-1">
                   Ảnh Đại Diện (Thumbnail URL)*
                 </label>
-                <input
-                  type="text"
-                  value={thumbnail}
-                  onChange={(e) => setThumbnail(e.target.value)}
-                  placeholder="Nhập link ảnh https://"
-                  className="w-full border border-gray-200 bg-white px-3 py-2.5 text-[11px] focus:outline-none focus:border-black transition-colors"
-                  required
-                />
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="text"
+                    value={thumbnail}
+                    onChange={(e) => setThumbnail(e.target.value)}
+                    placeholder="Nhập link ảnh https://"
+                    className="flex-grow border border-gray-200 bg-white px-3 py-2.5 text-[11px] focus:outline-none focus:border-black transition-colors"
+                    required
+                  />
+                  {thumbnail && (
+                    <div className="w-12 h-10 border border-gray-200 bg-[#f9f9f9] flex-shrink-0 flex items-center justify-center overflow-hidden">
+                      <img src={thumbnail} alt="Preview" onError={handleImageError} className="w-full h-full object-contain" />
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div>
