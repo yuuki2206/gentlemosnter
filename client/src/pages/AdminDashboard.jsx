@@ -207,6 +207,54 @@ const AdminDashboard = () => {
     setLoadingOrders(false);
   };
 
+  // Cập nhật trạng thái đơn hàng (Admin Status Handler)
+  const handleUpdateOrderStatus = (orderId, newStatus) => {
+    try {
+      const storedGlobal = JSON.parse(localStorage.getItem("gm_mock_orders") || "[]");
+      const updatedGlobal = storedGlobal.map(o => (o.orderId === orderId || o.id === orderId || o._id === orderId) ? { ...o, status: newStatus } : o);
+      localStorage.setItem("gm_mock_orders", JSON.stringify(updatedGlobal));
+
+      const storedUsers = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
+      const updatedUsers = storedUsers.map(u => {
+        if (u.purchases && Array.isArray(u.purchases)) {
+          const updatedPurchases = u.purchases.map(p => (p.orderId === orderId || p.id === orderId || p._id === orderId) ? { ...p, status: newStatus } : p);
+          return { ...u, purchases: updatedPurchases };
+        }
+        return u;
+      });
+      localStorage.setItem("gm_mock_users", JSON.stringify(updatedUsers));
+
+      fetchAllOrders();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // Xuất file Báo cáo CSV cho Đơn hàng
+  const handleExportOrdersCSV = () => {
+    if (orders.length === 0) return alert("Không có dữ liệu đơn hàng để xuất file.");
+    
+    const headers = ["Order ID", "Customer Email", "Total VND", "Total ETH", "Type", "Status", "Date"];
+    const rows = orders.map(o => [
+      `"${o.orderId}"`,
+      `"${o.userEmail}"`,
+      o.total,
+      o.ethTotal || 0,
+      `"${o.type}"`,
+      `"${o.status || 'Paid'}"`,
+      `"${new Date(o.createdAt).toLocaleString('vi-VN')}"`
+    ]);
+
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Gentle_Monster_Orders_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   useEffect(() => {
     if (user && user.role === "admin") {
       fetchAllProducts();
@@ -650,12 +698,20 @@ const AdminDashboard = () => {
           {activeTab === "transactions" && (
             <div className="space-y-6 text-left">
               <div className="border-b border-gray-100 pb-3 flex justify-between items-center">
-                <h2 className="text-[11px] font-bold tracking-widest uppercase text-black">
-                  LỊCH SỬ GIAO DỊCH & ĐƠN HÀNG CLOUD
-                </h2>
-                <span className="text-[9px] font-bold uppercase tracking-wider text-gray-400 bg-gray-50 px-2.5 py-1">
-                  {orders.length} Đơn hàng
-                </span>
+                <div>
+                  <h2 className="text-[11px] font-bold tracking-widest uppercase text-black">
+                    LỊCH SỬ GIAO DỊCH & ĐƠN HÀNG CLOUD
+                  </h2>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-gray-400 mt-0.5 block">
+                    {orders.length} Đơn hàng đã ghi nhận
+                  </span>
+                </div>
+                <button
+                  onClick={handleExportOrdersCSV}
+                  className="bg-black hover:bg-gray-800 text-white text-[10px] font-bold tracking-widest uppercase py-2 px-3.5 transition-colors rounded-none flex items-center gap-2"
+                >
+                  📥 Xuất File CSV
+                </button>
               </div>
 
               {/* Thống kê Widgets */}
@@ -692,6 +748,7 @@ const AdminDashboard = () => {
                         <th className="px-6 py-4">Sản Phẩm</th>
                         <th className="px-6 py-4">Tổng tiền (VND)</th>
                         <th className="px-6 py-4">MetaMask Info</th>
+                        <th className="px-6 py-4 text-center">Trạng Thái Đơn</th>
                         <th className="px-6 py-4 text-center">Loại đơn</th>
                       </tr>
                     </thead>
@@ -740,6 +797,19 @@ const AdminDashboard = () => {
                             ) : (
                               <span className="text-gray-400 italic">N/A (Web2 Transaction)</span>
                             )}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            <select
+                              value={o.status || "Completed"}
+                              onChange={(e) => handleUpdateOrderStatus(o.orderId, e.target.value)}
+                              className="border border-gray-200 bg-white px-2 py-1 text-[10px] font-semibold uppercase tracking-wider focus:outline-none focus:border-black rounded-none cursor-pointer"
+                            >
+                              <option value="Paid">Paid (Đã thanh toán)</option>
+                              <option value="Processing">Processing (Đang xử lý)</option>
+                              <option value="Shipped">Shipped (Đã gửi hàng)</option>
+                              <option value="Completed">Completed (Hoàn thành)</option>
+                              <option value="Cancelled">Cancelled (Hủy đơn)</option>
+                            </select>
                           </td>
                           <td className="px-6 py-4 text-center">
                             <span className={`px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider ${
