@@ -17,15 +17,24 @@
  */
 
 export const getMediaUrl = (path) => {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+
+  if (path.includes("Circuit%20collection/main_pc.mp4") || path.includes("Circuit collection/main_pc.mp4")) {
+    return "https://gm-prd-resource.gentlemonster.com/assets/stories/circuit-collection/video/main_pc.mp4";
+  }
+
+  if (path.includes("Circuit%20collection/3d.mp4") || path.includes("Circuit collection/3d.mp4")) {
+    return "https://gm-prd-resource.gentlemonster.com/assets/stories/circuit-collection/video/3d.mp4";
+  }
+
   const base = import.meta.env.VITE_MEDIA_BASE_URL || "";
   
-  // Phục vụ các video chiến dịch (Veggie/Circuit) trực tiếp từ local Vercel domain
-  // để tránh việc nhà mạng di động Việt Nam chặn/lọc CDN hãng Gentle Monster.
   const isLocalCampaignMedia = 
     path.includes("Veggie%20collection") || 
     path.includes("Veggie collection") ||
-    path.includes("Circuit%20collection") || 
-    path.includes("Circuit collection") ||
     path.endsWith("Veggie.mp4");
 
   if (isLocalCampaignMedia) {
@@ -33,13 +42,11 @@ export const getMediaUrl = (path) => {
   }
 
   if (base) {
-    // Đảm bảo không trùng dấu gạch chéo kép cho các tài nguyên CDN khác
     const cleanBase = base.endsWith("/") ? base.slice(0, -1) : base;
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
     return `${cleanBase}${cleanPath}`;
   }
 
-  // Chạy dưới Local
   if (base.endsWith("/") && path.startsWith("/")) {
     return `${base}${path.slice(1)}`;
   }

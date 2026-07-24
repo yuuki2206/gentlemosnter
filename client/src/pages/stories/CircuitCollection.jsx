@@ -125,7 +125,7 @@ const CircuitCollection = ({ story }) => {
           <div className="circuit-hero-container">
             <video
               ref={heroVideoRef}
-              src={getMediaUrl("/Circuit%20collection/main_pc.mp4")}
+              src="https://gm-prd-resource.gentlemonster.com/assets/stories/circuit-collection/video/main_pc.mp4"
               className="w-full absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full object-cover"
               loop
               muted={isHeroMuted}
@@ -374,7 +374,7 @@ const CircuitCollection = ({ story }) => {
               {/* Sửa đổi class để video 3D thích ứng hoàn hảo khi Resize */}
               <video
                 ref={video3DRef}
-                src={getMediaUrl("/Circuit%20collection/3d.mp4")}
+                src="https://gm-prd-resource.gentlemonster.com/assets/stories/circuit-collection/video/3d.mp4"
                 className="absolute inset-0 w-full h-full object-cover"
                 loop
                 muted={is3DMuted}
