@@ -81,6 +81,7 @@ function AppContent() {
           <Route path="/int/en/services" element={<Services />} />
           <Route path="/int/en/stories" element={<Stories />} />
           <Route path="/int/en/stories/:id" element={<StoryDetail />} />
+          <Route path="/int/en/category/collections/:id" element={<StoryDetail />} />
 
           {/* Wildcard: Mọi URL không khớp sẽ được chuyển hướng về trang chủ */}
           <Route path="*" element={<Navigate to="/" replace />} />

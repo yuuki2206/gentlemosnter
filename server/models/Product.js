@@ -68,6 +68,14 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    stock: {
+      type: Number,
+      default: 15,
+    },
+    status: {
+      type: String,
+      default: "In stock",
+    },
   },
   {
     timestamps: true,

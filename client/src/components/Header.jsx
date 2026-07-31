@@ -14,10 +14,21 @@ import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 
 
-const Header = ({ forceSolid = false, forceTransparent = false }) => {
+const Header = ({ forceSolid = false, forceTransparent = false, isDark = false }) => {
   const { cartCount } = useContext(CartContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isDarkPage =
+    isDark ||
+    location.pathname.includes("intelligent-eyewear") ||
+    location.pathname.includes("stories") ||
+    location.pathname.includes("2025-fall-collection") ||
+    location.pathname.includes("veggie") ||
+    location.pathname.includes("circuit") ||
+    location.pathname.includes("bold") ||
+    location.pathname.includes("2026-collection");
   // === STATE MANAGEMENT (Quản lý trạng thái nội bộ bằng useState) ===
   const [isOpen, setIsOpen] = useState(false);           // Trạng thái đóng/mở menu toàn màn hình trên Mobile
   const [isScrolled, setIsScrolled] = useState(false);   // Trạng thái người dùng đã cuộn trang xuống > 50px chưa
@@ -26,7 +37,6 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   const [cartActiveTab, setCartActiveTab] = useState("BAG"); // Tab mặc định khi mở giỏ hàng
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Trạng thái đóng/mở thanh tìm kiếm (Search Drawer)
   const [expandedItem, setExpandedItem] = useState(null); // Trạng thái mở rộng menu con trên Mobile
-  const progressBarRef = useRef(null);
 
   // Helper tắt toàn bộ overlay cùng một lúc tránh chồng chéo giao diện
   const closeAllDrawers = () => {
@@ -47,11 +57,6 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
       document.body.style.overflow = "";
     };
   }, [isCartOpen, isSearchOpen, isOpen, isAuthOpen]);
-
-  // === REACT ROUTER: useLocation ===
-  // Hook này trả về object chứa thông tin URL hiện tại, trong đó pathname là phần đường dẫn (VD: "/", "/sunglasses", "/intelligent-eyewear").
-  // Mỗi khi người dùng chuyển trang, useLocation sẽ re-render component này với pathname mới.
-  const location = useLocation();
 
   // === LOGIC XÁC ĐỊNH NỀN HEADER ===
   // Trang chủ ("/"), Intelligent Eyewear, và Services có thiết kế nền video/ảnh full-screen,
@@ -107,15 +112,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // 1. Cập nhật thanh tiến trình cuộn trên cùng
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (docHeight > 0 && progressBarRef.current) {
-        const progress = currentScrollY / docHeight;
-        progressBarRef.current.style.transform = `scaleX(${progress})`;
-      }
-
-      // 2. Đổi màu nền Header khi cuộn quá 50px
+      // Đổi màu nền Header khi cuộn quá 50px
       setIsScrolled(currentScrollY > 50);
     };
 
@@ -141,27 +138,15 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
     setIsAuthOpen(false);
     setIsOpen(false);
     setIsSearchOpen(false);
-    if (progressBarRef.current) {
-      progressBarRef.current.style.transform = "scaleX(0)";
-    }
   }, [location.pathname, location.search]);
 
   return (
     // === React Fragment (<>): Bọc nhiều element cùng cấp mà không tạo thẻ DOM thừa ===
     <>
-      {/* Scroll Progress Bar - Thanh tiến trình cuộn tối giản 1.5px ở trên cùng */}
-      <div 
-        ref={progressBarRef}
-        className={`fixed top-0 left-0 h-[1.5px] z-[1000] w-full origin-left transition-transform duration-75 ease-out ${
-          location.pathname.includes("intelligent-eyewear") ? "bg-white" : "bg-black"
-        }`}
-        style={{ transform: "scaleX(0)" }}
-      />
-
       <header
         className={`fixed top-0 left-0 w-full z-[999] px-4 py-5 md:px-8 transition-[background-color,border-color] duration-500 ease-in-out ${
           isSolid || isOpen
-            ? (location.pathname.includes("intelligent-eyewear") ? "bg-black text-white" : "bg-[#f8f8f8] text-black border-b border-gray-100")
+            ? (isDarkPage ? "bg-black text-white border-b border-white/10" : "bg-[#f8f8f8] text-black border-b border-gray-100")
             : "bg-transparent text-white"
         }`}
       >
@@ -213,7 +198,7 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
                         ${menuPosition[item]} z-[999]
                         ${
                           isSolid
-                            ? (location.pathname.includes("intelligent-eyewear") ? "bg-black text-white" : "bg-[#f8f8f8] text-black")
+                            ? (isDarkPage ? "bg-black text-white" : "bg-[#f8f8f8] text-black")
                             : "bg-transparent text-white font-bold"
                         }`}
                     >
@@ -227,6 +212,8 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
                               ? "/int/en/stories"
                               : item === "Sunglasses" || item === "Glasses"
                               ? `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`
+                              : item === "Collections" && (subItem.includes("2026") || subItem === "2026 Collection")
+                              ? "/stories/799785239610919992"
                               : item === "Collections" && subItem === "Veggie"
                               ? "/stories/850266286345551416"
                               : item === "Collections" && subItem === "Circuit"
@@ -347,6 +334,8 @@ const Header = ({ forceSolid = false, forceTransparent = false }) => {
                                 ? "/int/en/stories"
                                 : item === "Sunglasses" || item === "Glasses"
                                 ? `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`
+                                : item === "Collections" && (subItem.includes("2026") || subItem === "2026 Collection")
+                                ? "/stories/799785239610919992"
                                 : item === "Collections" && subItem === "Veggie"
                                 ? "/stories/850266286345551416"
                                 : item === "Collections" && subItem === "Circuit"

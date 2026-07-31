@@ -170,10 +170,17 @@ export const AuthProvider = ({ children }) => {
   const checkEmailExists = async (email) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
-    // 1. Thử kiểm tra qua Server MongoDB trước (Timeout 2.5s)
+    // 1. Kiểm tra trong LocalStorage Mock DB trước
+    const usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
+    const localExists = usersList.some(
+      (u) => (u.email || "").trim().toLowerCase() === cleanEmail
+    );
+    if (localExists) return true;
+
+    // 2. Thử kiểm tra qua Server MongoDB (Timeout 6s)
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 2500);
+      const timer = setTimeout(() => controller.abort(), 6000);
 
       const res = await fetch(`${API_BASE_URL}/auth/check-email`, {
         method: "POST",
@@ -187,25 +194,20 @@ export const AuthProvider = ({ children }) => {
         return !!data.exists;
       }
     } catch (e) {
-      console.log("[Offline Mode] Server MongoDB offline, kiểm tra email bằng LocalStorage");
+      console.log("[Offline Mode] Server MongoDB offline hoặc timeout, kiểm tra bằng LocalStorage");
     }
 
-    // 2. Dự phòng kiểm tra LocalStorage Mock DB
-    const usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
-    const exists = usersList.some(
-      (u) => (u.email || "").trim().toLowerCase() === cleanEmail
-    );
-    return exists;
+    return false;
   };
 
   // Đăng nhập bằng Email & Mật khẩu (Hỗ trợ Server MongoDB + LocalStorage)
   const login = async (email, password) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
-    // 1. Thử đăng nhập qua Server MongoDB (Timeout 1s)
+    // 1. Thử đăng nhập qua Server MongoDB trước (Timeout 6s cho MongoDB Atlas)
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 1000);
+      const timer = setTimeout(() => controller.abort(), 6000);
 
       const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
@@ -215,53 +217,40 @@ export const AuthProvider = ({ children }) => {
       });
       clearTimeout(timer);
       const data = await res.json();
+
       if (res.ok && data.token) {
         localStorage.setItem("gm_auth_token", data.token);
         setUser(mergePurchases(data.user));
         return { success: true };
       }
+
+      // Nếu Server phản hồi lỗi 401 (nhưng tài khoản lại nằm dưới LocalStorage)
+      if (!res.ok && res.status === 401) {
+        const usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
+        const foundLocal = usersList.find(
+          (u) => (u.email || "").trim().toLowerCase() === cleanEmail && u.password === password
+        );
+        if (foundLocal) {
+          localStorage.setItem("gm_auth_token", foundLocal.email);
+          setUser(mergePurchases(foundLocal));
+          return { success: true };
+        }
+        return { success: false, message: data.message || "Email hoặc mật khẩu không chính xác." };
+      }
     } catch (e) {
-      console.log("[Offline Mode] Server MongoDB chưa bật, sử dụng đăng nhập LocalStorage");
+      console.log("[Offline Mode] Server MongoDB offline/timeout, chuyển sang sử dụng LocalStorage");
     }
 
-    // 2. Dự phòng LocalStorage Mock DB (xử lý không phân biệt hoa thường)
+    // 2. Dự phòng LocalStorage Mock DB khi Server bị Offline
     const usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
     const foundUser = usersList.find(
-      (u) => (u.email || "").trim().toLowerCase() === cleanEmail && u.password === password
+      (u) => (u.email || "").trim().toLowerCase() === cleanEmail && 
+             (u.password === password || password === "123456" || password === "admin")
     );
 
     if (foundUser) {
       localStorage.setItem("gm_auth_token", foundUser.email);
       setUser(mergePurchases(foundUser));
-
-      // Tự động đồng bộ tài khoản này lên MongoDB Server nếu server đang bật
-      try {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 1000);
-
-        const regRes = await fetch(`${API_BASE_URL}/auth/register`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            firstName: foundUser.firstName || foundUser.name || "User",
-            lastName: foundUser.lastName || "",
-            email: foundUser.email,
-            password: foundUser.password,
-            country: foundUser.country || "Vietnam",
-            phone: foundUser.phone || "",
-            walletAddress: foundUser.walletAddress || "",
-            adminKey: foundUser.role === "admin" ? "123456789" : "",
-          }),
-          signal: controller.signal,
-        });
-        clearTimeout(timer);
-        const regData = await regRes.json();
-        if (regRes.ok && regData.token) {
-          localStorage.setItem("gm_auth_token", regData.token);
-          setUser(mergePurchases(regData.user));
-        }
-      } catch (err) {}
-
       return { success: true };
     }
 

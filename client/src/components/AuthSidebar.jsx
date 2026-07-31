@@ -271,9 +271,19 @@ const AuthSidebar = ({ isOpen, onClose }) => {
                     onClose();
                     navigate(`/signup?email=${encodeURIComponent(email)}`);
                   }}
-                  className="w-full bg-black hover:bg-gray-800 text-white text-[10px] font-bold tracking-widest uppercase py-4 transition-colors mb-8 rounded-none flex items-center justify-center gap-2"
+                  className="w-full bg-black hover:bg-gray-800 text-white text-[10px] font-bold tracking-widest uppercase py-4 transition-colors mb-3 rounded-none flex items-center justify-center gap-2"
                 >
                   <Mail size={14} /> SIGN UP WITH EMAIL
+                </button>
+
+                <button
+                  onClick={() => {
+                    setError("");
+                    setStep("PASSWORD");
+                  }}
+                  className="w-full bg-transparent border border-gray-300 hover:border-black text-black text-[10px] font-bold tracking-widest uppercase py-3 transition-colors mb-8 rounded-none"
+                >
+                  ALREADY HAVE A PASSWORD? LOG IN
                 </button>
 
                 <button className="w-full bg-transparent border border-gray-300 hover:border-black text-black text-[10px] font-bold tracking-widest uppercase py-4 transition-colors mb-8 rounded-none">

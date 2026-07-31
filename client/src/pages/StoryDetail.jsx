@@ -4,31 +4,18 @@ import { stories } from "../data/stories";
 import { products } from "../data/products";
 import VeggieCollection from "./stories/VeggieCollection";
 import CircuitCollection from "./stories/CircuitCollection";
+import Collection2026 from "./stories/Collection2026";
+import Fall2025Collection from "./stories/Fall2025Collection";
+import BoldCollection from "./stories/BoldCollection";
 import FallbackStory from "./stories/FallbackStory";
 import "../veggie.css";
 import "../circuit.css";
 
-/**
- * StoryDetail Component
- * 
- * KIẾN THỨC NỀN TẢNG & KIẾN TRÚC:
- * 1. Cơ chế Dispatcher (Bộ điều phối trung gian):
- *    - Thay vì viết gộp hàng ngàn dòng code giao diện của nhiều chiến dịch khác nhau vào chung một file gây rối,
- *      StoryDetail đóng vai trò là "Router con" hoặc "Dispatcher". Nó xác định chiến dịch hiện tại thông qua URL param `id` (slug),
- *      sau đó phân phối luồng render đến các component con chuyên dụng (`VeggieCollection`, `CircuitCollection`, `FallbackStory`).
- *    - Thiết kế này tuân thủ nguyên tắc Single Responsibility Principle (SRP) trong SOLID - mỗi file chỉ giải quyết đúng 1 chiến dịch.
- * 
- * 2. So khớp Chiến dịch linh hoạt (Fuzzy Matching):
- *    - Phân tích các từ khóa đặc trưng trong `title` (như "veggie", "f1", "circuit") hoặc so khớp trực tiếp ID chiến dịch từ CMS để quyết định giao diện chính xác.
- * 
- * 3. Tái sử dụng dữ liệu sản phẩm:
- *    - Lọc động danh sách sản phẩm thuộc bộ sưu tập tương ứng với tiêu đề chiến dịch để chuyển tiếp.
- */
 const StoryDetail = () => {
   const { id } = useParams();
 
-  // 1. Tìm thông tin chi tiết của chiến dịch dựa trên ID hoặc mặc định lấy chiến dịch đầu tiên
-  const story = stories.find((s) => s.id === id) || stories[0];
+  // 1. Tìm thông tin chi tiết của chiến dịch dựa trên ID hoặc slug
+  const story = stories.find((s) => s.id === id || s.url?.includes(id)) || stories[0];
 
   // 2. Lọc danh sách sản phẩm thuộc bộ sưu tập tương ứng với tiêu đề chiến dịch
   const collectionProducts = products.filter(
@@ -51,11 +38,24 @@ const StoryDetail = () => {
   ];
 
   // 4. Định nghĩa các điều kiện khớp trang chi tiết đặc biệt
-  const isVeggie = story.title?.toLowerCase().includes("veggie") || id === "850266286345551416";
+  const isVeggie = story.title?.toLowerCase().includes("veggie") || id === "850266286345551416" || id === "veggie-collection";
   const isCircuit = story.title?.toLowerCase().includes("circuit") ||
                     story.title?.toLowerCase().includes("f1") ||
                     id === "circuit-collection" ||
                     id === "817695100293913422";
+  const is2026 = story.title?.toLowerCase().includes("2026") ||
+                 story.title?.toLowerCase().includes("bouquet") ||
+                 id === "2026-collection" ||
+                 id === "799785239610919992";
+  const isFall2025 = story.title?.toLowerCase().includes("2025 fall") ||
+                     story.title?.toLowerCase().includes("fall collection") ||
+                     id === "2025-fall-collection" ||
+                     id === "773503337115322557";
+  const isBold = story.title?.toLowerCase().includes("bold") ||
+                 id === "2025-bold-collection" ||
+                 id === "bold-collection" ||
+                 id === "bold" ||
+                 id === "751335364734384213";
 
   // 5. Phân phối hiển thị đến các component con
   if (isCircuit) {
@@ -64,6 +64,18 @@ const StoryDetail = () => {
 
   if (isVeggie) {
     return <VeggieCollection story={story} veggieDisplayItems={veggieDisplayItems} />;
+  }
+
+  if (is2026) {
+    return <Collection2026 story={story} />;
+  }
+
+  if (isFall2025) {
+    return <Fall2025Collection story={story} />;
+  }
+
+  if (isBold) {
+    return <BoldCollection story={story} />;
   }
 
   return <FallbackStory story={story} collectionProducts={collectionProducts} />;

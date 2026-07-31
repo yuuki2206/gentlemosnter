@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
 
     // Tải toàn bộ sản phẩm lên cache nếu chưa có (chỉ lấy các trường cần cho Grid và Swiper để giảm payload)
     if (!productsCache) {
-      const rawProducts = await Product.find({}).select("sku name price thumbnail collection collections gallery");
+      const rawProducts = await Product.find({}).select("sku name price thumbnail collection collections gallery stock status");
       productsCache = rawProducts.map((p) => {
         const pObj = p.toObject();
         if (pObj.price < 1000) {
@@ -128,6 +128,8 @@ router.post("/", protect, adminOnly, async (req, res) => {
       name,
       price,
       sku,
+      stock: req.body.stock !== undefined ? Number(req.body.stock) : 15,
+      status: req.body.status || (Number(req.body.stock) > 0 ? "In stock" : "Out of stock"),
       collection,
       collections: collections || [collection],
       thumbnail,
@@ -164,6 +166,8 @@ router.put("/:sku", protect, adminOnly, async (req, res) => {
 
     product.name = req.body.name || product.name;
     product.price = req.body.price !== undefined ? req.body.price : product.price;
+    product.stock = req.body.stock !== undefined ? Number(req.body.stock) : product.stock;
+    product.status = req.body.status || (product.stock > 0 ? "In stock" : "Out of stock");
     product.collection = req.body.collection || product.collection;
     product.collections = req.body.collections || product.collections;
     product.thumbnail = req.body.thumbnail || product.thumbnail;

@@ -5,6 +5,7 @@ import { productsData } from "../data/products";
 import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History, TrendingUp, AlertTriangle } from "lucide-react";
 import Header from "../components/Header";
 import { API_BASE_URL, getAuthHeaders } from "../config/api";
+import { handleImageError, FALLBACK_IMAGE_URL } from "../config/media";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -100,14 +101,15 @@ const AdminDashboard = () => {
       }
       const localData = JSON.parse(storedProducts);
 
-      const combined = [...serverProducts, ...localData];
+      // Ưu tiên localData (chứa thông tin mới nhất vừa được Admin tạo/sửa)
+      const combined = [...localData, ...serverProducts];
       const uniqueMap = new Map();
 
       combined.forEach((p) => {
         const key = p.sku || p.id || p._id || p.name;
         if (!key) return;
 
-        // Chuẩn hóa giá: Nếu giá < 1000 (USD), lấy giá VND tương ứng từ localData (productsData)
+        // Chuẩn hóa giá
         let finalPrice = Number(p.price) || 0;
         if (finalPrice < 1000) {
           const matchInLocal = localData.find((lp) => lp.sku === p.sku || lp.name === p.name);
@@ -119,23 +121,31 @@ const AdminDashboard = () => {
         }
 
         // Chuẩn hóa số lượng tồn kho (Stock quantity)
-        const charCodeSum = (key || "").split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
-        const defaultStock = charCodeSum % 19 === 0 ? 0 : charCodeSum % 7 === 0 ? 3 : (charCodeSum % 25) + 4;
-        const stockQty = p.stock !== undefined ? Number(p.stock) : defaultStock;
+        let stockQty = 15;
+        if (p.stock !== undefined && p.stock !== null) {
+          stockQty = Number(p.stock);
+        } else if (p.status === "Out of stock" || p.status === "Sold out") {
+          stockQty = 0;
+        }
 
         const normalizedProduct = {
           ...p,
           price: finalPrice,
           stock: stockQty,
+          status: stockQty > 0 ? "In stock" : "Out of stock",
         };
 
         if (!uniqueMap.has(key)) {
           uniqueMap.set(key, normalizedProduct);
         } else {
           const existing = uniqueMap.get(key);
-          if (existing.price < 1000 && normalizedProduct.price >= 1000) {
-            uniqueMap.set(key, normalizedProduct);
-          }
+          // Cập nhật thông tin nếu bản ghi mới hơn có giá hợp lệ hoặc số lượng tồn kho rõ ràng
+          uniqueMap.set(key, {
+            ...existing,
+            ...normalizedProduct,
+            stock: p.stock !== undefined ? stockQty : existing.stock,
+            status: (p.stock !== undefined ? stockQty : existing.stock) > 0 ? "In stock" : "Out of stock",
+          });
         }
       });
 
@@ -466,6 +476,7 @@ const AdminDashboard = () => {
       price: Number(price),
       sku,
       stock: Number(stock),
+      status: Number(stock) > 0 ? "In stock" : "Out of stock",
       collection: category,
       collections: [category],
       thumbnail,
@@ -1219,7 +1230,23 @@ const AdminDashboard = () => {
                   />
                   {thumbnail && (
                     <div className="w-12 h-10 border border-gray-200 bg-[#f9f9f9] flex-shrink-0 flex items-center justify-center overflow-hidden">
-                      <img src={thumbnail} alt="Preview" onError={handleImageError} className="w-full h-full object-contain" />
+                      {thumbnail.match(/\.(mp4|webm|mov|ogg)(\?.*)?$/i) || thumbnail.includes("/video/") ? (
+                        <video src={thumbnail} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                      ) : (
+                        <img
+                          src={thumbnail}
+                          alt="Preview"
+                          onError={(e) => {
+                            if (typeof handleImageError === "function") {
+                              handleImageError(e);
+                            } else {
+                              e.target.onerror = null;
+                              e.target.src = FALLBACK_IMAGE_URL;
+                            }
+                          }}
+                          className="w-full h-full object-contain"
+                        />
+                      )}
                     </div>
                   )}
                 </div>
