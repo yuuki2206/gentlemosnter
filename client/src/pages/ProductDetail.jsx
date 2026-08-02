@@ -153,9 +153,18 @@ const ProductDetail = () => {
 
   const isWishlisted = wishlist.some((item) => item.sku === product.sku);
 
-  // Mảng tất cả ảnh/video phụ
+  // Mảng tất cả ảnh/video phụ (Đã lọc bỏ tuyệt đối các hình ảnh lọt từ mẫu/SKU khác)
   const mediaList = [product.thumbnail, ...(product.gallery || [])].filter(
-    (url, index, self) => self.indexOf(url) === index && url && url !== ""
+    (url, index, self) => {
+      if (!url || url === "" || self.indexOf(url) !== index) return false;
+      if (url.includes("S11500904")) return false;
+      if (url.includes("/catalog/product/")) {
+        const parts = url.split("/catalog/product/")[1].split("/");
+        const urlSku = parts[0];
+        if (urlSku && urlSku !== product.sku) return false;
+      }
+      return true;
+    }
   );
 
   const isVideoMedia = (url) => url?.toLowerCase().endsWith(".mp4");
@@ -605,7 +614,7 @@ const ProductDetail = () => {
                     <img
                       src={getProductThumbnailImage(similarItem)}
                       alt={similarItem.name}
-                      className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[0.95] sm:scale-100 lg:scale-[1.2] group-hover:scale-[1.05] lg:group-hover:scale-[1.35]"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       onError={handleImageError}
                     />
                   </div>
