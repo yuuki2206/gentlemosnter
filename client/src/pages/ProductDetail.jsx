@@ -1,3 +1,22 @@
+/**
+ * ProductDetail Component - Trang Chi Tiết Sản Phẩm Chuẩn Gentle Monster (PDP)
+ * 
+ * KIẾN THỨC NỀN TẢNG & KỸ THUẬT ÁP DỤNG:
+ * 1. React Router v6 Dynamic Parameters (useParams & useNavigate):
+ *    - Trích xuất SKU từ URL (`/shop/:sku`), tự động truy vấn sản phẩm và tìm kiếm biến thể màu liên quan.
+ * 
+ * 2. Unified Media Container & Smart SKU Filtering:
+ *    - Tỷ lệ khung hình đồng bộ 100% (`aspect-[4/3] sm:aspect-[1/1] max-w-[760px] bg-transparent`).
+ *    - Lọc bỏ tuyệt đối các hình ảnh lọt từ biến thể màu/SKU khác hoặc thư mục phụ kiện.
+ *    - Thuật toán `getProductThumbnailImage` ưu tiên trích xuất đúng ảnh gọng kính chính diện (`_FRONT.jpg`).
+ * 
+ * 3. State Management & Context API (CartContext):
+ *    - Đồng bộ giỏ hàng (Cart) và danh sách yêu thích (Wishlist) lưu trữ trong localStorage.
+ * 
+ * 4. Interactive Accordions & Unit Converter:
+ *    - Accordion thả xuống mịn màng (Details, Shipping, Size & Fit).
+ *    - Chuyển đổi kích thước linh hoạt giữa milimét (MM) và inch (IN).
+ */
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import useSWR from "swr";

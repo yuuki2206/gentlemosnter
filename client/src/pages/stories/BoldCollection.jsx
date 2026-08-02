@@ -1,3 +1,21 @@
+/**
+ * 2025 BOLD Collection Story Page Component
+ * 
+ * KIẾN THỨC NỀN TẢNG & KỸ THUẬT ÁP DỤNG:
+ * 1. WebGL & 3D Interactive Model Viewer (@google/model-viewer):
+ *    - Sử dụng Custom Element `<model-viewer>` hiển thị file kính 3D (.glb) chất lượng cao.
+ *    - Tăng quy mô kích thước kính +40% (`scale="1.4 1.4 1.4"`), tương tác 360 độ ("HOLD AND SPIN").
+ *    - Chuyển đổi màu sắc vật liệu 3D thời gian thực (CSS Color Swatch Material Switcher).
+ * 
+ * 2. Custom Video Player Controls & Progress Slider (HTML5 Media API & React useRef):
+ *    - Tương tác Play/Pause, Mute/Unmute và thanh kéo thời gian capsule slider dạng trượt mượt mà.
+ * 
+ * 3. Swiper Carousel & Touch Gestures (Swiper.js):
+ *    - Slider cuộn mượt mà hiển thị các bức ảnh triển lãm HAUS và khách mời nổi tiếng (Celebrity Guests).
+ * 
+ * 4. Responsive & High-End Aesthetic UI:
+ *    - Tỷ lệ khung hình chuẩn Gentle Monster, typography sang trọng, animation hiệu ứng cuộn.
+ */
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Play, Pause, Volume2, VolumeX, ChevronLeft, ChevronRight, ChevronDown, Plus } from "lucide-react";
