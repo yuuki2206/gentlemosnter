@@ -163,11 +163,20 @@ const ProductDetail = () => {
   const getProductThumbnailImage = (item) => {
     if (!item) return "";
     const thumb = item.thumbnail || "";
-    if (thumb.endsWith(".mp4") || thumb.includes(".mp4")) {
-      const firstImage = (item.gallery || []).find((g) => g && !g.endsWith(".mp4") && !g.includes(".mp4"));
-      if (firstImage) return firstImage;
+    if (thumb && !thumb.endsWith(".mp4") && !thumb.includes(".mp4")) {
+      return thumb;
     }
-    return thumb || (item.gallery && item.gallery[0]) || "";
+    const gallery = item.gallery || [];
+    const frontShot = gallery.find(
+      (g) => g && !g.includes("LOOK_BOOK") && !g.includes("S11500904") && (g.includes("_FRONT.jpg") || g.includes("_POSTER_AFTER_FRONT"))
+    );
+    if (frontShot) return frontShot;
+
+    const nonLookbook = gallery.find((g) => g && !g.endsWith(".mp4") && !g.includes("LOOK_BOOK") && !g.includes("S11500904"));
+    if (nonLookbook) return nonLookbook;
+
+    const firstImg = gallery.find((g) => g && !g.endsWith(".mp4") && !g.includes("S11500904"));
+    return firstImg || thumb || "";
   };
 
   const toggleAccordion = (section) => {
