@@ -241,7 +241,8 @@ const ProductDetail = () => {
       sku: product.sku,
       name: product.name,
       price: product.price,
-      thumbnail: product.thumbnail,
+      thumbnail: getProductThumbnailImage(product) || product.thumbnail,
+      gallery: product.gallery,
       slug: product.slug,
     };
     addToCart(item);

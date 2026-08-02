@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X, ShoppingBag } from "lucide-react";
+import { handleImageError } from "../config/media";
 
 const ToastNotification = () => {
   const [toast, setToast] = useState(null); // { item, visible }
@@ -27,6 +28,23 @@ const ToastNotification = () => {
 
   const { item, visible } = toast;
 
+  const getToastImage = (prod) => {
+    if (!prod) return "";
+    const thumb = prod.thumbnail || "";
+    if (thumb && !thumb.endsWith(".mp4") && !thumb.includes(".mp4")) {
+      return thumb;
+    }
+    const gallery = prod.gallery || [];
+    const frontShot = gallery.find(
+      (g) => g && !g.includes("LOOK_BOOK") && !g.includes("S11500904") && (g.includes("_FRONT.jpg") || g.includes("_POSTER_AFTER_FRONT"))
+    );
+    if (frontShot) return frontShot;
+    const firstImg = gallery.find((g) => g && !g.endsWith(".mp4") && !g.includes("S11500904"));
+    return firstImg || thumb || "";
+  };
+
+  const imageSrc = getToastImage(item);
+
   return (
     <div
       className={`fixed top-4 right-4 md:top-8 md:right-8 z-[1000001] w-[320px] bg-white text-black p-4 shadow-[0_10px_30px_rgba(0,0,0,0.15)] border border-gray-100 flex flex-col gap-3 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -50,7 +68,11 @@ const ToastNotification = () => {
       {/* Thông tin kính */}
       <div className="flex gap-3 items-center">
         <div className="w-[60px] h-[45px] bg-[#f4f4f4] rounded-xs flex items-center justify-center p-1.5 overflow-hidden flex-shrink-0">
-          <img src={item.thumbnail} alt={item.name} className="w-full h-full object-contain" />
+          {imageSrc.endsWith(".mp4") ? (
+            <video src={imageSrc} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+          ) : (
+            <img src={imageSrc} alt={item.name} className="w-full h-full object-contain" onError={handleImageError} />
+          )}
         </div>
         <div className="flex flex-col text-left">
           <span className="text-[11px] font-bold text-black uppercase tracking-wider line-clamp-1">{item.name}</span>
