@@ -261,13 +261,13 @@ const ProductDetail = () => {
         {/* CẤU TRÚC SPLIT: TRÁI SCROLLABLE GALLERY, PHẢI STICKY SIDEBAR */}
         <div className="flex flex-col lg:flex-row justify-between items-start w-full relative gap-12 lg:gap-16 max-w-[1440px] mx-auto">
           
-          {/* CỘT TRÁI: Gallery hình ảnh/video sản phẩm (Đồng bộ 100% tỷ lệ & kích thước chuẩn Gentle Monster) */}
+          {/* CỘT TRÁI: Gallery hình ảnh/video sản phẩm (Liền mạch 100% phủ kín tràn viền không dính viền nền) */}
           <div className="w-full lg:flex-1 flex lg:flex-col overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory scrollbar-none gap-4 lg:gap-8 scroll-smooth">
             
             {mediaList.map((mediaUrl, index) => (
               <div 
                 key={index} 
-                className="w-full flex-shrink-0 snap-start flex justify-center items-center overflow-hidden relative bg-[#f8f8f8] rounded-none aspect-[4/3] sm:aspect-[1/1] max-w-[760px] mx-auto group"
+                className="w-full flex-shrink-0 snap-start flex justify-center items-center overflow-hidden relative bg-transparent rounded-none aspect-[4/3] sm:aspect-[1/1] max-w-[760px] mx-auto group"
               >
                 {isVideoMedia(mediaUrl) ? (
                   <video
@@ -283,14 +283,14 @@ const ProductDetail = () => {
                   <img
                     src={mediaUrl}
                     alt={`${product.name} detail view ${index + 1}`}
-                    className="w-full h-full object-contain p-4 sm:p-8 transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={handleImageError}
                   />
                 )}
  
                 {/* Biểu tượng mũi tên scroll xuống chỉ ở ảnh đầu tiên trên Desktop */}
                 {index === 0 && mediaList.length > 1 && (
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-black/30 animate-bounce max-lg:hidden pointer-events-none">
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-black/30 animate-bounce max-lg:hidden pointer-events-none z-10">
                     <ArrowDown size={18} strokeWidth={1.2} />
                   </div>
                 )}
