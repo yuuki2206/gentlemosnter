@@ -153,12 +153,22 @@ const ProductDetail = () => {
 
   const isWishlisted = wishlist.some((item) => item.sku === product.sku);
 
-  // Mảng tất cả ảnh phụ
+  // Mảng tất cả ảnh/video phụ
   const mediaList = [product.thumbnail, ...(product.gallery || [])].filter(
-    (url, index, self) => self.indexOf(url) === index && url !== ""
+    (url, index, self) => self.indexOf(url) === index && url && url !== ""
   );
 
   const isVideoMedia = (url) => url?.toLowerCase().endsWith(".mp4");
+
+  const getProductThumbnailImage = (item) => {
+    if (!item) return "";
+    const thumb = item.thumbnail || "";
+    if (thumb.endsWith(".mp4") || thumb.includes(".mp4")) {
+      const firstImage = (item.gallery || []).find((g) => g && !g.endsWith(".mp4") && !g.includes(".mp4"));
+      if (firstImage) return firstImage;
+    }
+    return thumb || (item.gallery && item.gallery[0]) || "";
+  };
 
   const toggleAccordion = (section) => {
     setOpenAccordion((prev) => ({
@@ -584,7 +594,7 @@ const ProductDetail = () => {
                 >
                   <div className="aspect-[4/3] w-full bg-transparent flex justify-center items-center overflow-hidden mb-3">
                     <img
-                      src={similarItem.thumbnail}
+                      src={getProductThumbnailImage(similarItem)}
                       alt={similarItem.name}
                       className="w-[90%] h-auto object-contain transition-transform duration-500 scale-[0.95] sm:scale-100 lg:scale-[1.2] group-hover:scale-[1.05] lg:group-hover:scale-[1.35]"
                       onError={handleImageError}

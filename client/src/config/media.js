@@ -53,11 +53,7 @@ export const getMediaUrl = (path) => {
   return `${base}${path}`;
 };
 
-/**
- * Ảnh dự phòng mặc định (Unsplash Premium Sunglasses)
- * Được hiển thị khi link ảnh gốc từ database hoặc Cloudinary bị lỗi 404 hoặc không load được.
- */
-export const FALLBACK_IMAGE_URL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%"><rect width="100%" height="100%" fill="%23f3f3f3"/><g fill="none" stroke="%23cccccc" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(2, 8)"><path d="M0 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3H3c-1.66 0-3-1.34-3-3z"/><path d="M12 3c0-1.66 1.34-3 3-3h2c1.66 0 3 1.34 3 3v1c0 1.66-1.34 3-3 3h-2c-1.66 0-3-1.34-3-3z"/><path d="M8 3h4"/><path d="M0 3c0-1 .5-2 1.5-2.5M20 3c0-1-.5-2-1.5-2.5"/></g></svg>`;
+export const FALLBACK_IMAGE_URL = "https://gm-prd-resource.gentlemonster.com/catalog/product/0Q04AJXMC733C/fcd58405-b0e0-4dec-aca7-e337f27395bf/11005140_FRONT.jpg";
 
 /**
  * Bộ bắt lỗi hình ảnh (Image Error Handler)
