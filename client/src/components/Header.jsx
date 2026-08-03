@@ -97,7 +97,26 @@ const Header = ({ forceSolid = false, forceTransparent = false, isDark = false }
     ]
   };
 
-  // === VỊ TRÍ DROPDOWN MENU (padding-left tĩnh cho từng mục) ===
+  // Hàm helper sinh liên kết chuẩn cho từng sub-item trong Navigation Menu
+  const getSubItemLink = (item, subItem) => {
+    if (item === "Explore" && subItem === "Services") return "/int/en/services";
+    if (item === "Explore" && subItem === "Stories") return "/int/en/stories";
+    if (item === "Sunglasses" || item === "Glasses") {
+      return `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`;
+    }
+    if (item === "Collections") {
+      if (subItem === "Veggie") return "/stories/850266286345551416";
+      if (subItem === "Circuit") return "/stories/817695100293913422";
+      if (subItem.includes("2026")) return "/stories/799785239610919992";
+      if (subItem.includes("2025 FALL")) return "/stories/773503337115322557";
+      if (subItem.includes("2025 BOLD") || subItem.includes("BOLD")) return "/stories/751335364734384213";
+      if (subItem.includes("Pocket")) return "/stories/714643588624606213";
+      if (subItem.includes("Margiela")) return "/stories/683208104385640636";
+      if (subItem.includes("TEKKEN")) return "/stories/638549882970865405";
+      return `/sunglasses?category=${encodeURIComponent(subItem)}`;
+    }
+    return "#";
+  };
   // Vì dropdown được fixed full-width, cần padding-left khác nhau để dropdown con
   // xuất hiện ngay phía dưới mục cha tương ứng trên thanh menu ngang.
   const menuPosition = {
@@ -182,6 +201,7 @@ const Header = ({ forceSolid = false, forceTransparent = false, isDark = false }
                     to={
                       item === "Sunglasses" || item === "Glasses" ? `/${item.toLowerCase()}`
                         : item === "Intelligent Eyewear" ? "/intelligent-eyewear"
+                        : item === "Collections" || item === "Explore" ? "/int/en/stories"
                         : "#"
                     }
                     className="hover:opacity-70 transition-opacity cursor-pointer"
@@ -205,21 +225,7 @@ const Header = ({ forceSolid = false, forceTransparent = false, isDark = false }
                       {menuData[item].map((subItem) => (
                         <Link
                           key={subItem}
-                          to={
-                            item === "Explore" && subItem === "Services"
-                              ? "/int/en/services"
-                              : item === "Explore" && subItem === "Stories"
-                              ? "/int/en/stories"
-                              : item === "Sunglasses" || item === "Glasses"
-                              ? `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`
-                              : item === "Collections" && (subItem.includes("2026") || subItem === "2026 Collection")
-                              ? "/stories/799785239610919992"
-                              : item === "Collections" && subItem === "Veggie"
-                              ? "/stories/850266286345551416"
-                              : item === "Collections" && subItem === "Circuit"
-                              ? "/stories/817695100293913422"
-                              : "#"
-                          }
+                          to={getSubItemLink(item, subItem)}
                           className="text-[12px] hover:opacity-60 transition-opacity font-normal tracking-wide"
                         >
                           {subItem}
@@ -327,21 +333,7 @@ const Header = ({ forceSolid = false, forceTransparent = false, isDark = false }
                         {menuData[item].map((subItem) => (
                           <Link
                             key={subItem}
-                            to={
-                              item === "Explore" && subItem === "Services"
-                                ? "/int/en/services"
-                                : item === "Explore" && subItem === "Stories"
-                                ? "/int/en/stories"
-                                : item === "Sunglasses" || item === "Glasses"
-                                ? `/${item.toLowerCase()}?category=${encodeURIComponent(subItem)}`
-                                : item === "Collections" && (subItem.includes("2026") || subItem === "2026 Collection")
-                                ? "/stories/799785239610919992"
-                                : item === "Collections" && subItem === "Veggie"
-                                ? "/stories/850266286345551416"
-                                : item === "Collections" && subItem === "Circuit"
-                                ? "/stories/817695100293913422"
-                                : "#"
-                            }
+                            to={getSubItemLink(item, subItem)}
                             onClick={() => {
                               setIsOpen(false);
                               setExpandedItem(null);
