@@ -1021,9 +1021,9 @@ const rawAllProducts = [...products, ...(glasses || []), ...(sunglasses || [])];
 const uniqueMap = new Map();
 rawAllProducts.forEach((item) => {
   if (item && item.sku && !uniqueMap.has(item.sku)) {
-    // Lọc bỏ tuyệt đối hình ảnh gọng kính thuộc biến thể màu khác hoặc hộp kính phụ kiện khỏi mảng gallery
+    // Lọc bỏ tuyệt đối hình ảnh gọng kính thuộc biến thể màu khác hoặc hộp kính phụ kiện (S11500/11500) khỏi mảng gallery
     const cleanGallery = (item.gallery || []).filter(url => {
-      if (!url || url === "" || url.includes("S11500904")) return false;
+      if (!url || url === "" || url.includes("S11500") || url.includes("11500")) return false;
       if (url.includes("/catalog/product/")) {
         const parts = url.split("/catalog/product/")[1].split("/");
         const urlSku = parts[0];

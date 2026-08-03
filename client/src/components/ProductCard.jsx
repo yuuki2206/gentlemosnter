@@ -22,18 +22,28 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
     );
   }
 
+  const isCaseMedia = (url) => {
+    if (!url) return true;
+    return url.includes("S11500") || url.includes("11500");
+  };
+
   const getModelMedia = (item) => {
-    const poster = item.gallery?.find(g => g.includes("POSTER") || g.includes("LOOK_BOOK"));
+    const poster = item.gallery?.find(g => (g.includes("POSTER") || g.includes("LOOK_BOOK")) && !isCaseMedia(g));
     if (poster) return poster;
-    if (item.thumbnail && item.thumbnail.toLowerCase().endsWith(".mp4")) return item.thumbnail;
-    return item.image || item.gallery?.[0];
+    if (item.thumbnail && item.thumbnail.toLowerCase().endsWith(".mp4") && !isCaseMedia(item.thumbnail)) return item.thumbnail;
+    return item.image || item.gallery?.find(g => !isCaseMedia(g));
   };
 
   const getProductMedia = (item) => {
-    const front = item.gallery?.find(g => g.includes("FRONT") && !g.includes("POSTER") && !g.includes("S11500904"));
+    // 1. Ưu tiên thumbnail nếu là ảnh gọng kính thực sự
+    if (item.thumbnail && !item.thumbnail.toLowerCase().endsWith(".mp4") && !isCaseMedia(item.thumbnail)) {
+      return item.thumbnail;
+    }
+    // 2. Tìm ảnh góc chính diện (_FRONT.jpg) trong gallery ngoại trừ bao da
+    const front = item.gallery?.find(g => g.includes("FRONT") && !g.includes("POSTER") && !isCaseMedia(g));
     if (front) return front;
-    if (item.thumbnail && !item.thumbnail.toLowerCase().endsWith(".mp4") && !item.thumbnail.includes("S11500904")) return item.thumbnail;
-    return item.gallery?.find(g => !g.includes("S11500904")) || item.image;
+    // 3. Fallback lấy bất kỳ ảnh kính hợp lệ nào
+    return item.gallery?.find(g => !isCaseMedia(g)) || item.image || "";
   };
 
   // === DERIVED STATE ===
@@ -54,7 +64,7 @@ const ProductCard = ({ item, hideModelView = false, loading = false }) => {
     !g.toLowerCase().endsWith(".mp4") &&
     !g.includes("POSTER") &&
     !g.includes("LOOK_BOOK") &&
-    !g.includes("S11500904")
+    !isCaseMedia(g)
   ) || [];
 
   const charCodeSum = (item.sku || "").split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);

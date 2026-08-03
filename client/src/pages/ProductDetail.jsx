@@ -183,7 +183,7 @@ const ProductDetail = () => {
   let mediaList = [product.thumbnail, ...(product.gallery || [])].filter(
     (url, index, self) => {
       if (!url || url === "" || self.indexOf(url) !== index) return false;
-      if (url.includes("S11500904")) return false; // Lọc bỏ hộp kính phụ kiện
+      if (url.includes("S11500") || url.includes("11500")) return false; // Lọc bỏ hộp kính phụ kiện bao da
 
       // Nếu URL chứa thư mục /catalog/product/{sku}/
       if (url.includes("/catalog/product/")) {
