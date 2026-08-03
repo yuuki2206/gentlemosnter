@@ -42,21 +42,19 @@ const SearchDrawer = ({ isOpen, onClose }) => {
   const searchFetcher = (searchQuery) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        let storedProducts = localStorage.getItem("gm_products_db_v3");
+        let storedProducts = localStorage.getItem("gm_products_db_v4");
+        let localProducts = [];
         if (storedProducts) {
           try {
-            const parsed = JSON.parse(storedProducts);
-            if (parsed.length > 0 && parsed[0].url && !parsed[0].url.startsWith("http")) {
-              localStorage.removeItem("gm_products_db_v3");
-              storedProducts = null;
-            }
+            localProducts = JSON.parse(storedProducts);
           } catch (e) {}
         }
-        if (!storedProducts) {
-          localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
-          storedProducts = JSON.stringify(productsData);
-        }
-        const allProducts = JSON.parse(storedProducts);
+        
+        const productMap = new Map();
+        productsData.forEach(p => productMap.set(p.sku, p));
+        localProducts.forEach(p => productMap.set(p.sku, p));
+        const allProducts = Array.from(productMap.values());
+
         const queryLower = searchQuery.toLowerCase();
         const matched = allProducts.filter(p => 
           p.name?.toLowerCase().includes(queryLower) ||

@@ -1,3 +1,6 @@
+import { glasses } from "./glasses.js";
+import { sunglasses } from "./sunglasses.js";
+
 export const products = [
   {
     "sku": "0Q04AJXKR7376",
@@ -1013,4 +1016,14 @@ export const products = [
   }
 ];
 
-export const productsData = products;
+// Combine all product sources (Main + Glasses + Sunglasses) into a master products list
+const rawAllProducts = [...products, ...(glasses || []), ...(sunglasses || [])];
+const uniqueMap = new Map();
+rawAllProducts.forEach((item) => {
+  if (item && item.sku && !uniqueMap.has(item.sku)) {
+    uniqueMap.set(item.sku, item);
+  }
+});
+
+export const masterProducts = Array.from(uniqueMap.values());
+export const productsData = masterProducts;

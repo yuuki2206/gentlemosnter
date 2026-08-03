@@ -84,25 +84,25 @@ const AdminDashboard = () => {
 
     // 2. Gom kết hợp bộ dữ liệu mẫu 47 mẫu kính cao cấp Gentle Monster
     try {
-      let storedProducts = localStorage.getItem("gm_products_db_v3");
+      let storedProducts = localStorage.getItem("gm_products_db_v4");
+      let localData = [];
       if (storedProducts) {
         try {
-          const parsed = JSON.parse(storedProducts);
-          // Tự động xóa bộ nhớ đệm Localhost cũ nếu chứa giá USD cũ (< 1000)
-          if (parsed.length > 0 && (parsed.some((p) => p.price < 1000) || (parsed[0].url && !parsed[0].url.startsWith("http")))) {
-            localStorage.removeItem("gm_products_db_v3");
-            storedProducts = null;
-          }
+          localData = JSON.parse(storedProducts);
         } catch (e) {}
       }
-      if (!storedProducts) {
-        localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
-        storedProducts = JSON.stringify(productsData);
-      }
-      const localData = JSON.parse(storedProducts);
+      
+      const productMap = new Map();
+      productsData.forEach(p => productMap.set(p.sku, p));
+      localData.forEach(p => productMap.set(p.sku, p));
+      const masterList = Array.from(productMap.values());
 
-      // Ưu tiên localData (chứa thông tin mới nhất vừa được Admin tạo/sửa)
-      const combined = [...localData, ...serverProducts];
+      if (!storedProducts) {
+        localStorage.setItem("gm_products_db_v4", JSON.stringify(masterList));
+      }
+
+      // Ưu tiên masterList (chứa tất cả sản phẩm + dữ liệu mới nhất vừa được Admin tạo/sửa)
+      const combined = [...masterList, ...serverProducts];
       const uniqueMap = new Map();
 
       combined.forEach((p) => {
@@ -508,9 +508,9 @@ const AdminDashboard = () => {
       }
 
       // 2. Lưu vào LocalStorage làm bộ đệm siêu nhanh
-      let storedProducts = localStorage.getItem("gm_products_db_v3");
+      let storedProducts = localStorage.getItem("gm_products_db_v4");
       if (!storedProducts) {
-        localStorage.setItem("gm_products_db_v3", JSON.stringify(productsData));
+        localStorage.setItem("gm_products_db_v4", JSON.stringify(productsData));
         storedProducts = JSON.stringify(productsData);
       }
       let allProducts = JSON.parse(storedProducts);
@@ -520,7 +520,7 @@ const AdminDashboard = () => {
         const index = allProducts.findIndex((p) => p.sku === sku);
         if (index !== -1) {
           allProducts[index] = { ...allProducts[index], ...productPayload };
-          localStorage.setItem("gm_products_db_v3", JSON.stringify(allProducts));
+          localStorage.setItem("gm_products_db_v4", JSON.stringify(allProducts));
           setSuccess("Đã cập nhật thông tin kính thành công!");
           setShowFormModal(false);
           fetchAllProducts();
@@ -535,7 +535,7 @@ const AdminDashboard = () => {
           return;
         }
         allProducts.push(productPayload);
-        localStorage.setItem("gm_products_db_v3", JSON.stringify(allProducts));
+        localStorage.setItem("gm_products_db_v4", JSON.stringify(allProducts));
         setSuccess("Đã thêm kính mới thành công!");
         setShowFormModal(false);
         setProductPage(1);
@@ -560,11 +560,11 @@ const AdminDashboard = () => {
         });
       } catch (apiErr) {}
 
-      let storedProducts = localStorage.getItem("gm_products_db_v3");
+      let storedProducts = localStorage.getItem("gm_products_db_v4");
       if (storedProducts) {
         let allProducts = JSON.parse(storedProducts);
         const filtered = allProducts.filter((p) => p.sku !== productSku);
-        localStorage.setItem("gm_products_db_v3", JSON.stringify(filtered));
+        localStorage.setItem("gm_products_db_v4", JSON.stringify(filtered));
         alert("Đã xóa sản phẩm thành công!");
         fetchAllProducts();
       }
