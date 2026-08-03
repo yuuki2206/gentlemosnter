@@ -30,8 +30,8 @@ const SwiperProductCard = ({ item, loading = false }) => {
     const bLower = b.toLowerCase();
     const isVideoA = aLower.endsWith(".mp4");
     const isVideoB = bLower.endsWith(".mp4");
-    const isPackagingA = a.includes("S11500904") || aLower.includes("package");
-    const isPackagingB = b.includes("S11500904") || bLower.includes("package");
+    const isPackagingA = a.includes("S11500") || a.includes("11500") || aLower.includes("package");
+    const isPackagingB = b.includes("S11500") || b.includes("11500") || bLower.includes("package");
 
     if (isPackagingA && !isPackagingB) return 1;
     if (!isPackagingA && isPackagingB) return -1;

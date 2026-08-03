@@ -35,11 +35,12 @@ const ToastNotification = () => {
       return thumb;
     }
     const gallery = prod.gallery || [];
+    const isCase = (url) => !url || url.includes("S11500") || url.includes("11500");
     const frontShot = gallery.find(
-      (g) => g && !g.includes("LOOK_BOOK") && !g.includes("S11500904") && (g.includes("_FRONT.jpg") || g.includes("_POSTER_AFTER_FRONT"))
+      (g) => g && !g.includes("LOOK_BOOK") && !isCase(g) && (g.includes("_FRONT.jpg") || g.includes("_POSTER_AFTER_FRONT"))
     );
     if (frontShot) return frontShot;
-    const firstImg = gallery.find((g) => g && !g.endsWith(".mp4") && !g.includes("S11500904"));
+    const firstImg = gallery.find((g) => g && !g.endsWith(".mp4") && !isCase(g));
     return firstImg || thumb || "";
   };
 
