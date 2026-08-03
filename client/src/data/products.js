@@ -1021,7 +1021,25 @@ const rawAllProducts = [...products, ...(glasses || []), ...(sunglasses || [])];
 const uniqueMap = new Map();
 rawAllProducts.forEach((item) => {
   if (item && item.sku && !uniqueMap.has(item.sku)) {
-    uniqueMap.set(item.sku, item);
+    // Lọc bỏ tuyệt đối hình ảnh gọng kính thuộc biến thể màu khác hoặc hộp kính phụ kiện khỏi mảng gallery
+    const cleanGallery = (item.gallery || []).filter(url => {
+      if (!url || url === "" || url.includes("S11500904")) return false;
+      if (url.includes("/catalog/product/")) {
+        const parts = url.split("/catalog/product/")[1].split("/");
+        const urlSku = parts[0];
+        if (urlSku && item.sku && urlSku !== item.sku) {
+          if (url.includes("_FRONT") || url.includes("_D_45") || url.includes("_SIDE") || url.includes("_AFTER_FRONT")) {
+            return false;
+          }
+        }
+      }
+      return true;
+    });
+
+    uniqueMap.set(item.sku, {
+      ...item,
+      gallery: cleanGallery
+    });
   }
 });
 

@@ -46,7 +46,7 @@ const ProductDetail = () => {
   const fetcher = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        let storedProducts = localStorage.getItem("gm_products_db_v5");
+        let storedProducts = localStorage.getItem("gm_products_db_v6");
         let localProducts = [];
         if (storedProducts) {
           try {
@@ -54,7 +54,7 @@ const ProductDetail = () => {
           } catch (e) {}
         }
         
-        // Cơ sở dữ liệu Master chuẩn gồm 240 sản phẩm kính Gentle Monster
+        // Cơ sở dữ liệu Master chuẩn gồm 240 sản phẩm kính Gentle Monster (đã được làm sạch 100%)
         const productMap = new Map();
         productsData.forEach((p) => {
           if (p && p.sku) productMap.set(p.sku, p);
@@ -70,7 +70,7 @@ const ProductDetail = () => {
         });
 
         const allProducts = Array.from(productMap.values());
-        localStorage.setItem("gm_products_db_v5", JSON.stringify(allProducts));
+        localStorage.setItem("gm_products_db_v6", JSON.stringify(allProducts));
 
         const target = sku ? sku.trim().toLowerCase() : "";
         const currentProduct = allProducts.find(
