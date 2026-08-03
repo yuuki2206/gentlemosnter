@@ -15,7 +15,6 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import Preloader from "./components/Preloader";
 import ToastNotification from "./components/ToastNotification";
-import CustomCursor from "./components/CustomCursor";
 
 // Lazy load dynamic imports for routes
 const Home = lazy(() => import("./pages/Home"));
@@ -54,7 +53,6 @@ function AppContent() {
     <>
       {showPreloader && <Preloader ready={!authLoading} onComplete={handlePreloaderComplete} />}
       <ToastNotification />
-      <CustomCursor />
       
       <Suspense fallback={<div className="min-h-screen bg-black" />}>
         <Routes>

@@ -172,19 +172,19 @@ const ProductDetail = () => {
 
   const isWishlisted = wishlist.some((item) => item.sku === product.sku);
 
-  // Mảng tất cả ảnh/video phụ (Đã lọc bỏ tuyệt đối các hình ảnh lọt từ mẫu/SKU khác)
-  const mediaList = [product.thumbnail, ...(product.gallery || [])].filter(
+  // Mảng tất cả ảnh/video phụ của sản phẩm (Lọc trùng và lọc bớt thư mục hộp phụ kiện)
+  let mediaList = [product.thumbnail, ...(product.gallery || [])].filter(
     (url, index, self) => {
       if (!url || url === "" || self.indexOf(url) !== index) return false;
-      if (url.includes("S11500904")) return false;
-      if (url.includes("/catalog/product/")) {
-        const parts = url.split("/catalog/product/")[1].split("/");
-        const urlSku = parts[0];
-        if (urlSku && urlSku !== product.sku) return false;
-      }
+      if (url.includes("S11500904")) return false; // Lọc bỏ hộp kính phụ kiện
       return true;
     }
   );
+
+  // Đảm bảo không bao giờ bị rỗng ảnh gallery nếu sản phẩm có SKU tùy chỉnh
+  if (mediaList.length === 0 && product.thumbnail) {
+    mediaList = [product.thumbnail];
+  }
 
   const isVideoMedia = (url) => url?.toLowerCase().endsWith(".mp4");
 
