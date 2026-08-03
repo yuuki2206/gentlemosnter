@@ -46,7 +46,7 @@ const ProductDetail = () => {
   const fetcher = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        let storedProducts = localStorage.getItem("gm_products_db_v4");
+        let storedProducts = localStorage.getItem("gm_products_db_v5");
         let localProducts = [];
         if (storedProducts) {
           try {
@@ -54,28 +54,41 @@ const ProductDetail = () => {
           } catch (e) {}
         }
         
-        // Trộn cơ sở dữ liệu master (products + glasses + sunglasses) với dữ liệu từ localStorage (admin tạo)
+        // Cơ sở dữ liệu Master chuẩn gồm 240 sản phẩm kính Gentle Monster
         const productMap = new Map();
-        productsData.forEach(p => productMap.set(p.sku, p));
-        localProducts.forEach(p => productMap.set(p.sku, p));
+        productsData.forEach((p) => {
+          if (p && p.sku) productMap.set(p.sku, p);
+        });
+
+        // Chỉ bổ sung các sản phẩm mới do Admin khởi tạo (không để dữ liệu lỗi đè dữ liệu gốc)
+        localProducts.forEach((p) => {
+          if (p && p.sku && p.name && p.name !== p.sku) {
+            if (!productMap.has(p.sku)) {
+              productMap.set(p.sku, p);
+            }
+          }
+        });
+
         const allProducts = Array.from(productMap.values());
+        localStorage.setItem("gm_products_db_v5", JSON.stringify(allProducts));
 
-        if (!storedProducts) {
-          localStorage.setItem("gm_products_db_v4", JSON.stringify(allProducts));
-        }
-
-        const currentProduct = allProducts.find(p => p.sku === sku);
+        const target = sku ? sku.trim().toLowerCase() : "";
+        const currentProduct = allProducts.find(
+          (p) =>
+            (p.sku && p.sku.toLowerCase() === target) ||
+            (p.slug && p.slug.toLowerCase() === target)
+        );
         
         if (currentProduct) {
           // Lấy các sản phẩm có cùng bộ sưu tập hoặc loại kính để làm "Similar Frames"
           const similar = allProducts
-            .filter(p => p.sku !== sku && (p.collection === currentProduct.collection || p.category === currentProduct.category))
+            .filter(p => p.sku !== currentProduct.sku && (p.collection === currentProduct.collection || p.category === currentProduct.category))
             .slice(0, 6);
             
-          // Lấy các màu sắc khác có cùng tên cơ bản (ví dụ: "Musubi" hoặc "Paranoyd")
+          // Lấy các màu sắc khác có cùng tên cơ bản (ví dụ: "Musubi", "Matiny", "Paranoyd")
           const baseName = currentProduct.name ? currentProduct.name.split(" ")[0] : "";
           const colorways = baseName ? allProducts
-            .filter(p => p.name && p.name.startsWith(baseName))
+            .filter(p => p.name && p.name.toLowerCase().startsWith(baseName.toLowerCase()))
             .map(p => ({
               sku: p.sku,
               name: p.name,
@@ -85,22 +98,14 @@ const ProductDetail = () => {
             
           resolve({
             ...currentProduct,
-            similarFrames: similar,
+            similarFrames: similar.length >= 4 ? similar : allProducts.slice(0, 6),
             colorways: colorways
           });
         } else {
-          // Robust fallback nếu không tìm thấy SKU
-          const fallback = allProducts[0] || {};
-          const cleanName = sku ? sku.replace(/^GM-/, "").replace(/-/g, " ") : "Gentle Monster Frame";
-          resolve({
-            ...fallback,
-            sku: sku,
-            name: cleanName,
-            similarFrames: allProducts.slice(1, 7),
-            colorways: []
-          });
+          // Nếu không tìm thấy SKU thực sự trong hệ thống
+          resolve(null);
         }
-      }, 200);
+      }, 150);
     });
   };
 

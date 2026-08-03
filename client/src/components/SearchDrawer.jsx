@@ -42,7 +42,7 @@ const SearchDrawer = ({ isOpen, onClose }) => {
   const searchFetcher = (searchQuery) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        let storedProducts = localStorage.getItem("gm_products_db_v4");
+        let storedProducts = localStorage.getItem("gm_products_db_v5");
         let localProducts = [];
         if (storedProducts) {
           try {
@@ -51,8 +51,18 @@ const SearchDrawer = ({ isOpen, onClose }) => {
         }
         
         const productMap = new Map();
-        productsData.forEach(p => productMap.set(p.sku, p));
-        localProducts.forEach(p => productMap.set(p.sku, p));
+        productsData.forEach((p) => {
+          if (p && p.sku) productMap.set(p.sku, p);
+        });
+
+        localProducts.forEach((p) => {
+          if (p && p.sku && p.name && p.name !== p.sku) {
+            if (!productMap.has(p.sku)) {
+              productMap.set(p.sku, p);
+            }
+          }
+        });
+
         const allProducts = Array.from(productMap.values());
 
         const queryLower = searchQuery.toLowerCase();
