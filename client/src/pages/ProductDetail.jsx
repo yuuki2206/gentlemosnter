@@ -179,16 +179,28 @@ const ProductDetail = () => {
 
   const isWishlisted = wishlist.some((item) => item.sku === product.sku);
 
-  // Mảng tất cả ảnh/video phụ của sản phẩm (Lọc trùng và lọc bớt thư mục hộp phụ kiện)
+  // Mảng tất cả ảnh/video phụ của sản phẩm (Lọc trùng, lọc hộp phụ kiện, lọc bỏ ảnh gọng kính SKU màu khác ở cuối gallery)
   let mediaList = [product.thumbnail, ...(product.gallery || [])].filter(
     (url, index, self) => {
       if (!url || url === "" || self.indexOf(url) !== index) return false;
       if (url.includes("S11500904")) return false; // Lọc bỏ hộp kính phụ kiện
+
+      // Nếu URL chứa thư mục /catalog/product/{sku}/
+      if (url.includes("/catalog/product/")) {
+        const parts = url.split("/catalog/product/")[1].split("/");
+        const urlSku = parts[0];
+        // Nếu ảnh gọng kính thuộc mã SKU màu khác -> Lọc bỏ để tránh lọt ảnh màu khác vào cuối gallery
+        if (urlSku && product.sku && urlSku !== product.sku) {
+          if (url.includes("_FRONT") || url.includes("_D_45") || url.includes("_SIDE")) {
+            return false;
+          }
+        }
+      }
       return true;
     }
   );
 
-  // Đảm bảo không bao giờ bị rỗng ảnh gallery nếu sản phẩm có SKU tùy chỉnh
+  // Đảm bảo không bao giờ bị rỗng ảnh gallery
   if (mediaList.length === 0 && product.thumbnail) {
     mediaList = [product.thumbnail];
   }
