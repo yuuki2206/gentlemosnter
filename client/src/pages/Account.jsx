@@ -83,7 +83,10 @@ const Account = () => {
         <div className="flex justify-between items-center border-b border-gray-100 pb-4 mb-12">
           {/* Tabs bên trái */}
           <div className="flex gap-2 flex-wrap">
-            {["Account", "Purchases", "Wishlist", "Profile", "Users Manager"].map((tab) => (
+            {(user?.role === "admin" 
+              ? ["Account", "Purchases", "Wishlist", "Profile", "Users Manager"]
+              : ["Account", "Purchases", "Wishlist", "Profile"]
+            ).map((tab) => (
               <button
                 key={tab}
                 onClick={() => {
@@ -453,7 +456,7 @@ const Account = () => {
         )}
 
         {/* ================= TAB 5: USERS MANAGER (Admin console) ================= */}
-        {activeTab === "Users Manager" && (
+        {activeTab === "Users Manager" && user?.role === "admin" && (
           <div className="w-full text-left max-w-4xl mx-auto space-y-6">
             <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-black mb-4 border-b border-gray-100 pb-2">
               USERS MANAGER
