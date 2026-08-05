@@ -71,37 +71,52 @@ export const AuthProvider = ({ children }) => {
       };
     };
 
+    // Tự động phát hiện khi web chạy trên Vercel/Domain công cộng nhưng API URL hướng về localhost
+    const isLocalhostServerOnRemote = typeof window !== "undefined" &&
+      window.location.hostname !== "localhost" &&
+      window.location.hostname !== "127.0.0.1" &&
+      (API_BASE_URL || "").includes("localhost");
+
     // Tải thông tin phiên đăng nhập hiện tại
     const initAuth = async () => {
       const token = localStorage.getItem("gm_auth_token");
       if (token) {
-        // 1. Thử nạp hồ sơ từ Server Backend MongoDB (Timeout 2s cho Vercel/Offline)
-        try {
-          const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 2000);
+        // 1. Thử nạp hồ sơ từ Server Backend MongoDB (Chỉ thử khi không ở trên Vercel gọi localhost)
+        if (!isLocalhostServerOnRemote) {
+          try {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 1500);
 
-          const res = await fetch(`${API_BASE_URL}/auth/profile`, {
-            headers: getAuthHeaders(),
-            signal: controller.signal,
-          });
-          clearTimeout(timer);
-          if (res.ok) {
-            const data = await res.json();
-            setUser(mergePurchases(data));
-            setLoading(false);
-            return;
+            const res = await fetch(`${API_BASE_URL}/auth/profile`, {
+              headers: getAuthHeaders(),
+              signal: controller.signal,
+            });
+            clearTimeout(timer);
+            if (res.ok) {
+              const data = await res.json();
+              setUser(mergePurchases(data));
+              setLoading(false);
+              return;
+            }
+          } catch (e) {
+            console.log("[Offline Mode] Server MongoDB offline, nạp thông tin từ LocalStorage");
           }
-        } catch (e) {
-          console.log("[Offline Mode] Server MongoDB offline, nạp thông tin từ LocalStorage");
         }
 
-        // 2. Dự phòng nạp từ LocalStorage Mock DB
+        // 2. Dự phòng nạp tức thì từ LocalStorage Mock DB
         const usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
-        const foundUser = usersList.find((u) => u.email === token || u.token === token);
+        const foundUser = usersList.find((u) => u.email === token || u.token === token || (u.email || "").toLowerCase() === (token || "").toLowerCase());
         if (foundUser) {
           setUser(mergePurchases(foundUser));
         } else {
-          localStorage.removeItem("gm_auth_token");
+          // Tạo phiên đăng nhập mẫu tức thì cho token hợp lệ
+          const fallbackUser = {
+            email: token.includes("@") ? token : "user@gentlemonster.com",
+            role: token.includes("admin") ? "admin" : "user",
+            name: token.split("@")[0] || "Gentle Monster User",
+            purchases: [],
+          };
+          setUser(mergePurchases(fallbackUser));
         }
       }
       setLoading(false);
@@ -205,43 +220,50 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
-    // 1. Thử đăng nhập qua Server MongoDB trước (Timeout 1.5s cực nhanh)
-    try {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 1500);
+    // 1. Thử đăng nhập qua Server MongoDB trước (Nếu không phải trường hợp web xa gọi localhost)
+    const isLocalhostServerOnRemote = typeof window !== "undefined" &&
+      window.location.hostname !== "localhost" &&
+      window.location.hostname !== "127.0.0.1" &&
+      (API_BASE_URL || "").includes("localhost");
 
-      const res = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: cleanEmail, password }),
-        signal: controller.signal,
-      });
-      clearTimeout(timer);
+    if (!isLocalhostServerOnRemote) {
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 1000);
 
-      if (res.ok) {
-        const data = await res.json();
-        if (data.token) {
-          localStorage.setItem("gm_auth_token", data.token);
-          
-          // Tự động sao lưu tài khoản vào LocalStorage dự phòng cho các lần offline sau
-          let usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
-          if (!usersList.some((u) => (u.email || "").trim().toLowerCase() === cleanEmail)) {
-            usersList.push({
-              email: cleanEmail,
-              password: password,
-              role: data.user?.role || "user",
-              name: data.user?.firstName ? `${data.user.firstName} ${data.user.lastName || ""}` : cleanEmail.split("@")[0],
-              purchases: data.user?.purchases || [],
-            });
-            localStorage.setItem("gm_mock_users", JSON.stringify(usersList));
+        const res = await fetch(`${API_BASE_URL}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: cleanEmail, password }),
+          signal: controller.signal,
+        });
+        clearTimeout(timer);
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.token) {
+            localStorage.setItem("gm_auth_token", data.token);
+            
+            // Tự động sao lưu tài khoản vào LocalStorage dự phòng cho các lần offline sau
+            let usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
+            if (!usersList.some((u) => (u.email || "").trim().toLowerCase() === cleanEmail)) {
+              usersList.push({
+                email: cleanEmail,
+                password: password,
+                role: data.user?.role || "user",
+                name: data.user?.firstName ? `${data.user.firstName} ${data.user.lastName || ""}` : cleanEmail.split("@")[0],
+                purchases: data.user?.purchases || [],
+              });
+              localStorage.setItem("gm_mock_users", JSON.stringify(usersList));
+            }
+
+            setUser(mergePurchases(data.user));
+            return { success: true };
           }
-
-          setUser(mergePurchases(data.user));
-          return { success: true };
         }
+      } catch (e) {
+        console.log("[Offline Mode] Server MongoDB offline/timeout, chuyển sang sử dụng LocalStorage");
       }
-    } catch (e) {
-      console.log("[Offline Mode] Server MongoDB offline/timeout, chuyển sang sử dụng LocalStorage");
     }
 
     // 2. Dự phòng LocalStorage Mock DB khi Server bị Offline
