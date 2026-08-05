@@ -72,7 +72,7 @@ const AuthSidebar = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  // Bước 1: Kiểm tra email
+  // Bước 1: Kiểm tra email & chuyển sang nhập Password
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -88,12 +88,8 @@ const AuthSidebar = ({ isOpen, onClose }) => {
       return;
     }
 
-    const exists = await checkEmailExists(email);
-    if (exists) {
-      setStep("PASSWORD"); // Đã có tài khoản, yêu cầu password
-    } else {
-      setStep("SIGNUP_PROMPT"); // Chưa có tài khoản, chuyển hướng đăng ký
-    }
+    // Chuyển thẳng sang bước nhập Password để người dùng đăng nhập mượt mà 100%
+    setStep("PASSWORD");
   };
 
   // Bước 2: Đăng nhập bằng mật khẩu

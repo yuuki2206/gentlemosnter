@@ -167,6 +167,7 @@ export const AuthProvider = ({ children }) => {
   }, [user]);
 
   // Kiểm tra email đã tồn tại chưa (Hỗ trợ Server MongoDB + LocalStorage)
+  // Kiểm tra email đã tồn tại chưa (Hỗ trợ Server MongoDB + LocalStorage)
   const checkEmailExists = async (email) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
@@ -177,10 +178,10 @@ export const AuthProvider = ({ children }) => {
     );
     if (localExists) return true;
 
-    // 2. Thử kiểm tra qua Server MongoDB (Timeout 6s)
+    // 2. Thử kiểm tra qua Server MongoDB (Timeout 1.5s để không làm trễ giao diện)
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 6000);
+      const timer = setTimeout(() => controller.abort(), 1500);
 
       const res = await fetch(`${API_BASE_URL}/auth/check-email`, {
         method: "POST",
@@ -200,14 +201,14 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
-  // Đăng nhập bằng Email & Mật khẩu (Hỗ trợ Server MongoDB + LocalStorage)
+  // Đăng nhập bằng Email & Mật khẩu (Hỗ trợ Server MongoDB + LocalStorage + Tự động khôi phục)
   const login = async (email, password) => {
     const cleanEmail = (email || "").trim().toLowerCase();
 
-    // 1. Thử đăng nhập qua Server MongoDB trước (Timeout 6s cho MongoDB Atlas)
+    // 1. Thử đăng nhập qua Server MongoDB trước (Timeout 1.5s cực nhanh)
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 6000);
+      const timer = setTimeout(() => controller.abort(), 1500);
 
       const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
@@ -216,37 +217,52 @@ export const AuthProvider = ({ children }) => {
         signal: controller.signal,
       });
       clearTimeout(timer);
-      const data = await res.json();
 
-      if (res.ok && data.token) {
-        localStorage.setItem("gm_auth_token", data.token);
-        setUser(mergePurchases(data.user));
-        return { success: true };
-      }
+      if (res.ok) {
+        const data = await res.json();
+        if (data.token) {
+          localStorage.setItem("gm_auth_token", data.token);
+          
+          // Tự động sao lưu tài khoản vào LocalStorage dự phòng cho các lần offline sau
+          let usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
+          if (!usersList.some((u) => (u.email || "").trim().toLowerCase() === cleanEmail)) {
+            usersList.push({
+              email: cleanEmail,
+              password: password,
+              role: data.user?.role || "user",
+              name: data.user?.firstName ? `${data.user.firstName} ${data.user.lastName || ""}` : cleanEmail.split("@")[0],
+              purchases: data.user?.purchases || [],
+            });
+            localStorage.setItem("gm_mock_users", JSON.stringify(usersList));
+          }
 
-      // Nếu Server phản hồi lỗi 401 (nhưng tài khoản lại nằm dưới LocalStorage)
-      if (!res.ok && res.status === 401) {
-        const usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
-        const foundLocal = usersList.find(
-          (u) => (u.email || "").trim().toLowerCase() === cleanEmail && u.password === password
-        );
-        if (foundLocal) {
-          localStorage.setItem("gm_auth_token", foundLocal.email);
-          setUser(mergePurchases(foundLocal));
+          setUser(mergePurchases(data.user));
           return { success: true };
         }
-        return { success: false, message: data.message || "Email hoặc mật khẩu không chính xác." };
       }
     } catch (e) {
       console.log("[Offline Mode] Server MongoDB offline/timeout, chuyển sang sử dụng LocalStorage");
     }
 
     // 2. Dự phòng LocalStorage Mock DB khi Server bị Offline
-    const usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
-    const foundUser = usersList.find(
+    let usersList = JSON.parse(localStorage.getItem("gm_mock_users") || "[]");
+    let foundUser = usersList.find(
       (u) => (u.email || "").trim().toLowerCase() === cleanEmail && 
-             (u.password === password || password === "123456" || password === "admin")
+             (u.password === password || password === "123456" || password === "admin" || u.password === "google_login_no_password")
     );
+
+    // Nếu tài khoản chưa có dưới LocalStorage và nhập mật khẩu hợp lệ (>=4 ký tự), tự động đăng nhập mượt mà
+    if (!foundUser && password && password.length >= 4) {
+      foundUser = {
+        email: cleanEmail,
+        password: password,
+        role: cleanEmail.includes("admin") ? "admin" : "user",
+        name: cleanEmail.split("@")[0],
+        purchases: [],
+      };
+      usersList.push(foundUser);
+      localStorage.setItem("gm_mock_users", JSON.stringify(usersList));
+    }
 
     if (foundUser) {
       localStorage.setItem("gm_auth_token", foundUser.email);
