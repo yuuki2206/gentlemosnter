@@ -471,54 +471,71 @@ const Account = () => {
                   <tr className="bg-gray-50 border-b border-gray-100 text-gray-400 font-bold uppercase tracking-wider text-[9px]">
                     <th className="px-6 py-4">Họ và Tên</th>
                     <th className="px-6 py-4">Email</th>
-                    <th className="px-6 py-4">Quốc gia</th>
+                    <th className="px-6 py-4">Vai trò (Role)</th>
+                    <th className="px-6 py-4">IP Đăng ký</th>
                     <th className="px-6 py-4">Ganache Wallet Address</th>
                     <th className="px-6 py-4 text-center">Hành động</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {users.map((u) => (
-                    <tr key={u.email} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 font-semibold text-black">
-                        {u.firstName} {u.lastName}
-                      </td>
-                      <td className="px-6 py-4 text-gray-600 font-medium">{u.email}</td>
-                      <td className="px-6 py-4 text-gray-500">{u.country}</td>
-                      <td className="px-6 py-4">
-                        {u.walletAddress ? (
-                          <div className="flex items-center gap-2">
-                            <span className="font-mono text-blue-800 bg-blue-50 border border-blue-100 px-2.5 py-1 text-[10px] break-all select-all font-semibold">
-                              {u.walletAddress}
+                  {users.map((u) => {
+                    const isAdmin = u.role === "admin" || (u.email || "").toLowerCase().includes("admin");
+                    return (
+                      <tr key={u.email} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 font-semibold text-black">
+                          {u.firstName || u.name || "User"} {u.lastName || ""}
+                        </td>
+                        <td className="px-6 py-4 text-gray-600 font-medium">{u.email}</td>
+                        <td className="px-6 py-4">
+                          <span className={`px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${
+                            isAdmin ? "bg-black text-white" : "bg-gray-100 text-gray-600"
+                          }`}>
+                            {isAdmin ? "admin" : (u.role || "user")}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 font-mono text-gray-500 font-semibold">{u.registrationIp || "127.0.0.1"}</td>
+                        <td className="px-6 py-4">
+                          {u.walletAddress ? (
+                            <div className="flex items-center gap-2">
+                              <span className="font-mono text-blue-800 bg-blue-50 border border-blue-100 px-2.5 py-1 text-[10px] break-all select-all font-semibold">
+                                {u.walletAddress}
+                              </span>
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(u.walletAddress);
+                                  alert(`Đã copy địa chỉ ví: ${u.walletAddress}`);
+                                }}
+                                className="text-[9px] font-bold text-blue-600 hover:underline uppercase tracking-widest flex-shrink-0"
+                              >
+                                Copy
+                              </button>
+                            </div>
+                          ) : (
+                            <span className="text-gray-400 italic">No wallet address</span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          {isAdmin ? (
+                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider italic">
+                              Protected (Admin)
                             </span>
+                          ) : (
                             <button
                               onClick={() => {
-                                navigator.clipboard.writeText(u.walletAddress);
-                                alert(`Đã copy địa chỉ ví: ${u.walletAddress}`);
+                                if (window.confirm(`Bạn có chắc muốn xóa tài khoản ${u.email}?`)) {
+                                  adminDeleteUser(u.email);
+                                  alert("Đã xóa tài khoản khỏi hệ thống.");
+                                }
                               }}
-                              className="text-[9px] font-bold text-blue-600 hover:underline uppercase tracking-widest flex-shrink-0"
+                              className="text-[9px] font-bold text-red-500 hover:text-red-700 uppercase tracking-wider transition-colors"
                             >
-                              Copy
+                              Delete
                             </button>
-                          </div>
-                        ) : (
-                          <span className="text-gray-400 italic">No wallet address</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        <button
-                          onClick={() => {
-                            if (window.confirm(`Bạn có chắc muốn xóa tài khoản ${u.email}?`)) {
-                              adminDeleteUser(u.email);
-                              alert("Đã xóa tài khoản khỏi hệ thống.");
-                            }
-                          }}
-                          className="text-[9px] font-bold text-red-500 hover:text-red-700 uppercase tracking-wider transition-colors"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
