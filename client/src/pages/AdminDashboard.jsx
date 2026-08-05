@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { productsData } from "../data/products";
-import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History, TrendingUp, AlertTriangle } from "lucide-react";
+import { SlidersHorizontal, Plus, Edit2, Trash2, Shield, Eye, Package, UserCheck, History, TrendingUp, AlertTriangle, UploadCloud, Star, X, Check, FileImage } from "lucide-react";
 import Header from "../components/Header";
 import { API_BASE_URL, getAuthHeaders } from "../config/api";
 import { handleImageError, FALLBACK_IMAGE_URL } from "../config/media";
@@ -33,6 +33,10 @@ const AdminDashboard = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  // States kéo thả & quản lý hình ảnh tải lên từ máy tính
+  const [isDragging, setIsDragging] = useState(false);
+  const [imageUploadMode, setImageUploadMode] = useState("dragdrop"); // 'dragdrop' hoặc 'url'
 
   // States cho các trường dữ liệu của Form
   const [name, setName] = useState("");
@@ -408,6 +412,106 @@ const AdminDashboard = () => {
       </div>
     );
   }
+
+  // Xử lý tệp hình ảnh được kéo thả hoặc chọn từ máy tính
+  const processImageFiles = (files) => {
+    if (!files || files.length === 0) return;
+
+    const validFiles = Array.from(files).filter((file) =>
+      file.type.startsWith("image/") || file.type.startsWith("video/")
+    );
+
+    if (validFiles.length === 0) {
+      alert("Vui lòng chọn hoặc kéo thả các tệp định dạng hình ảnh (JPG, PNG, WEBP...) hoặc Video (MP4)!");
+      return;
+    }
+
+    const readers = validFiles.map((file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(readers).then((dataUrls) => {
+      let currentThumb = thumbnail;
+      let galleryList = galleryInput
+        ? galleryInput.split(",").map((s) => s.trim()).filter(Boolean)
+        : [];
+
+      dataUrls.forEach((dataUrl) => {
+        if (!currentThumb) {
+          currentThumb = dataUrl;
+        } else if (currentThumb !== dataUrl && !galleryList.includes(dataUrl)) {
+          galleryList.push(dataUrl);
+        }
+      });
+
+      setThumbnail(currentThumb);
+      setGalleryInput(galleryList.join(", "));
+    });
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      processImageFiles(e.dataTransfer.files);
+    }
+  };
+
+  const handleFileInputChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      processImageFiles(e.target.files);
+    }
+  };
+
+  // Đặt làm ảnh đại diện chính (Thumbnail)
+  const handleSetAsThumbnail = (urlToSet) => {
+    let galleryList = galleryInput
+      ? galleryInput.split(",").map((s) => s.trim()).filter(Boolean)
+      : [];
+
+    if (thumbnail && thumbnail !== urlToSet && !galleryList.includes(thumbnail)) {
+      galleryList.unshift(thumbnail);
+    }
+
+    galleryList = galleryList.filter((u) => u !== urlToSet);
+
+    setThumbnail(urlToSet);
+    setGalleryInput(galleryList.join(", "));
+  };
+
+  // Xóa hình ảnh khỏi danh sách
+  const handleRemoveImage = (urlToRemove) => {
+    let galleryList = galleryInput
+      ? galleryInput.split(",").map((s) => s.trim()).filter(Boolean)
+      : [];
+
+    if (thumbnail === urlToRemove) {
+      const nextThumb = galleryList.length > 0 ? galleryList[0] : "";
+      const newGallery = galleryList.length > 0 ? galleryList.slice(1) : [];
+      setThumbnail(nextThumb);
+      setGalleryInput(newGallery.join(", "));
+    } else {
+      const newGallery = galleryList.filter((u) => u !== urlToRemove);
+      setGalleryInput(newGallery.join(", "));
+    }
+  };
 
   // Mở Form thêm mới sản phẩm
   const handleOpenAddModal = () => {
@@ -1222,54 +1326,196 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-[9px] text-gray-400 uppercase tracking-widest mb-1">
-                  Ảnh Đại Diện (Thumbnail URL)*
-                </label>
-                <div className="flex gap-3 items-center">
-                  <input
-                    type="text"
-                    value={thumbnail}
-                    onChange={(e) => setThumbnail(e.target.value)}
-                    placeholder="Nhập link ảnh https://"
-                    className="flex-grow border border-gray-200 bg-white px-3 py-2.5 text-[11px] focus:outline-none focus:border-black transition-colors"
-                    required
-                  />
-                  {thumbnail && (
-                    <div className="w-12 h-10 border border-gray-200 bg-[#f9f9f9] flex-shrink-0 flex items-center justify-center overflow-hidden">
-                      {thumbnail.match(/\.(mp4|webm|mov|ogg)(\?.*)?$/i) || thumbnail.includes("/video/") ? (
-                        <video src={thumbnail} autoPlay loop muted playsInline className="w-full h-full object-cover" />
-                      ) : (
-                        <img
-                          src={thumbnail}
-                          alt="Preview"
-                          onError={(e) => {
-                            if (typeof handleImageError === "function") {
-                              handleImageError(e);
-                            } else {
-                              e.target.onerror = null;
-                              e.target.src = FALLBACK_IMAGE_URL;
-                            }
-                          }}
-                          className="w-full h-full object-contain"
-                        />
-                      )}
-                    </div>
-                  )}
+              {/* KHO QUẢN LÝ ẢNH & KÉO THẢ TẢI ẢNH LÊN */}
+              <div className="border border-gray-200 p-4 space-y-4 bg-white text-left">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-2.5 gap-2">
+                  <div>
+                    <span className="block text-[10px] font-bold text-black uppercase tracking-wider">
+                      HÌNH ẢNH SẢN PHẨM & TỆP TẢI LÊN*
+                    </span>
+                    <span className="block text-[8px] text-gray-400 mt-0.5">
+                      Hỗ trợ kéo thả trực tiếp tệp ảnh từ máy tính hoặc dán đường dẫn URL.
+                    </span>
+                  </div>
+                  {/* Chế độ chọn: Kéo thả tệp hoặc Nhập Link */}
+                  <div className="flex items-center gap-1 bg-gray-100 p-0.5 self-start sm:self-auto">
+                    <button
+                      type="button"
+                      onClick={() => setImageUploadMode("dragdrop")}
+                      className={`px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider transition-colors ${
+                        imageUploadMode === "dragdrop" ? "bg-black text-white" : "text-gray-500 hover:text-black"
+                      }`}
+                    >
+                      📁 Kéo thả / Chọn tệp
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setImageUploadMode("url")}
+                      className={`px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider transition-colors ${
+                        imageUploadMode === "url" ? "bg-black text-white" : "text-gray-500 hover:text-black"
+                      }`}
+                    >
+                      🔗 Nhập Link URL
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-[9px] text-gray-400 uppercase tracking-widest mb-1">
-                  Ảnh Góc Chụp Phụ (Gallery URLs - Phân cách bằng dấu phẩy)
-                </label>
-                <textarea
-                  value={galleryInput}
-                  onChange={(e) => setGalleryInput(e.target.value)}
-                  placeholder="Link1, Link2, Link3..."
-                  rows={2}
-                  className="w-full border border-gray-200 bg-white px-3 py-2.5 text-[11px] focus:outline-none focus:border-black transition-colors"
-                />
+                {/* VÙNG KÉO THẢ TỆP (DRAG & DROP ZONE) */}
+                {imageUploadMode === "dragdrop" && (
+                  <div>
+                    <div
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      onClick={() => document.getElementById("admin-file-input")?.click()}
+                      className={`border-2 border-dashed p-6 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-2 ${
+                        isDragging
+                          ? "border-black bg-gray-100 scale-[0.99]"
+                          : "border-gray-300 hover:border-black bg-[#fafafa]"
+                      }`}
+                    >
+                      <input
+                        id="admin-file-input"
+                        type="file"
+                        accept="image/*,video/*"
+                        multiple
+                        onChange={handleFileInputChange}
+                        className="hidden"
+                      />
+                      <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center shadow-xs">
+                        <UploadCloud size={20} />
+                      </div>
+                      <div>
+                        <p className="text-[11px] font-bold text-black uppercase tracking-wider">
+                          Kéo & thả ảnh từ máy tính vào đây
+                        </p>
+                        <p className="text-[9px] text-gray-400 mt-0.5">
+                          hoặc bấm vào ô này để chọn tệp hình ảnh / video từ thiết bị của bạn
+                        </p>
+                      </div>
+                      <span className="text-[8px] font-semibold text-gray-400 bg-gray-200/60 px-2 py-0.5 rounded-xs tracking-wider uppercase mt-1">
+                        Hỗ trợ: JPG, PNG, WEBP, MP4
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* CHẾ ĐỘ NHẬP LINK URL TRỰC TIẾP */}
+                {imageUploadMode === "url" && (
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-[8px] text-gray-400 uppercase tracking-widest mb-1">
+                        Link Ảnh Đại Diện (Thumbnail URL)*
+                      </label>
+                      <input
+                        type="text"
+                        value={thumbnail}
+                        onChange={(e) => setThumbnail(e.target.value)}
+                        placeholder="Nhập link https://..."
+                        className="w-full border border-gray-200 bg-white px-3 py-2 text-[10px] focus:outline-none focus:border-black"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[8px] text-gray-400 uppercase tracking-widest mb-1">
+                        Link Ảnh Góc Phụ (Gallery URLs - Phân cách bằng dấu phẩy)
+                      </label>
+                      <textarea
+                        value={galleryInput}
+                        onChange={(e) => setGalleryInput(e.target.value)}
+                        placeholder="https://link1.jpg, https://link2.jpg..."
+                        rows={2}
+                        className="w-full border border-gray-200 bg-white px-3 py-2 text-[10px] focus:outline-none focus:border-black"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* BỘ XEM TRƯỚC VÀ QUẢN LÝ DANH SÁCH ẢNH (IMAGE MANAGER) */}
+                {(() => {
+                  const allImages = [thumbnail, ...(galleryInput ? galleryInput.split(",").map(s => s.trim()).filter(Boolean) : [])].filter(Boolean);
+                  const uniqueImages = Array.from(new Set(allImages));
+
+                  if (uniqueImages.length === 0) return null;
+
+                  return (
+                    <div className="pt-2 border-t border-gray-100 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">
+                          DANH SÁCH ẢNH ĐÃ CHỌN ({uniqueImages.length})
+                        </span>
+                        <span className="text-[8px] text-gray-400 italic">
+                          *Bấm "Set Thumb" để chọn ảnh đại diện chính
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3">
+                        {uniqueImages.map((imgUrl, idx) => {
+                          const isMainThumb = imgUrl === thumbnail;
+
+                          return (
+                            <div
+                              key={imgUrl.slice(-20) + idx}
+                              className={`relative border p-1.5 bg-[#f9f9f9] flex flex-col items-center justify-between transition-all ${
+                                isMainThumb ? "border-black ring-1 ring-black" : "border-gray-200 hover:border-gray-400"
+                              }`}
+                            >
+                              {/* Badge Ảnh chính / Nút đặt làm ảnh chính */}
+                              {isMainThumb ? (
+                                <span className="absolute top-1 left-1 bg-black text-white text-[7px] font-bold uppercase tracking-widest px-1.5 py-0.5 z-10 flex items-center gap-1">
+                                  <Star size={8} className="fill-white" /> Ảnh chính
+                                </span>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() => handleSetAsThumbnail(imgUrl)}
+                                  className="absolute top-1 left-1 bg-gray-800/80 hover:bg-black text-white text-[7px] font-semibold uppercase tracking-widest px-1.5 py-0.5 z-10 opacity-80 hover:opacity-100 transition-opacity"
+                                  title="Đặt làm Ảnh chính (Thumbnail)"
+                                >
+                                  Set Thumb
+                                </button>
+                              )}
+
+                              {/* Nút xóa ảnh */}
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveImage(imgUrl)}
+                                className="absolute top-1 right-1 bg-red-600 hover:bg-red-700 text-white p-1 rounded-full z-10 transition-colors"
+                                title="Xóa ảnh này"
+                              >
+                                <X size={10} />
+                              </button>
+
+                              {/* Khung hiển thị Xem trước Ảnh/Video */}
+                              <div className="w-full h-24 bg-white flex items-center justify-center overflow-hidden my-1 border border-gray-100">
+                                {imgUrl.match(/\.(mp4|webm|mov|ogg)(\?.*)?$/i) || imgUrl.startsWith("data:video/") || imgUrl.includes("/video/") ? (
+                                  <video src={imgUrl} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                                ) : (
+                                  <img
+                                    src={imgUrl}
+                                    alt={`Preview ${idx + 1}`}
+                                    onError={(e) => {
+                                      if (typeof handleImageError === "function") {
+                                        handleImageError(e);
+                                      } else {
+                                        e.target.onerror = null;
+                                        e.target.src = FALLBACK_IMAGE_URL;
+                                      }
+                                    }}
+                                    className="w-full h-full object-contain p-1"
+                                  />
+                                )}
+                              </div>
+
+                              <span className="text-[8px] text-gray-400 truncate w-full font-mono text-center">
+                                {imgUrl.startsWith("data:") ? "Tệp Máy Tính (Base64)" : imgUrl.split("/").pop()}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
 
               <div className="flex gap-4">
